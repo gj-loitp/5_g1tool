@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:g1tool/common/c/color_constant.dart';
 import 'package:g1tool/ui/menu_screen.dart';
 import 'package:get/get.dart';
 
@@ -47,12 +49,13 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   route() {
-    Get.off(MenuScreen());
+    Get.off(const MenuScreen());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConstants.appColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -61,17 +64,16 @@ class SplashScreenState extends State<SplashScreen> {
               borderRadius: BorderRadius.circular(150.0),
               child: Image.asset(
                 "assets/images/loitp.JPG",
-                width: 300,
-                height: 300,
+                width: 250,
+                height: 250,
               ),
             ),
             const Padding(
                 padding:
                     EdgeInsets.only(top: DimenConstants.marginPaddingMedium)),
-            const CircularProgressIndicator(
-              backgroundColor: Colors.white,
-              strokeWidth: 3,
-            )
+            const CupertinoActivityIndicator(
+              color: Colors.white,
+            ),
           ],
         ),
       ),
