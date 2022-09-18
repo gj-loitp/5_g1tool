@@ -3,6 +3,7 @@ import 'package:g1tool/common/c/color_constant.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:g1tool/model/player.dart';
 import 'package:g1tool/ui/player/add_player_screen.dart';
+import 'package:g1tool/ui/player/update_player_screen.dart';
 import 'package:get/get.dart';
 
 import '../../common/c/string_constant.dart';
@@ -80,28 +81,31 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> {
     if (list.isEmpty) {
       return UIUtils.buildNoDataView();
     } else {
-      Widget buildItem(Player p) {
-        return Container(
-          padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-          margin:
-              const EdgeInsets.only(top: DimenConstants.marginPaddingMedium),
-          color: Colors.white70,
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(150.0),
-                child: Image.network(
-                  p.avatar ?? '',
-                  width: 50,
-                  height: 50,
+      Widget buildItem(Player p, GestureTapCallback onTap) {
+        return InkWell(
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+            margin:
+                const EdgeInsets.only(top: DimenConstants.marginPaddingMedium),
+            color: Colors.white70,
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(150.0),
+                  child: Image.network(
+                    p.avatar ?? '',
+                    width: 50,
+                    height: 50,
+                  ),
                 ),
-              ),
-              const SizedBox(width: DimenConstants.marginPaddingMedium),
-              UIUtils.getText(
-                p.name,
-                fontSize: DimenConstants.txtLarge,
-              ),
-            ],
+                const SizedBox(width: DimenConstants.marginPaddingMedium),
+                UIUtils.getText(
+                  p.name,
+                  fontSize: DimenConstants.txtLarge,
+                ),
+              ],
+            ),
           ),
         );
       }
@@ -112,7 +116,20 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> {
           physics: const BouncingScrollPhysics(),
           itemCount: list.length,
           itemBuilder: (context, i) {
-            return buildItem(list[i]);
+            Player p = list[i];
+            return buildItem(
+              p,
+              () {
+                Get.to(
+                  () => UpdatePlayerScreen(
+                    onUpdateSuccess: (updatedPlayer) {
+                      _cListPlayer.getListPlayer();
+                    },
+                    player: p,
+                  ),
+                );
+              },
+            );
           },
         ),
       );
