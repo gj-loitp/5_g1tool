@@ -15,13 +15,21 @@ class ListPlayerController extends GetxController {
   }
 
   Future<void> genListPlayerDefault() async {
+    bool isExist(Player player, List<Player> list) {
+      var isExist = false;
+      for (var p in list) {
+        if (p.name == player.name && p.avatar == player.avatar) {
+          isExist = true;
+        }
+      }
+      return isExist;
+    }
+
     Future<void> addPlayer(String name, String avatar) async {
       Player player = Player();
       player.name = name;
       player.avatar = avatar;
-
-      var isExist = await isExistPlayer(player);
-      if (!isExist) {
+      if (!isExist(player, listPlayer)) {
         await DBProvider.db.addClient(player);
       }
     }
@@ -58,19 +66,5 @@ class ListPlayerController extends GetxController {
         "https://github.com/tplloi/g1tool/blob/master/assets/images/player/trien.jpg?raw=true");
 
     getListPlayer();
-  }
-
-  Future<bool> isExistPlayer(Player player) async {
-    var id = player.id;
-    if (id == null) {
-      return false;
-    } else {
-      var player = await DBProvider.db.getPlayerById(id);
-      if (player == null) {
-        return false;
-      } else {
-        return true;
-      }
-    }
   }
 }
