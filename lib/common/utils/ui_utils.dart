@@ -30,7 +30,7 @@ class UIUtils {
 
     return AppBar(
       title: Text(text),
-      centerTitle: false,
+      centerTitle: true,
       leading: IconButton(
         icon: const Icon(
           Icons.arrow_back,
@@ -38,8 +38,6 @@ class UIUtils {
         ),
         onPressed: onPressed,
       ),
-
-      //add action on appbar
       actions: [
         buildActionWidget(),
       ],
@@ -55,13 +53,13 @@ class UIUtils {
   }) {
     return Container(
       margin: EdgeInsets.only(top: marginTop),
-      height: DimenConstants.buttonHeight * 1.5,
+      height: DimenConstants.buttonHeight * 1.2,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.black,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.white.withOpacity(0.9),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(DimenConstants.radiusMedium),
+            borderRadius: BorderRadius.circular(DimenConstants.radiusRound),
             side: BorderSide(
               color: const Color(0xFF8C98A8).withOpacity(0.2),
               width: 0.5,
@@ -81,8 +79,10 @@ class UIUtils {
               ),
             ),
             const SizedBox(width: DimenConstants.marginPaddingMedium),
-            const Icon(
-              Icons.double_arrow,
+            Image.asset(
+              "assets/images/ic_right_arrow.png",
+              width: 25,
+              height: 25,
             ),
           ],
         ),

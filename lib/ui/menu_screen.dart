@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:g1tool/common/c/dimen_constant.dart';
 
-import '../common/c/dimen_constant.dart';
 import '../common/utils/ui_utils.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -11,7 +11,7 @@ class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: UIUtils.getAppBar(
-        "Main menu",
+        "G1 tools",
         () {
           SystemNavigator.pop();
         },
@@ -20,16 +20,26 @@ class MenuScreen extends StatelessWidget {
       body: Stack(
         children: [
           UIUtils.buildCachedNetworkImage(
-              "https://live.staticflickr.com/8653/28179077686_ec36b85f0b_b.jpg"),
-          ListView(
-            physics: const BouncingScrollPhysics(),
+              "https://live.staticflickr.com/8660/28212625915_d8c3d9c049_b.jpg"),
+          Padding(
             padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-            children: [
-              UIUtils.getButton(
-                "Animation",
-                () {},
-              ),
-            ],
+            child: Column(
+              children: [
+                const Spacer(),
+                UIUtils.getButton(
+                  "Bi lắc",
+                  () {},
+                ),
+                UIUtils.getButton(
+                  "Uno",
+                  () {},
+                ),
+                UIUtils.getButton(
+                  "Quản lý người chơi",
+                  () {},
+                ),
+              ],
+            ),
           ),
         ],
       ),
