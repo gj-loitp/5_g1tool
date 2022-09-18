@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:g1tool/model/player.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +18,6 @@ class AddPlayerController extends GetxController {
   void getListPlayer() async {
     var list = await DBProvider.db.getAllPlayer();
     listPlayer.assignAll(list);
-    print(">>>listPlayer " + jsonEncode(listPlayer));
   }
 
   void addPlayer(String name) async {
@@ -28,10 +25,7 @@ class AddPlayerController extends GetxController {
     p.name = name;
     p.avatar =
         "https://live.staticflickr.com/8051/28816266454_a7d83db3b2_w.jpg";
-    print('p ${p.toJson()}');
-
     await DBProvider.db.addClient(p);
-
     getListPlayer();
   }
 }

@@ -80,6 +80,12 @@ class _AddPlayerScreenState extends BaseStatefulState<AddPlayerScreen> {
             onPressed: () {
               if (_cAddPlayer.isValidName()) {
                 _cAddPlayer.addPlayer(_cAddPlayer.name.value);
+                Get.back();
+                widget.onAddSuccess.call();
+                showSnackBarFull(
+                  "Thông báo",
+                  "Đã thêm người chơi `${_cAddPlayer.name.value}` thành công",
+                );
               }
             },
             child: const Icon(Icons.add)),
