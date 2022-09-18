@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
+import 'package:g1tool/ui/player/list_player_screen.dart';
+import 'package:get/get.dart';
 
 import '../common/utils/ui_utils.dart';
 
@@ -36,7 +38,9 @@ class MenuScreen extends StatelessWidget {
                 ),
                 UIUtils.getButton(
                   "Quản lý người chơi",
-                  () {},
+                  () {
+                    Get.to(() => const ListPlayerScreen());
+                  },
                 ),
               ],
             ),
