@@ -18,7 +18,7 @@ class AddPlayerController extends GetxController {
     Player p = Player();
     p.name = name;
     p.avatar =
-        "https://live.staticflickr.com/8051/28816266454_a7d83db3b2_w.jpg";
+        "https://live.staticflickr.com/575/33169799475_17f36bcb58_q.jpg";
     return await DBProvider.db.addClient(p);
   }
 }
