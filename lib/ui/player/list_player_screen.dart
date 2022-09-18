@@ -6,6 +6,7 @@ import 'package:g1tool/model/player.dart';
 import 'package:g1tool/ui/player/add_player_screen.dart';
 import 'package:get/get.dart';
 
+import '../../common/c/string_constant.dart';
 import '../../common/core/base_stateful_state.dart';
 import '../../common/utils/ui_utils.dart';
 import '../../controller/list_player_controller.dart';
@@ -42,15 +43,16 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> {
               Icons.supervisor_account,
               color: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () {
+              //TODO
+            },
           ),
         ],
       ),
       body: Obx(() {
         return Stack(
           children: [
-            UIUtils.buildCachedNetworkImage(
-                "https://live.staticflickr.com/8732/28179077226_f448ccf2be_b.jpg"),
+            UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
             _buildListPlayerView(),
           ],
         );

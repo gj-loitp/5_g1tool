@@ -4,6 +4,7 @@ import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:g1tool/ui/player/list_player_screen.dart';
 import 'package:get/get.dart';
 
+import '../common/c/string_constant.dart';
 import '../common/utils/ui_utils.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -21,8 +22,7 @@ class MenuScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          UIUtils.buildCachedNetworkImage(
-              "https://live.staticflickr.com/8660/28212625915_d8c3d9c049_b.jpg"),
+          UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
           Padding(
             padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
             child: Column(

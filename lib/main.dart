@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
+import 'package:g1tool/common/c/string_constant.dart';
 import 'package:g1tool/common/utils/ui_utils.dart';
 import 'package:g1tool/ui/menu_screen.dart';
 import 'package:get/get.dart';
@@ -59,27 +60,29 @@ class SplashScreenState extends State<SplashScreen> {
       backgroundColor: ColorConstants.appColor,
       body: Stack(
         children: [
-          UIUtils.buildCachedNetworkImage(
-              "https://live.staticflickr.com/8831/28179085646_9f2b3912fd_b.jpg"),
-          Column(
-            children: [
-              const SizedBox(height: DimenConstants.marginPadding98),
-              Container(
-                alignment: Alignment.center,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(150.0),
-                  child: Image.asset(
-                    "assets/images/loitp.JPG",
-                    width: 150,
-                    height: 150,
+          UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
+          Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(150.0),
+                    child: Image.asset(
+                      "assets/images/loitp.JPG",
+                      width: 150,
+                      height: 150,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: DimenConstants.marginPaddingMedium),
-              const CupertinoActivityIndicator(
-                color: Colors.white,
-              ),
-            ],
+                const SizedBox(height: DimenConstants.marginPaddingMedium),
+                const CupertinoActivityIndicator(
+                  color: Colors.white,
+                ),
+              ],
+            ),
           ),
         ],
       ),

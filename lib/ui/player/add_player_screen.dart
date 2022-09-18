@@ -5,6 +5,7 @@ import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:g1tool/common/core/base_stateful_state.dart';
 import 'package:get/get.dart';
 
+import '../../common/c/string_constant.dart';
 import '../../common/utils/ui_utils.dart';
 import '../../controller/add_player_controller.dart';
 
@@ -43,8 +44,7 @@ class _AddPlayerScreenState extends BaseStatefulState<AddPlayerScreen> {
         ),
         body: Stack(
           children: [
-            UIUtils.buildCachedNetworkImage(
-                "https://live.staticflickr.com/65535/48556433996_fb33140ec1_b.jpg"),
+            UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
             ListView(
               padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
               physics: const BouncingScrollPhysics(),
