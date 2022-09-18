@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class Player {
   String? name;
   String? avatar;
@@ -17,5 +19,13 @@ class Player {
     data['avatar'] = avatar;
     data['id'] = id;
     return data;
+  }
+
+  String getName() {
+    if (kDebugMode) {
+      return "$id - $name";
+    } else {
+      return "$name";
+    }
   }
 }

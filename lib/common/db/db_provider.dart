@@ -66,10 +66,10 @@ class DBProvider {
     return res;
   }
 
-  getPlayerById(int id) async {
+  Future<Player?> getPlayerById(int id) async {
     final db = await (database);
     if (db == null) {
-      return;
+      return null;
     }
     var res = await db.query(tableNamePlayer, where: "id = ?", whereArgs: [id]);
     return res.isNotEmpty ? Player.fromJson(res.first) : null;

@@ -101,7 +101,7 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> {
                 ),
                 const SizedBox(width: DimenConstants.marginPaddingMedium),
                 UIUtils.getText(
-                  p.name,
+                  p.getName(),
                   fontSize: DimenConstants.txtLarge,
                 ),
               ],

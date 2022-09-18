@@ -10,7 +10,7 @@ import '../../model/player.dart';
 
 class UpdatePlayerScreen extends StatefulWidget {
   final Player player;
-  final Function(Player updatedPlayer) onUpdateSuccess;
+  final Function(Player? updatedPlayer) onUpdateSuccess;
 
   const UpdatePlayerScreen({
     Key? key,
@@ -47,40 +47,74 @@ class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> {
       body: Stack(
         children: [
           UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
-          ListView(
+          Padding(
             padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-            physics: const BouncingScrollPhysics(),
-            children: [
-              SizedBox(
-                height: 250,
-                child:
-                    UIUtils.buildCachedNetworkImage(widget.player.avatar ?? ""),
-              ),
-              Container(
-                color: Colors.white,
-                padding:
-                    const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-                child: TextFormField(
-                  controller: _tecName,
-                  maxLength: 30,
-                  keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    filled: true,
-                    fillColor: Colors.white,
-                    icon: Icon(Icons.person),
-                    hintText: 'Nhập tên người chơi',
-                    labelText: 'Tên *',
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      SizedBox(
+                        height: 250,
+                        child: UIUtils.buildCachedNetworkImage(
+                            widget.player.avatar ?? ""),
+                      ),
+                      Container(
+                        color: Colors.white,
+                        padding: const EdgeInsets.all(
+                            DimenConstants.marginPaddingMedium),
+                        child: TextFormField(
+                          controller: _tecName,
+                          maxLength: 30,
+                          keyboardType: TextInputType.text,
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            filled: true,
+                            fillColor: Colors.white,
+                            icon: Icon(Icons.person),
+                            hintText: 'Nhập tên người chơi',
+                            labelText: 'Tên *',
+                          ),
+                          onChanged: (text) {
+                            _cUpdatePlayer.setName(text);
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                  onChanged: (text) {
-                    _cUpdatePlayer.setName(text);
+                ),
+                UIUtils.getButton(
+                  "Xoá",
+                  () {
+                    _deletePlayer();
                   },
                 ),
-              ),
-            ],
+                UIUtils.getButton(
+                  "Cập nhật",
+                  () {},
+                ),
+              ],
+            ),
           ),
         ],
       ),
+    );
+  }
+
+  void _deletePlayer() {
+    showConfirmDialog(
+      StringConstants.warning,
+      "Bạn có muốn xoá người chơi ${widget.player.name}?",
+      StringConstants.ok,
+      () {
+        _cUpdatePlayer.deletePlayer(widget.player).then((value) {
+          Get.back();
+          showSnackBarFull(StringConstants.warning,
+              "Đã xoá người chơi ${widget.player.name}");
+          widget.onUpdateSuccess.call(null);
+        });
+      },
     );
   }
 }

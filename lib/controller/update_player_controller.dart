@@ -17,8 +17,11 @@ class UpdatePlayerController extends GetxController {
   Future<int> addPlayer(String name) async {
     Player p = Player();
     p.name = name;
-    p.avatar =
-        "https://live.staticflickr.com/575/33169799475_17f36bcb58_q.jpg";
+    p.avatar = "https://live.staticflickr.com/575/33169799475_17f36bcb58_q.jpg";
     return await DBProvider.db.addClient(p);
+  }
+
+  Future<int> deletePlayer(Player p) async {
+    return await DBProvider.db.deletePlayerById(p.id);
   }
 }

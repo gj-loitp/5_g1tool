@@ -396,7 +396,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
     VoidCallback okCallback,
   ) {
     showAlertDialog(
-      false,
+      true,
       title,
       message,
       null,
