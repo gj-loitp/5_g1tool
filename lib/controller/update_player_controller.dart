@@ -24,4 +24,8 @@ class UpdatePlayerController extends GetxController {
   Future<int> deletePlayer(Player p) async {
     return await DBProvider.db.deletePlayerById(p.id);
   }
+
+  Future<int> updatePlayer(Player p) async {
+    return await DBProvider.db.updatePlayer(p);
+  }
 }

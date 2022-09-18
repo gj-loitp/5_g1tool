@@ -92,7 +92,9 @@ class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> {
                 ),
                 UIUtils.getButton(
                   "Cập nhật",
-                  () {},
+                  () {
+                    _updatePlayer();
+                  },
                 ),
               ],
             ),
@@ -112,6 +114,24 @@ class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> {
           Get.back();
           showSnackBarFull(StringConstants.warning,
               "Đã xoá người chơi ${widget.player.name}");
+          widget.onUpdateSuccess.call(null);
+        });
+      },
+    );
+  }
+
+  void _updatePlayer() {
+    var newName = _tecName.text;
+    showConfirmDialog(
+      StringConstants.warning,
+      "Bạn có muốn cập nhật người chơi ${widget.player.name} thành $newName?",
+      StringConstants.ok,
+      () {
+        var player = Player.fromJson(widget.player.toJson());
+        player.name = newName;
+        _cUpdatePlayer.updatePlayer(player).then((value) {
+          Get.back();
+          showSnackBarFull(StringConstants.warning, "Cập nhật thành công");
           widget.onUpdateSuccess.call(null);
         });
       },
