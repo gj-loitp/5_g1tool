@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:g1tool/common/c/color_constant.dart';
 import 'package:get/get.dart';
 
 import '../c/dimen_constant.dart';
@@ -61,7 +62,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
                             ? (Expanded(
                                 child: TextButton(
                                   style: TextButton.styleFrom(
-                                    foregroundColor: const Color(0xff0A79F8),
+                                    foregroundColor: ColorConstants.appColor,
                                     padding: const EdgeInsets.fromLTRB(
                                       DimenConstants.marginPaddingMedium,
                                       DimenConstants.marginPaddingMedium *
@@ -95,7 +96,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
                               ))
                             : (TextButton(
                                 style: TextButton.styleFrom(
-                                  foregroundColor: const Color(0xff0A79F8),
+                                  foregroundColor: ColorConstants.appColor,
                                   padding: const EdgeInsets.fromLTRB(
                                     DimenConstants.marginPaddingMedium,
                                     DimenConstants.marginPaddingMedium * 2 / 3,
@@ -140,7 +141,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
                                 DimenConstants.marginPaddingMedium,
                                 DimenConstants.marginPaddingMedium * 2 / 3,
                               ),
-                              backgroundColor: const Color(0xff2B67F6),
+                              backgroundColor: ColorConstants.appColor,
                               textStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -149,7 +150,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
                                 borderRadius: BorderRadius.all(Radius.circular(
                                     DimenConstants.radiusRound)),
                                 side: BorderSide(
-                                    color: Color(0xff2B67F6), width: 1.0),
+                                    color: Colors.purple, width: 1.0),
                               ),
                             ),
                             onPressed: () {
@@ -248,7 +249,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
                             ? (Expanded(
                                 child: TextButton(
                                   style: TextButton.styleFrom(
-                                    foregroundColor: const Color(0xff0A79F8),
+                                    foregroundColor: ColorConstants.appColor,
                                     padding: const EdgeInsets.fromLTRB(
                                       DimenConstants.marginPaddingMedium,
                                       DimenConstants.marginPaddingMedium *
@@ -282,7 +283,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
                               ))
                             : (TextButton(
                                 style: TextButton.styleFrom(
-                                  foregroundColor: const Color(0xff0A79F8),
+                                  foregroundColor: ColorConstants.appColor,
                                   padding: const EdgeInsets.fromLTRB(
                                     DimenConstants.marginPaddingMedium,
                                     DimenConstants.marginPaddingMedium * 2 / 3,
@@ -327,7 +328,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
                                 DimenConstants.marginPaddingMedium,
                                 DimenConstants.marginPaddingMedium * 2 / 3,
                               ),
-                              backgroundColor: const Color(0xff2B67F6),
+                              backgroundColor: ColorConstants.appColor,
                               textStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -336,7 +337,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                                 side: BorderSide(
-                                    color: Color(0xff2B67F6), width: 1.0),
+                                    color: Colors.purple, width: 1.0),
                               ),
                             ),
                             onPressed: () {
@@ -460,7 +461,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
                     height: 40,
                     child: TextButton(
                       style: TextButton.styleFrom(
-                        foregroundColor: const Color(0xff2B67F6),
+                        foregroundColor: ColorConstants.appColor,
                         padding: const EdgeInsets.fromLTRB(
                           DimenConstants.marginPaddingMedium * 5 / 2,
                           0,

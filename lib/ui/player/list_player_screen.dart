@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:g1tool/common/c/color_constant.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:g1tool/model/player.dart';
@@ -44,7 +43,7 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> {
               color: Colors.white,
             ),
             onPressed: () {
-              //TODO
+              _genDefaultPlayer();
             },
           ),
         ],
@@ -64,7 +63,7 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> {
               () => AddPlayerScreen(
                 onAddSuccess: (name) {
                   showSnackBarFull(
-                    "Thông báo",
+                    StringConstants.warning,
                     "Đã thêm người chơi `$name` thành công",
                   );
                   _cListPlayer.getListPlayer();
@@ -118,5 +117,16 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> {
         ),
       );
     }
+  }
+
+  void _genDefaultPlayer() {
+    showConfirmDialog(
+      StringConstants.warning,
+      "Bạn có muốn thêm danh sách người chơi mặc định?",
+      StringConstants.ok,
+      () {
+        _cListPlayer.genListPlayerDefault();
+      },
+    );
   }
 }
