@@ -36,7 +36,15 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> {
         () {
           SystemNavigator.pop();
         },
-        null,
+        [
+          IconButton(
+            icon: const Icon(
+              Icons.supervisor_account,
+              color: Colors.white,
+            ),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Obx(() {
         return Stack(

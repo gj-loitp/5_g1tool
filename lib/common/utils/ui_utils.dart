@@ -11,23 +11,9 @@ class UIUtils {
   static AppBar getAppBar(
     String text,
     VoidCallback? onPressed,
-    VoidCallback? onPressCodeViewer, {
+    List<Widget>? rightWidgets, {
     Color backgroundColor = Colors.purple,
   }) {
-    Widget buildActionWidget() {
-      if (onPressCodeViewer == null) {
-        return Container();
-      } else {
-        return IconButton(
-          icon: const Icon(
-            Icons.code,
-            color: Colors.white,
-          ),
-          onPressed: onPressCodeViewer,
-        );
-      }
-    }
-
     return AppBar(
       title: Text(text),
       centerTitle: true,
@@ -38,9 +24,7 @@ class UIUtils {
         ),
         onPressed: onPressed,
       ),
-      actions: [
-        buildActionWidget(),
-      ],
+      actions: rightWidgets,
       backgroundColor: backgroundColor,
       systemOverlayStyle: SystemUiOverlayStyle.light,
     );
