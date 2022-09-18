@@ -78,7 +78,9 @@ class _AddPlayerScreenState extends BaseStatefulState<AddPlayerScreen> {
                 ? ColorConstants.appColor
                 : Colors.grey,
             onPressed: () {
-              if (_cAddPlayer.isValidName()) {}
+              if (_cAddPlayer.isValidName()) {
+                _cAddPlayer.addPlayer(_cAddPlayer.name.value);
+              }
             },
             child: const Icon(Icons.add)),
       );
