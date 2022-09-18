@@ -25,7 +25,7 @@ class ListPlayerController extends GetxController {
       }
     }
 
-    addPlayer("Trần Phú Lợi", "https://github.com/tplloi/g1tool/blob/master/assets/images/player/loi.jpg?raw=true");
+    addPlayer("Lợi", "https://github.com/tplloi/g1tool/blob/master/assets/images/player/loi.jpg?raw=true");
     addPlayer("Toại *||*", "https://github.com/tplloi/g1tool/blob/master/assets/images/player/toai.jpeg?raw=true");
     addPlayer("Phúc (|)", "https://github.com/tplloi/g1tool/blob/master/assets/images/player/phuc.jpg?raw=true");
     addPlayer("Bảo Chu", "https://github.com/tplloi/g1tool/blob/master/assets/images/player/baochu.jpg?raw=true");
