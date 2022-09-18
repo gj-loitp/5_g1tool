@@ -109,17 +109,24 @@ class UIUtils {
     );
   }
 
-  static Text getText(String text) {
+  static Text getText(
+    String? text, {
+    double fontSize = DimenConstants.txtMedium,
+  }) {
     return Text(
-      text,
-      style: UIUtils.getStyleText(),
+      text ?? "",
+      style: UIUtils.getStyleText(
+        fontSize: fontSize,
+      ),
     );
   }
 
-  static TextStyle getStyleText() {
-    return const TextStyle(
+  static TextStyle getStyleText({
+    double fontSize = DimenConstants.txtMedium,
+  }) {
+    return TextStyle(
       color: Colors.black,
-      fontSize: DimenConstants.txtMedium,
+      fontSize: fontSize,
     );
   }
 
@@ -432,5 +439,15 @@ class UIUtils {
         child: Icon(Icons.error),
       ),
     );
+  }
+
+  static Widget buildNoDataView() {
+    return Container(
+        padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+        alignment: Alignment.center,
+        child: getText(
+          "Chưa có dữ liệu",
+          fontSize: DimenConstants.txtMedium,
+        ));
   }
 }

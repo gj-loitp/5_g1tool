@@ -9,7 +9,7 @@ import '../../common/utils/ui_utils.dart';
 import '../../controller/add_player_controller.dart';
 
 class AddPlayerScreen extends StatefulWidget {
-  final VoidCallback onAddSuccess;
+  final Function(String name) onAddSuccess;
 
   const AddPlayerScreen({
     Key? key,
@@ -78,18 +78,19 @@ class _AddPlayerScreenState extends BaseStatefulState<AddPlayerScreen> {
                 ? ColorConstants.appColor
                 : Colors.grey,
             onPressed: () {
-              if (_cAddPlayer.isValidName()) {
-                _cAddPlayer.addPlayer(_cAddPlayer.name.value);
-                Get.back();
-                widget.onAddSuccess.call();
-                showSnackBarFull(
-                  "Thông báo",
-                  "Đã thêm người chơi `${_cAddPlayer.name.value}` thành công",
-                );
-              }
+              addPlayer();
             },
             child: const Icon(Icons.add)),
       );
     });
+  }
+
+  void addPlayer() {
+    if (_cAddPlayer.isValidName()) {
+      _cAddPlayer.addPlayer(_cAddPlayer.name.value).then((value) {
+        Get.back();
+        widget.onAddSuccess.call(_cAddPlayer.name.value);
+      });
+    }
   }
 }
