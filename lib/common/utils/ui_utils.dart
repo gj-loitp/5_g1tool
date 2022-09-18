@@ -426,7 +426,7 @@ class UIUtils {
         ),
       ),
       placeholder: (context, url) => const Center(
-        child: CircularProgressIndicator(),
+        child: CupertinoActivityIndicator(),
       ),
       errorWidget: (context, url, error) => const Center(
         child: Icon(Icons.error),
