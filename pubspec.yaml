@@ -11,6 +11,8 @@ dependencies:
 
   #https://pub.dev/packages/avatar_glow
   avatar_glow: ^2.0.2
+  #https://pub.dev/packages/cached_network_image
+  cached_network_image: ^3.2.2
   cupertino_icons: ^1.0.5
   #https://pub.dev/packages/get
   get: ^4.6.5

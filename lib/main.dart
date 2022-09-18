@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
+import 'package:g1tool/common/utils/ui_utils.dart';
 import 'package:g1tool/ui/menu_screen.dart';
 import 'package:get/get.dart';
 
@@ -18,10 +19,10 @@ void main() {
       defaultTransition: Transition.cupertino,
       theme: ThemeData(
         backgroundColor: Colors.white,
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange)
-            .copyWith(secondary: Colors.deepOrange),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+            .copyWith(secondary: Colors.purple),
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     ),
   );
 }
@@ -56,26 +57,31 @@ class SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorConstants.appColor,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(150.0),
-              child: Image.asset(
-                "assets/images/loitp.JPG",
-                width: 250,
-                height: 250,
+      body: Stack(
+        children: [
+          UIUtils.buildCachedNetworkImage(
+              "https://live.staticflickr.com/8831/28179085646_9f2b3912fd_b.jpg"),
+          Column(
+            children: [
+              const SizedBox(height: DimenConstants.marginPadding98),
+              Container(
+                alignment: Alignment.center,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(150.0),
+                  child: Image.asset(
+                    "assets/images/loitp.JPG",
+                    width: 150,
+                    height: 150,
+                  ),
+                ),
               ),
-            ),
-            const Padding(
-                padding:
-                    EdgeInsets.only(top: DimenConstants.marginPaddingMedium)),
-            const CupertinoActivityIndicator(
-              color: Colors.white,
-            ),
-          ],
-        ),
+              const SizedBox(height: DimenConstants.marginPaddingMedium),
+              const CupertinoActivityIndicator(
+                color: Colors.white,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

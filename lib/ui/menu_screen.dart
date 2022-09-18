@@ -17,13 +17,19 @@ class MenuScreen extends StatelessWidget {
         },
         null,
       ),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+      body: Stack(
         children: [
-          UIUtils.getButton(
-            "Animation",
-            () {},
+          UIUtils.buildCachedNetworkImage(
+              "https://live.staticflickr.com/8653/28179077686_ec36b85f0b_b.jpg"),
+          ListView(
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+            children: [
+              UIUtils.getButton(
+                "Animation",
+                () {},
+              ),
+            ],
           ),
         ],
       ),

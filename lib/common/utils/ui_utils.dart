@@ -1,4 +1,5 @@
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -406,6 +407,30 @@ class UIUtils {
       margin: EdgeInsets.zero,
       colorText: const Color(0xff232426),
       snackPosition: isTop ? SnackPosition.TOP : SnackPosition.BOTTOM,
+    );
+  }
+
+  static Widget buildCachedNetworkImage(String imageUrl) {
+    return CachedNetworkImage(
+      imageUrl: imageUrl,
+      imageBuilder: (context, imageProvider) => Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: imageProvider,
+            fit: BoxFit.cover,
+            // colorFilter: const ColorFilter.mode(
+            //   Colors.transparent,
+            //   BlendMode.colorBurn,
+            // ),
+          ),
+        ),
+      ),
+      placeholder: (context, url) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+      errorWidget: (context, url, error) => const Center(
+        child: Icon(Icons.error),
+      ),
     );
   }
 }
