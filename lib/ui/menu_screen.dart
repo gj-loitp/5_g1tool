@@ -1,5 +1,6 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:g1tool/ui/player/list_player_screen.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,7 @@ class MenuScreen extends StatelessWidget {
       appBar: UIUtils.getAppBar(
         "G1 tools",
         () {
-          SystemNavigator.pop();
+          exit(0);
         },
         null,
       ),

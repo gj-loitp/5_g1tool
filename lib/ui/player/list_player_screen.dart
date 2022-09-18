@@ -35,7 +35,7 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> {
       appBar: UIUtils.getAppBar(
         "Danh sách người chơi",
         () {
-          SystemNavigator.pop();
+          Get.back();
         },
         [
           IconButton(

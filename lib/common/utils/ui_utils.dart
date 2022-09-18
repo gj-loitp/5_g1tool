@@ -96,21 +96,25 @@ class UIUtils {
   static Text getText(
     String? text, {
     double fontSize = DimenConstants.txtMedium,
+    Color color = Colors.black,
   }) {
     return Text(
       text ?? "",
       style: UIUtils.getStyleText(
         fontSize: fontSize,
+        color: color,
       ),
     );
   }
 
   static TextStyle getStyleText({
     double fontSize = DimenConstants.txtMedium,
+    Color color = Colors.black,
   }) {
     return TextStyle(
-      color: Colors.black,
+      color: color,
       fontSize: fontSize,
+      fontWeight: FontWeight.w400,
     );
   }
 
@@ -427,11 +431,13 @@ class UIUtils {
 
   static Widget buildNoDataView() {
     return Container(
-        padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-        alignment: Alignment.center,
-        child: getText(
-          "Chưa có dữ liệu",
-          fontSize: DimenConstants.txtMedium,
-        ));
+      padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+      alignment: Alignment.center,
+      child: getText(
+        "Chưa có dữ liệu",
+        fontSize: DimenConstants.txtLarge,
+        color: Colors.white,
+      ),
+    );
   }
 }

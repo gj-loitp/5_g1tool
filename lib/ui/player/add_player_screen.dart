@@ -38,7 +38,7 @@ class _AddPlayerScreenState extends BaseStatefulState<AddPlayerScreen> {
         appBar: UIUtils.getAppBar(
           "Thêm người chơi",
           () {
-            SystemNavigator.pop();
+            Get.back();
           },
           null,
         ),
