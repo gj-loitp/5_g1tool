@@ -26,10 +26,12 @@ class UpdatePlayerScreen extends StatefulWidget {
 
 class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> {
   final _cUpdatePlayer = Get.put(UpdatePlayerController());
+  final _tecName = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    _tecName.text = widget.player.name ?? "";
   }
 
   @override
@@ -37,7 +39,7 @@ class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> {
     return Scaffold(
       appBar: UIUtils.getAppBar(
         "Chỉnh sửa người chơi",
-            () {
+        () {
           Get.back();
         },
         null,
@@ -49,11 +51,17 @@ class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> {
             padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
             physics: const BouncingScrollPhysics(),
             children: [
+              SizedBox(
+                height: 250,
+                child:
+                    UIUtils.buildCachedNetworkImage(widget.player.avatar ?? ""),
+              ),
               Container(
                 color: Colors.white,
                 padding:
-                const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+                    const EdgeInsets.all(DimenConstants.marginPaddingMedium),
                 child: TextFormField(
+                  controller: _tecName,
                   maxLength: 30,
                   keyboardType: TextInputType.text,
                   decoration: const InputDecoration(
