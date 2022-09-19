@@ -121,6 +121,10 @@ class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> {
 
   void _updatePlayer() {
     var newName = _tecName.text;
+    if (newName == widget.player.name) {
+      showSnackBarFull(StringConstants.warning, "Không có gì để cập nhật");
+      return;
+    }
     showWarningDialog(
       StringConstants.warning,
       "Bạn có muốn cập nhật người chơi ${widget.player.name} thành $newName?",
