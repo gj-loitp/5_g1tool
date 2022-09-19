@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:g1tool/common/c/color_constant.dart';
 import 'package:get/get.dart';
 
 import '../c/dimen_constant.dart';
@@ -150,81 +151,6 @@ class UIUtils {
     );
   }
 
-  static void showAlertDialog(
-    BuildContext context,
-    String title,
-    String message,
-    String? cancelTitle,
-    VoidCallback? cancelAction,
-    String okTitle,
-    VoidCallback? okAction,
-  ) {
-    showCupertinoDialog(
-      context: context,
-      builder: (context) => CupertinoAlertDialog(
-        content: Text(
-          message,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: Color(0xff232426),
-          ),
-        ),
-        title: Text(title),
-        actions: [
-          if (cancelTitle != null)
-            CupertinoDialogAction(
-              isDefaultAction: true,
-              onPressed: () {
-                Get.back();
-                cancelAction?.call();
-              },
-              child: Text(
-                cancelTitle,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xff0A79F8),
-                ),
-              ),
-            ),
-          CupertinoDialogAction(
-            child: Text(
-              okTitle,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: Color(0xffFF0000),
-              ),
-            ),
-            onPressed: () {
-              Get.back();
-              okAction?.call();
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  static void showErrorDialog(
-    BuildContext context,
-    String title,
-    String message,
-    String okTitle,
-    VoidCallback? okCallback,
-  ) {
-    showAlertDialog(
-      context,
-      title,
-      message,
-      null,
-      null,
-      okTitle,
-      okCallback,
-    );
-  }
-
   static void showSnackBar(
     String title,
     String message,
@@ -238,96 +164,181 @@ class UIUtils {
     );
   }
 
-  static void showDialogSuccess(
-    BuildContext context,
-    String msg,
-    VoidCallback? onClickConfirm,
-  ) {
-    showGeneralDialog(
-      barrierDismissible: false,
-      barrierColor: Colors.black.withOpacity(0.5),
-      transitionDuration: const Duration(milliseconds: 500),
-      context: context,
-      pageBuilder: (_, __, ___) {
-        return Center(
-          child: Container(
-            width: 300,
-            margin: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(DimenConstants.radiusMedium),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(height: DimenConstants.marginPaddingMedium),
-                AvatarGlow(
-                  glowColor: Colors.green,
-                  endRadius: 60,
-                  duration: const Duration(milliseconds: 2000),
-                  repeat: true,
-                  showTwoGlows: true,
-                  repeatPauseDuration: const Duration(milliseconds: 100),
-                  child: Image.asset(
-                    "assets/images/ic_success.png",
-                    height: 60,
-                    width: 60,
-                  ),
-                ),
-                // SizedBox(height: DimenConstants.marginPaddingMedium),
-                Text(
-                  msg,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xff232426),
-                  ),
-                ),
-                const SizedBox(height: DimenConstants.radiusMedium),
-                const Divider(
-                  color: Color(0xffC8C8CA),
-                  height: 1,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: DimenConstants.heightButton,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: const Color(0xff0A79F8),
-                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                      // backgroundColor: Colors.white,
-                      textStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    onPressed: () {
-                      Get.back();
-                      onClickConfirm?.call();
-                    },
-                    child: const Text(
-                      "Đóng",
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-      transitionBuilder: (_, anim, __, child) {
-        return ScaleTransition(
-          scale: CurvedAnimation(
-            parent: anim,
-            curve: Curves.bounceIn,
-            reverseCurve: Curves.bounceIn,
-          ),
-          child: child,
-        );
-      },
-    );
-  }
+  // static void showDialogSuccess(
+  //   BuildContext context,
+  //   String msg,
+  //   VoidCallback? onClickConfirm,
+  // ) {
+  //   showGeneralDialog(
+  //     barrierDismissible: false,
+  //     barrierColor: Colors.black.withOpacity(0.5),
+  //     transitionDuration: const Duration(milliseconds: 500),
+  //     context: context,
+  //     pageBuilder: (_, __, ___) {
+  //       return Center(
+  //         child: Container(
+  //           width: 300,
+  //           margin: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+  //           decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             borderRadius: BorderRadius.circular(DimenConstants.radiusMedium),
+  //           ),
+  //           child: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               const SizedBox(height: DimenConstants.marginPaddingMedium),
+  //               AvatarGlow(
+  //                 glowColor: Colors.green,
+  //                 endRadius: 60,
+  //                 duration: const Duration(milliseconds: 2000),
+  //                 repeat: true,
+  //                 showTwoGlows: true,
+  //                 repeatPauseDuration: const Duration(milliseconds: 100),
+  //                 child: Image.asset(
+  //                   "assets/images/ic_success.png",
+  //                   height: 60,
+  //                   width: 60,
+  //                 ),
+  //               ),
+  //               // SizedBox(height: DimenConstants.marginPaddingMedium),
+  //               Text(
+  //                 msg,
+  //                 textAlign: TextAlign.center,
+  //                 style: const TextStyle(
+  //                   fontSize: 16,
+  //                   fontWeight: FontWeight.w700,
+  //                   color: Color(0xff232426),
+  //                 ),
+  //               ),
+  //               const SizedBox(height: DimenConstants.radiusMedium),
+  //               const Divider(
+  //                 color: Color(0xffC8C8CA),
+  //                 height: 1,
+  //               ),
+  //               SizedBox(
+  //                 width: double.infinity,
+  //                 height: DimenConstants.heightButton,
+  //                 child: TextButton(
+  //                   style: TextButton.styleFrom(
+  //                     foregroundColor: const Color(0xff0A79F8),
+  //                     padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+  //                     // backgroundColor: Colors.white,
+  //                     textStyle: const TextStyle(
+  //                       fontSize: 16,
+  //                       fontWeight: FontWeight.w400,
+  //                     ),
+  //                   ),
+  //                   onPressed: () {
+  //                     Get.back();
+  //                     onClickConfirm?.call();
+  //                   },
+  //                   child: const Text(
+  //                     "Đóng",
+  //                   ),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //     transitionBuilder: (_, anim, __, child) {
+  //       return ScaleTransition(
+  //         scale: CurvedAnimation(
+  //           parent: anim,
+  //           curve: Curves.bounceIn,
+  //           reverseCurve: Curves.bounceIn,
+  //         ),
+  //         child: child,
+  //       );
+  //     },
+  //   );
+  // }
+
+  // static void showDialog2(
+  //   BuildContext context,
+  //   bool barrierDismissible,
+  //   String? msg,
+  //   String? confirm,
+  //   String? cancel,
+  //   VoidCallback? onClickConfirm,
+  //   VoidCallback? onClickCancel,
+  // ) {
+  //   showGeneralDialog(
+  //     barrierDismissible: barrierDismissible,
+  //     barrierColor: Colors.black.withOpacity(0.5),
+  //     transitionDuration: const Duration(milliseconds: 500),
+  //     context: context,
+  //     pageBuilder: (_, __, ___) {
+  //       return Center(
+  //         child: Container(
+  //           width: 300,
+  //           margin: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+  //           decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             borderRadius: BorderRadius.circular(DimenConstants.radiusMedium),
+  //           ),
+  //           child: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               const SizedBox(height: DimenConstants.marginPaddingMedium),
+  //               if (msg != null && msg.isNotEmpty)
+  //                 Text(
+  //                   msg,
+  //                   textAlign: TextAlign.center,
+  //                   style: const TextStyle(
+  //                     fontSize: 16,
+  //                     fontWeight: FontWeight.w700,
+  //                     color: Color(0xff232426),
+  //                   ),
+  //                 ),
+  //               const SizedBox(height: DimenConstants.radiusMedium),
+  //               const Divider(
+  //                 color: Color(0xffC8C8CA),
+  //                 height: 1,
+  //               ),
+  //               Row(
+  //                 children: [
+  //                   if (confirm != null && confirm.isNotEmpty)
+  //                     SizedBox(
+  //                       width: double.infinity,
+  //                       height: DimenConstants.heightButton,
+  //                       child: TextButton(
+  //                         style: TextButton.styleFrom(
+  //                           foregroundColor: ColorConstants.appColor,
+  //                           padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+  //                           // backgroundColor: Colors.white,
+  //                           textStyle: const TextStyle(
+  //                             fontSize: 16,
+  //                             fontWeight: FontWeight.w400,
+  //                           ),
+  //                         ),
+  //                         onPressed: () {
+  //                           Get.back();
+  //                           onClickConfirm?.call();
+  //                         },
+  //                         child: Text(confirm),
+  //                       ),
+  //                     ),
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //     transitionBuilder: (_, anim, __, child) {
+  //       return ScaleTransition(
+  //         scale: CurvedAnimation(
+  //           parent: anim,
+  //           curve: Curves.bounceIn,
+  //           reverseCurve: Curves.bounceIn,
+  //         ),
+  //         child: child,
+  //       );
+  //     },
+  //   );
+  // }
 
   static Widget buildHorizontalDivider(
       Color color, double width, double height) {

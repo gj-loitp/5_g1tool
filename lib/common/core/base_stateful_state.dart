@@ -201,159 +201,162 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
       barrierLabel: "",
       context: context,
       pageBuilder: (_, __, ___) {
-        return Center(
-          child: Container(
-            width: Get.width,
-            margin: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-            padding: const EdgeInsets.fromLTRB(
-              DimenConstants.marginPaddingMedium,
-              DimenConstants.marginPaddingMedium,
-              DimenConstants.marginPaddingMedium,
-              DimenConstants.marginPaddingMedium,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xff232426),
-                    decoration: TextDecoration.none,
-                  ),
-                ),
-                const SizedBox(height: DimenConstants.marginPaddingMedium),
-                Text(
-                  message,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff232426),
-                    decoration: TextDecoration.none,
-                  ),
-                ),
-                const SizedBox(height: 28),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Visibility(
-                      visible: cancelTitle != null &&
-                          cancelTitle.isNotEmpty == true,
-                      child: (okTitle != null && okTitle.isNotEmpty == true)
-                          ? (Expanded(
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            foregroundColor: ColorConstants.appColor,
-                            padding: const EdgeInsets.fromLTRB(
-                              DimenConstants.marginPaddingMedium,
-                              DimenConstants.marginPaddingMedium *
-                                  2 /
-                                  3,
-                              DimenConstants.marginPaddingMedium,
-                              DimenConstants.marginPaddingMedium *
-                                  2 /
-                                  3,
-                            ),
-                            backgroundColor: const Color(0xffffffff),
-                            textStyle: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(15)),
-                              side: BorderSide(
-                                  color: Color(0xffDEE1EB), width: 1.0),
-                            ),
-                          ),
-                          onPressed: () {
-                            Get.back();
-                            cancelAction?.call();
-                          },
-                          child: Text(
-                            cancelTitle ?? "",
-                          ),
-                        ),
-                      ))
-                          : (TextButton(
-                        style: TextButton.styleFrom(
-                          foregroundColor: ColorConstants.appColor,
-                          padding: const EdgeInsets.fromLTRB(
-                            DimenConstants.marginPaddingMedium,
-                            DimenConstants.marginPaddingMedium * 2 / 3,
-                            DimenConstants.marginPaddingMedium,
-                            DimenConstants.marginPaddingMedium * 2 / 3,
-                          ),
-                          backgroundColor: const Color(0xffffffff),
-                          textStyle: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(15)),
-                            side: BorderSide(
-                                color: Color(0xffDEE1EB), width: 1.0),
-                          ),
-                        ),
-                        onPressed: () {
-                          Get.back();
-                          cancelAction?.call();
-                        },
-                        child: Text(
-                          cancelTitle ?? "",
-                        ),
-                      )),
+        return Material(
+          color: Colors.transparent,
+          child: Center(
+            child: Container(
+              width: Get.width,
+              margin: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+              padding: const EdgeInsets.fromLTRB(
+                DimenConstants.marginPaddingMedium,
+                DimenConstants.marginPaddingMedium,
+                DimenConstants.marginPaddingMedium,
+                DimenConstants.marginPaddingMedium,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xff232426),
+                      decoration: TextDecoration.none,
                     ),
-                    Visibility(
-                      visible: okTitle != null && okTitle.isNotEmpty == true,
-                      child: const SizedBox(
-                          width: DimenConstants.marginPaddingSmall),
+                  ),
+                  const SizedBox(height: DimenConstants.marginPaddingMedium),
+                  Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xff232426),
+                      decoration: TextDecoration.none,
                     ),
-                    Visibility(
-                      visible: okTitle != null && okTitle.isNotEmpty == true,
-                      child: Expanded(
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            foregroundColor: const Color(0xffffffff),
-                            padding: const EdgeInsets.fromLTRB(
-                              DimenConstants.marginPaddingMedium,
-                              DimenConstants.marginPaddingMedium * 2 / 3,
-                              DimenConstants.marginPaddingMedium,
-                              DimenConstants.marginPaddingMedium * 2 / 3,
+                  ),
+                  const SizedBox(height: 28),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Visibility(
+                        visible: cancelTitle != null &&
+                            cancelTitle.isNotEmpty == true,
+                        child: (okTitle != null && okTitle.isNotEmpty == true)
+                            ? (Expanded(
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: ColorConstants.appColor,
+                                    padding: const EdgeInsets.fromLTRB(
+                                      DimenConstants.marginPaddingMedium,
+                                      DimenConstants.marginPaddingMedium *
+                                          2 /
+                                          3,
+                                      DimenConstants.marginPaddingMedium,
+                                      DimenConstants.marginPaddingMedium *
+                                          2 /
+                                          3,
+                                    ),
+                                    backgroundColor: const Color(0xffffffff),
+                                    textStyle: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(15)),
+                                      side: BorderSide(
+                                          color: Color(0xffDEE1EB), width: 1.0),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Get.back();
+                                    cancelAction?.call();
+                                  },
+                                  child: Text(
+                                    cancelTitle ?? "",
+                                  ),
+                                ),
+                              ))
+                            : (TextButton(
+                                style: TextButton.styleFrom(
+                                  foregroundColor: ColorConstants.appColor,
+                                  padding: const EdgeInsets.fromLTRB(
+                                    DimenConstants.marginPaddingMedium,
+                                    DimenConstants.marginPaddingMedium * 2 / 3,
+                                    DimenConstants.marginPaddingMedium,
+                                    DimenConstants.marginPaddingMedium * 2 / 3,
+                                  ),
+                                  backgroundColor: const Color(0xffffffff),
+                                  textStyle: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                    side: BorderSide(
+                                        color: Color(0xffDEE1EB), width: 1.0),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Get.back();
+                                  cancelAction?.call();
+                                },
+                                child: Text(
+                                  cancelTitle ?? "",
+                                ),
+                              )),
+                      ),
+                      Visibility(
+                        visible: okTitle != null && okTitle.isNotEmpty == true,
+                        child: const SizedBox(
+                            width: DimenConstants.marginPaddingSmall),
+                      ),
+                      Visibility(
+                        visible: okTitle != null && okTitle.isNotEmpty == true,
+                        child: Expanded(
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              foregroundColor: const Color(0xffffffff),
+                              padding: const EdgeInsets.fromLTRB(
+                                DimenConstants.marginPaddingMedium,
+                                DimenConstants.marginPaddingMedium * 2 / 3,
+                                DimenConstants.marginPaddingMedium,
+                                DimenConstants.marginPaddingMedium * 2 / 3,
+                              ),
+                              backgroundColor: ColorConstants.appColor,
+                              textStyle: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                side: BorderSide(
+                                    color: Colors.purple, width: 1.0),
+                              ),
                             ),
-                            backgroundColor: ColorConstants.appColor,
-                            textStyle: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
+                            onPressed: () {
+                              Get.back();
+                              okAction?.call();
+                            },
+                            child: Text(
+                              okTitle ?? "",
                             ),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(15)),
-                              side: BorderSide(
-                                  color: Colors.purple, width: 1.0),
-                            ),
-                          ),
-                          onPressed: () {
-                            Get.back();
-                            okAction?.call();
-                          },
-                          child: Text(
-                            okTitle ?? "",
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         );
