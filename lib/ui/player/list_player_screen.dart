@@ -137,12 +137,17 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> {
   }
 
   void _genDefaultPlayer() {
-    showConfirmDialog(
+    showWarningDialog(
       StringConstants.warning,
       "Bạn có muốn thêm danh sách người chơi mặc định?",
-      StringConstants.ok,
+      () {
+        //do nothing
+      },
       () {
         _cListPlayer.genListPlayerDefault();
+      },
+      (type) {
+        //do nothing
       },
     );
   }

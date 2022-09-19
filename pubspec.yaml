@@ -9,17 +9,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-  #https://pub.dev/packages/avatar_glow
   avatar_glow: ^2.0.2
-  #https://pub.dev/packages/cached_network_image
   cached_network_image: ^3.2.2
   cupertino_icons: ^1.0.5
-  #https://pub.dev/packages/get
   get: ^4.6.5
-  #https://pub.dev/packages/hive
-  hive: ^2.2.3
-  #https://pub.dev/packages/sqflite
-  sqflite: ^2.0.3+1
+  sqflite: ^2.1.0
+  awesome_dialog: ^3.0.1
 
 
 dev_dependencies:

@@ -105,10 +105,9 @@ class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> {
   }
 
   void _deletePlayer() {
-    showConfirmDialog(
+    showErrorDialog(
       StringConstants.warning,
       "Bạn có muốn xoá người chơi ${widget.player.name}?",
-      StringConstants.ok,
       () {
         _cUpdatePlayer.deletePlayer(widget.player).then((value) {
           Get.back();
@@ -122,10 +121,12 @@ class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> {
 
   void _updatePlayer() {
     var newName = _tecName.text;
-    showConfirmDialog(
+    showWarningDialog(
       StringConstants.warning,
       "Bạn có muốn cập nhật người chơi ${widget.player.name} thành $newName?",
-      StringConstants.ok,
+      () {
+        //do nothing
+      },
       () {
         var player = Player.fromJson(widget.player.toJson());
         player.name = newName;
@@ -134,6 +135,9 @@ class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> {
           showSnackBarFull(StringConstants.warning, "Cập nhật thành công");
           widget.onUpdateSuccess.call(null);
         });
+      },
+      (type) {
+        //do nothing
       },
     );
   }

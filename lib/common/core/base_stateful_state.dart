@@ -1,413 +1,10 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:g1tool/common/c/color_constant.dart';
-import 'package:get/get.dart';
 
-import '../c/dimen_constant.dart';
 import '../utils/ui_utils.dart';
 
 abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
   BaseStatefulState();
-
-  void showAlertDialogWidget(
-    bool barrierDismissible,
-    String title,
-    Widget widgetMessage,
-    String cancelTitle,
-    VoidCallback cancelAction,
-    String okTitle,
-    VoidCallback okAction,
-  ) {
-    showGeneralDialog(
-      barrierDismissible: barrierDismissible,
-      barrierColor: Colors.black.withOpacity(0.5),
-      context: context,
-      pageBuilder: (_, __, ___) {
-        return WillPopScope(
-          onWillPop: () async => barrierDismissible,
-          child: Center(
-            child: Container(
-              width: Get.width,
-              margin: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-              padding: const EdgeInsets.fromLTRB(
-                DimenConstants.marginPaddingMedium,
-                DimenConstants.marginPaddingMedium,
-                DimenConstants.marginPaddingMedium,
-                DimenConstants.marginPaddingMedium,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xff232426),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                  const SizedBox(height: DimenConstants.marginPaddingMedium),
-                  widgetMessage,
-                  const SizedBox(height: 28),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Visibility(
-                        visible: cancelTitle.isNotEmpty == true,
-                        child: (okTitle.isNotEmpty == true)
-                            ? (Expanded(
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                    foregroundColor: ColorConstants.appColor,
-                                    padding: const EdgeInsets.fromLTRB(
-                                      DimenConstants.marginPaddingMedium,
-                                      DimenConstants.marginPaddingMedium *
-                                          2 /
-                                          3,
-                                      DimenConstants.marginPaddingMedium,
-                                      DimenConstants.marginPaddingMedium *
-                                          2 /
-                                          3,
-                                    ),
-                                    backgroundColor: const Color(0xffffffff),
-                                    textStyle: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(15)),
-                                      side: BorderSide(
-                                          color: Color(0xffDEE1EB), width: 1.0),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    Get.back();
-                                    cancelAction.call();
-                                  },
-                                  child: Text(
-                                    cancelTitle,
-                                  ),
-                                ),
-                              ))
-                            : (TextButton(
-                                style: TextButton.styleFrom(
-                                  foregroundColor: ColorConstants.appColor,
-                                  padding: const EdgeInsets.fromLTRB(
-                                    DimenConstants.marginPaddingMedium,
-                                    DimenConstants.marginPaddingMedium * 2 / 3,
-                                    DimenConstants.marginPaddingMedium,
-                                    DimenConstants.marginPaddingMedium * 2 / 3,
-                                  ),
-                                  backgroundColor: const Color(0xffffffff),
-                                  textStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15)),
-                                    side: BorderSide(
-                                        color: Color(0xffDEE1EB), width: 1.0),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Get.back();
-                                  cancelAction.call();
-                                },
-                                child: Text(
-                                  cancelTitle,
-                                ),
-                              )),
-                      ),
-                      Visibility(
-                        visible: okTitle.isNotEmpty == true,
-                        child: const SizedBox(
-                            width: DimenConstants.marginPaddingSmall),
-                      ),
-                      Visibility(
-                        visible: okTitle.isNotEmpty == true,
-                        child: Expanded(
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: const Color(0xffffffff),
-                              padding: const EdgeInsets.fromLTRB(
-                                DimenConstants.marginPaddingMedium,
-                                DimenConstants.marginPaddingMedium * 2 / 3,
-                                DimenConstants.marginPaddingMedium,
-                                DimenConstants.marginPaddingMedium * 2 / 3,
-                              ),
-                              backgroundColor: ColorConstants.appColor,
-                              textStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                    DimenConstants.radiusRound)),
-                                side: BorderSide(
-                                    color: Colors.purple, width: 1.0),
-                              ),
-                            ),
-                            onPressed: () {
-                              Get.back();
-                              okAction.call();
-                            },
-                            child: Text(
-                              okTitle,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-      transitionDuration: const Duration(milliseconds: 500),
-      transitionBuilder: (_, anim, __, child) {
-        return ScaleTransition(
-          scale: CurvedAnimation(
-            parent: anim,
-            curve: Curves.bounceIn,
-            reverseCurve: Curves.bounceIn,
-          ),
-          child: child,
-        );
-      },
-    );
-  }
-
-  void showAlertDialog(
-    bool barrierDismissible,
-    String title,
-    String message,
-    String? cancelTitle,
-    VoidCallback? cancelAction,
-    String? okTitle,
-    VoidCallback? okAction,
-  ) {
-    showGeneralDialog(
-      barrierDismissible: barrierDismissible,
-      barrierColor: Colors.black.withOpacity(0.5),
-      barrierLabel: "",
-      context: context,
-      pageBuilder: (_, __, ___) {
-        return WillPopScope(
-          onWillPop: () async => barrierDismissible,
-          child: Center(
-            child: Container(
-              width: Get.width,
-              margin: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-              padding: const EdgeInsets.fromLTRB(
-                DimenConstants.marginPaddingMedium,
-                DimenConstants.marginPaddingMedium,
-                DimenConstants.marginPaddingMedium,
-                DimenConstants.marginPaddingMedium,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xff232426),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                  const SizedBox(height: DimenConstants.marginPaddingMedium),
-                  Text(
-                    message,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff232426),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                  const SizedBox(height: 28),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Visibility(
-                        visible: cancelTitle != null &&
-                            cancelTitle.isNotEmpty == true,
-                        child: (okTitle != null && okTitle.isNotEmpty == true)
-                            ? (Expanded(
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: ColorConstants.appColor,
-                              padding: const EdgeInsets.fromLTRB(
-                                DimenConstants.marginPaddingMedium,
-                                DimenConstants.marginPaddingMedium *
-                                    2 /
-                                    3,
-                                DimenConstants.marginPaddingMedium,
-                                DimenConstants.marginPaddingMedium *
-                                    2 /
-                                    3,
-                              ),
-                              backgroundColor: const Color(0xffffffff),
-                              textStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
-                                side: BorderSide(
-                                    color: Color(0xffDEE1EB), width: 1.0),
-                              ),
-                            ),
-                            onPressed: () {
-                              Get.back();
-                              cancelAction?.call();
-                            },
-                            child: Text(
-                              cancelTitle ?? "",
-                            ),
-                          ),
-                        ))
-                            : (TextButton(
-                          style: TextButton.styleFrom(
-                            foregroundColor: ColorConstants.appColor,
-                            padding: const EdgeInsets.fromLTRB(
-                              DimenConstants.marginPaddingMedium,
-                              DimenConstants.marginPaddingMedium * 2 / 3,
-                              DimenConstants.marginPaddingMedium,
-                              DimenConstants.marginPaddingMedium * 2 / 3,
-                            ),
-                            backgroundColor: const Color(0xffffffff),
-                            textStyle: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(15)),
-                              side: BorderSide(
-                                  color: Color(0xffDEE1EB), width: 1.0),
-                            ),
-                          ),
-                          onPressed: () {
-                            Get.back();
-                            cancelAction?.call();
-                          },
-                          child: Text(
-                            cancelTitle ?? "",
-                          ),
-                        )),
-                      ),
-                      Visibility(
-                        visible: okTitle != null && okTitle.isNotEmpty == true,
-                        child: const SizedBox(
-                            width: DimenConstants.marginPaddingSmall),
-                      ),
-                      Visibility(
-                        visible: okTitle != null && okTitle.isNotEmpty == true,
-                        child: Expanded(
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: const Color(0xffffffff),
-                              padding: const EdgeInsets.fromLTRB(
-                                DimenConstants.marginPaddingMedium,
-                                DimenConstants.marginPaddingMedium * 2 / 3,
-                                DimenConstants.marginPaddingMedium,
-                                DimenConstants.marginPaddingMedium * 2 / 3,
-                              ),
-                              backgroundColor: ColorConstants.appColor,
-                              textStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
-                                side: BorderSide(
-                                    color: Colors.purple, width: 1.0),
-                              ),
-                            ),
-                            onPressed: () {
-                              Get.back();
-                              okAction?.call();
-                            },
-                            child: Text(
-                              okTitle ?? "",
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-      transitionDuration: const Duration(milliseconds: 500),
-      transitionBuilder: (_, anim, __, child) {
-        return ScaleTransition(
-          scale: CurvedAnimation(
-            parent: anim,
-            curve: Curves.bounceIn,
-            reverseCurve: Curves.bounceIn,
-          ),
-          child: child,
-        );
-      },
-    );
-  }
-
-  void showErrorDialog(
-    String title,
-    String message,
-    String cancelTitle,
-    VoidCallback cancelCallback,
-  ) {
-    showAlertDialog(
-      false,
-      title,
-      message,
-      cancelTitle,
-      cancelCallback,
-      null,
-      null,
-    );
-  }
-
-  void showConfirmDialog(
-    String title,
-    String message,
-    String okTitle,
-    VoidCallback okCallback,
-  ) {
-    showAlertDialog(
-      true,
-      title,
-      message,
-      null,
-      null,
-      okTitle,
-      okCallback,
-    );
-  }
 
   void showSnackBarFull(
     String title,
@@ -423,92 +20,63 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
     UIUtils.showFullWidthSnackBarError(title, message);
   }
 
-  void showDialogSuccess(
-    Widget textCenter,
-    bool barrierDismissible,
-    Function onClickConfirm,
+  void showWarningDialog(
+    String title,
+    String desc,
+    Function()? btnCancelOnPress,
+    Function()? btnOkOnPress,
+    Function(DismissType type)? onDismissCallback,
   ) {
-    showGeneralDialog(
-      barrierDismissible: barrierDismissible,
-      barrierColor: Colors.black.withOpacity(0.5),
+    AwesomeDialog(
       context: context,
-      pageBuilder: (_, __, ___) {
-        return WillPopScope(
-          onWillPop: () async => barrierDismissible,
-          child: Center(
-            child: Container(
-              width: Get.width,
-              margin: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-              padding: const EdgeInsets.fromLTRB(
-                DimenConstants.marginPaddingMedium,
-                DimenConstants.marginPaddingMedium,
-                DimenConstants.marginPaddingMedium,
-                0,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius:
-                    BorderRadius.circular(DimenConstants.radiusMedium),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(
-                    "assets/images/ic_success.png",
-                    height: 45,
-                    width: 45,
-                  ),
-                  const SizedBox(height: DimenConstants.marginPaddingMedium),
-                  textCenter,
-                  const SizedBox(height: DimenConstants.marginPaddingMedium),
-                  SizedBox(
-                    height: 40,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        foregroundColor: ColorConstants.appColor,
-                        padding: const EdgeInsets.fromLTRB(
-                          DimenConstants.marginPaddingMedium * 5 / 2,
-                          0,
-                          DimenConstants.marginPaddingMedium * 5 / 2,
-                          0,
-                        ),
-                        textStyle: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                          side:
-                              BorderSide(color: Color(0xffDEE1EB), width: 1.0),
-                        ),
-                      ),
-                      onPressed: () {
-                        Get.back();
-                        onClickConfirm.call();
-                      },
-                      child: const Text(
-                        "Đóng",
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: DimenConstants.marginPaddingMedium),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-      transitionDuration: const Duration(milliseconds: 500),
-      transitionBuilder: (_, anim, __, child) {
-        return ScaleTransition(
-          scale: CurvedAnimation(
-            parent: anim,
-            curve: Curves.bounceIn,
-            reverseCurve: Curves.bounceIn,
-          ),
-          child: child,
-        );
-      },
-    );
+      dialogType: DialogType.warning,
+      headerAnimationLoop: false,
+      animType: AnimType.scale,
+      showCloseIcon: true,
+      closeIcon: const Icon(Icons.cancel),
+      title: title,
+      desc: desc,
+      btnCancelOnPress: btnCancelOnPress,
+      onDismissCallback: onDismissCallback,
+      btnOkOnPress: btnOkOnPress,
+    ).show();
+  }
+
+  void showErrorDialog(
+    String title,
+    String desc,
+    Function()? btnOkOnPress,
+  ) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.error,
+      animType: AnimType.scale,
+      headerAnimationLoop: false,
+      title: title,
+      desc: desc,
+      btnOkOnPress: btnOkOnPress,
+      btnOkIcon: Icons.cancel,
+      btnOkColor: Colors.red,
+    ).show();
+  }
+
+  void showSuccessDialog(
+    String title,
+    String desc,
+    Function(DismissType type)? onDismissCallback,
+    Function()? btnOkOnPress,
+  ) {
+    AwesomeDialog(
+      context: context,
+      animType: AnimType.scale,
+      headerAnimationLoop: false,
+      dialogType: DialogType.success,
+      showCloseIcon: true,
+      title: title,
+      desc: desc,
+      btnOkOnPress: btnOkOnPress,
+      btnOkIcon: Icons.check_circle,
+      onDismissCallback: onDismissCallback,
+    ).show();
   }
 }
