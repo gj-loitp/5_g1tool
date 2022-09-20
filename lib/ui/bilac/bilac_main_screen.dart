@@ -180,5 +180,6 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
     if (index == 0) {
       return;
     }
+    _cBilacMainController.updateScoreOfPlayer(index, player);
   }
 }

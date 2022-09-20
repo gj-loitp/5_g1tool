@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:g1tool/model/player.dart';
 import 'package:get/get.dart';
@@ -14,6 +16,17 @@ class BilacMainController extends GetxController {
   void genNewGame(List<Player> listPlayerSelected) {
     listPlayer.clear();
     listPlayer.addAll(listPlayerSelected);
+
+    var maxRound = getMaxRound();
+    String tmpScoreString = "";
+    for (int i = 0; i < maxRound - 1; i++) {
+      tmpScoreString += "#${Player.RESULT_NONE}";
+    }
+    for (var p in listPlayer) {
+      p.scoreString = tmpScoreString;
+    }
+
+    _print(">>>listPlayer ${jsonEncode(listPlayer)}");
     listPlayer.refresh();
   }
 
@@ -28,4 +41,6 @@ class BilacMainController extends GetxController {
     // _print("getMaxRound ${C(2, listPlayer.length)}");
     return C(2, listPlayer.length);
   }
+
+  void updateScoreOfPlayer(int indexScore, Player player) {}
 }
