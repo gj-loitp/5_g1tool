@@ -8,6 +8,7 @@ import '../../common/c/string_constant.dart';
 import '../../common/core/base_stateful_state.dart';
 import '../../common/utils/ui_utils.dart';
 import '../../controller/bilac/bilac_main_controller.dart';
+import '../../model/player.dart';
 import '../player/select_player_screen.dart';
 
 class BiLacMainScreen extends StatefulWidget {
@@ -97,7 +98,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
     } else {
       var maxRound = _cBilacMainController.getMaxRound();
       var columns = <String>[];
-      columns.add("Name");
+      columns.add("Tên");
       for (int i = 1; i < maxRound; i++) {
         columns.add("Ván $i");
       }
@@ -110,7 +111,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
 
         for (int i = 0; i < maxRound; i++) {
           if (i == 0) {
-            r.add("${p.name}");
+            r.add("${p.name} (${p.getNumberOfRound()})");
           } else {
             r.add("${p.getScoreByIndex(i)}");
           }
@@ -135,7 +136,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
                   child: Container(
                     margin: const EdgeInsets.all(1.0),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Player.getColorByScore(value),
                       border: Border.all(
                         color: Colors.red,
                         width: 0.5,
@@ -147,7 +148,10 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
                     alignment: Alignment.center,
                     width: double.infinity,
                     height: double.infinity,
-                    child: UIUtils.getText(value),
+                    child: UIUtils.getText(
+                      value,
+                      fontSize: 12.0,
+                    ),
                   ),
                   onTap: () {},
                 ),

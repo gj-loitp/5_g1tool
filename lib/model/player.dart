@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class Player {
   static const String RESULT_NONE = "";
@@ -53,6 +54,33 @@ class Player {
       return RESULT_NONE;
     } else {
       return listScore[index];
+    }
+  }
+
+  int getNumberOfRound() {
+    var listScore = getListScore();
+    if (listScore.isEmpty) {
+      return 0;
+    } else {
+      int num = 0;
+      for (var score in listScore) {
+        if (score != RESULT_NONE) {
+          num++;
+        }
+      }
+      return num;
+    }
+  }
+
+  static Color getColorByScore(String score) {
+    if (score == RESULT_NONE) {
+      return Colors.white;
+    } else if (score == RESULT_WIN) {
+      return Colors.green;
+    } else if (score == RESULT_LOSE) {
+      return Colors.redAccent;
+    } else {
+      return Colors.yellow;
     }
   }
 }
