@@ -45,7 +45,8 @@ class _SelectPlayerScreenState extends BaseStatefulState<SelectPlayerScreen> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-            backgroundColor: _cSelectPlayer.isEmptyData()
+            backgroundColor: _cSelectPlayer.isEmptyData() ||
+                    _cSelectPlayer.isEmptyListPlayerSelected()
                 ? Colors.grey
                 : ColorConstants.appColor,
             onPressed: () {
@@ -80,10 +81,18 @@ class _SelectPlayerScreenState extends BaseStatefulState<SelectPlayerScreen> {
                   ),
                 ),
                 const SizedBox(width: DimenConstants.marginPaddingMedium),
-                UIUtils.getText(
-                  p.getName(),
-                  fontSize: DimenConstants.txtLarge,
+                Expanded(
+                  child: UIUtils.getText(
+                    p.getName(),
+                    fontSize: DimenConstants.txtLarge,
+                  ),
                 ),
+                if (p.isSelected == true)
+                  Image.asset(
+                    "assets/images/ic_success.png",
+                    width: 35,
+                    height: 35,
+                  ),
               ],
             ),
           ),
@@ -99,7 +108,9 @@ class _SelectPlayerScreenState extends BaseStatefulState<SelectPlayerScreen> {
             Player p = list[i];
             return buildItem(
               p,
-              () {},
+              () {
+                _cSelectPlayer.toggleSelectPlayer(i);
+              },
             );
           },
         ),

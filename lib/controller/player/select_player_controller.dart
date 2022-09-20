@@ -16,4 +16,22 @@ class SelectPlayerController extends GetxController {
   bool isEmptyData() {
     return listPlayer.isEmpty;
   }
+
+  bool isEmptyListPlayerSelected() {
+    return getListPlayerSelected().isEmpty;
+  }
+
+  List<Player> getListPlayerSelected() {
+    return listPlayer.where((p) => p.isSelected == true).toList();
+  }
+
+  void toggleSelectPlayer(int index) {
+    if (listPlayer[index].isSelected == null ||
+        listPlayer[index].isSelected == false) {
+      listPlayer[index].isSelected = true;
+    } else {
+      listPlayer[index].isSelected = false;
+    }
+    listPlayer.refresh();
+  }
 }
