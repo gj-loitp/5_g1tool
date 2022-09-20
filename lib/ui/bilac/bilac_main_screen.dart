@@ -9,7 +9,6 @@ import '../../common/core/base_stateful_state.dart';
 import '../../common/utils/ui_utils.dart';
 import '../../controller/bilac/bilac_main_controller.dart';
 import '../player/select_player_screen.dart';
-import 'model.dart';
 
 class BiLacMainScreen extends StatefulWidget {
   const BiLacMainScreen({super.key});
@@ -87,24 +86,38 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
     // } else {
     //   return Container();
     // }
-    var columns = products.first.keys.toList();
+
+    var columns = <String>[];
+    columns.add("Name");
+    columns.add("Round 1");
+    columns.add("Round 2");
+
+    var rows1 = <String>[];
+    rows1.add("Loi");
+    rows1.add("1");
+    rows1.add("0");
+
+    var rows2 = <String>[];
+    rows2.add("Toai");
+    rows2.add("0");
+    rows2.add("1");
+
+    var rows = <List<String>>[];
+    rows.add(rows1);
+    rows.add(rows2);
+
     return ScrollableTableView(
       columns: columns.map((column) {
         return TableViewColumn(
           label: column,
         );
       }).toList(),
-      rows: products.map((product) {
+      rows: rows.map((record) {
         return TableViewRow(
           height: 60,
-          cells: columns.map((column) {
+          cells: record.map((value) {
             return TableViewCell(
-              child: InkWell(
-                child: Text(product[column] ?? ""),
-                onTap: (){
-                  print(">>>>>onTap");
-                },
-              ),
+              child: Text(value),
             );
           }).toList(),
         );
