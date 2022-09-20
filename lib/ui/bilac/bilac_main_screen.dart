@@ -120,6 +120,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
       }
 
       return ScrollableTableView(
+        rowDividerHeight: 0.0,
         columns: columns.map((column) {
           return TableViewColumn(
             label: column,
@@ -127,10 +128,25 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
         }).toList(),
         rows: rows.map((record) {
           return TableViewRow(
-            height: 50,
+            height: 40,
             cells: record.map((value) {
               return TableViewCell(
-                child: Text(value),
+                child: Container(
+                  margin: const EdgeInsets.all(2.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.red,
+                    ),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: UIUtils.getText(value),
+                ),
               );
             }).toList(),
           );
