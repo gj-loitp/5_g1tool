@@ -1,13 +1,16 @@
 import 'package:g1tool/model/player.dart';
 
 class Bilac {
+  String? time;
   List<Session>? session;
 
   Bilac({
+    this.time,
     this.session,
   });
 
   Bilac.fromJson(Map<String, dynamic> json) {
+    time = json['time'];
     if (json['session'] != null) {
       session = <Session>[];
       json['session'].forEach((v) {
@@ -18,6 +21,7 @@ class Bilac {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['time'] = time;
     if (session != null) {
       data['session'] = session!.map((v) => v.toJson()).toList();
     }

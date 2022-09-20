@@ -4,6 +4,7 @@ import 'package:g1tool/common/c/color_constant.dart';
 import 'package:get/get.dart';
 
 import '../../common/c/string_constant.dart';
+import '../../common/c/time_constant.dart';
 import '../../common/core/base_stateful_state.dart';
 import '../../common/utils/ui_utils.dart';
 import '../../controller/bilac/bilac_main_controller.dart';
@@ -24,6 +25,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
   @override
   void initState() {
     super.initState();
+    _cBilacMainController.getBilacByTime(TimeConstants.getTime(DateTime.now()));
   }
 
   @override
@@ -68,8 +70,8 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
   }
 
   void _onDateChanged(DateTime dateTime) {
-    print("_onDateChanged $dateTime");
-    //TODO
+    // print("_onDateChanged $dateTime");
+    _cBilacMainController.getBilacByTime(TimeConstants.getTime(dateTime));
   }
 
   Widget _buildBody() {

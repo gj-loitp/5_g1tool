@@ -32,7 +32,7 @@ class ListPlayerController extends GetxController {
       player.isSelected = false;
       player.result = RESULT_NONE;
       if (!isExist(player, listPlayer)) {
-        await DBProvider.db.addClient(player);
+        await DBProvider.db.addPlayer(player);
       }
     }
 
