@@ -65,12 +65,20 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
         floatingActionButton: FloatingActionButton(
             backgroundColor: ColorConstants.appColor,
             onPressed: () {
-              Get.to(
-                () => SelectPlayerScreen(
-                  onListPlayerSelected: (listPlayerSelected) {
-                    _cBilacMainController.genNewGame(listPlayerSelected);
-                  },
-                ),
+              showWarningDialog(
+                StringConstants.warning,
+                "Bạn có muốn tạo Game mới?",
+                () {},
+                () {
+                  Get.to(
+                    () => SelectPlayerScreen(
+                      onListPlayerSelected: (listPlayerSelected) {
+                        _cBilacMainController.genNewGame(listPlayerSelected);
+                      },
+                    ),
+                  );
+                },
+                (type) {},
               );
             },
             child: const Icon(Icons.add)),
