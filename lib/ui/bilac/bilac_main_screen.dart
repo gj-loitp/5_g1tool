@@ -7,6 +7,7 @@ import '../../common/c/string_constant.dart';
 import '../../common/core/base_stateful_state.dart';
 import '../../common/utils/ui_utils.dart';
 import '../../controller/bilac/bilac_main_controller.dart';
+import '../player/select_player_screen.dart';
 
 class BiLacMainScreen extends StatefulWidget {
   const BiLacMainScreen({super.key});
@@ -54,7 +55,9 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
       ),
       floatingActionButton: FloatingActionButton(
           backgroundColor: ColorConstants.appColor,
-          onPressed: () {},
+          onPressed: () {
+            Get.to(() => const SelectPlayerScreen());
+          },
           child: const Icon(Icons.add)),
     );
   }
