@@ -26,11 +26,16 @@ class Bilac {
 }
 
 class Session {
+  String? time;
   List<Game>? game;
 
-  Session({this.game});
+  Session({
+    this.time,
+    this.game,
+  });
 
   Session.fromJson(Map<String, dynamic> json) {
+    time = json['time'];
     if (json['game'] != null) {
       game = <Game>[];
       json['game'].forEach((v) {
@@ -41,6 +46,7 @@ class Session {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['time'] = time;
     if (game != null) {
       data['game'] = game!.map((v) => v.toJson()).toList();
     }

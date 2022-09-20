@@ -19,12 +19,11 @@ class BiLacMainScreen extends StatefulWidget {
 }
 
 class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
-  final _cListPlayer = Get.put(BilacMainController());
+  final _cBilacMainController = Get.put(BilacMainController());
 
   @override
   void initState() {
     super.initState();
-    _cListPlayer.getListPlayer();
   }
 
   @override
@@ -59,7 +58,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
             Get.to(
               () => SelectPlayerScreen(
                 onListPlayerSelected: (listPlayerSelected) {
-
+                  _cBilacMainController.genNewSession(listPlayerSelected);
                 },
               ),
             );
