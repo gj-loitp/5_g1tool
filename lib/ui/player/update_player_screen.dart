@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:g1tool/common/core/base_stateful_state.dart';

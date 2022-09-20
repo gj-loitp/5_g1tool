@@ -10,7 +10,12 @@ import '../../common/utils/ui_utils.dart';
 import '../../controller/player/select_player_controller.dart';
 
 class SelectPlayerScreen extends StatefulWidget {
-  const SelectPlayerScreen({super.key});
+  final Function(List<Player> listPlayerSelected) onListPlayerSelected;
+
+  const SelectPlayerScreen({
+    Key? key,
+    required this.onListPlayerSelected,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -50,7 +55,9 @@ class _SelectPlayerScreenState extends BaseStatefulState<SelectPlayerScreen> {
                 ? Colors.grey
                 : ColorConstants.appColor,
             onPressed: () {
-              //TODO confirm selected list
+              widget.onListPlayerSelected
+                  .call(_cSelectPlayer.getListPlayerSelected());
+              Get.back();
             },
             child: const Icon(Icons.done_all)),
       );

@@ -56,7 +56,13 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
       floatingActionButton: FloatingActionButton(
           backgroundColor: ColorConstants.appColor,
           onPressed: () {
-            Get.to(() => const SelectPlayerScreen());
+            Get.to(
+              () => SelectPlayerScreen(
+                onListPlayerSelected: (listPlayerSelected) {
+
+                },
+              ),
+            );
           },
           child: const Icon(Icons.add)),
     );
