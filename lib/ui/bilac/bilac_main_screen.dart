@@ -4,7 +4,6 @@ import 'package:g1tool/common/c/color_constant.dart';
 import 'package:get/get.dart';
 
 import '../../common/c/string_constant.dart';
-import '../../common/c/time_constant.dart';
 import '../../common/core/base_stateful_state.dart';
 import '../../common/utils/ui_utils.dart';
 import '../../controller/bilac/bilac_main_controller.dart';
@@ -25,7 +24,13 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
   @override
   void initState() {
     super.initState();
-    _cBilacMainController.getBilacByTime(TimeConstants.getTime(DateTime.now()));
+    // _cBilacMainController.getBilacByTime(TimeConstants.getTime(DateTime.now()));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    //TODO save db
   }
 
   @override
@@ -60,7 +65,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
             Get.to(
               () => SelectPlayerScreen(
                 onListPlayerSelected: (listPlayerSelected) {
-                  _cBilacMainController.genNewSession(listPlayerSelected);
+                  _cBilacMainController.genNewGame(listPlayerSelected);
                 },
               ),
             );
@@ -71,14 +76,15 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
 
   void _onDateChanged(DateTime dateTime) {
     // print("_onDateChanged $dateTime");
-    _cBilacMainController.getBilacByTime(TimeConstants.getTime(dateTime));
+    // _cBilacMainController.getBilacByTime(TimeConstants.getTime(dateTime));
   }
 
   Widget _buildBody() {
-    if (_cBilacMainController.bilac.value.time == null) {
-      return UIUtils.buildNoDataView();
-    } else {
-      return Container();
-    }
+    return Container();
+    // if (_cBilacMainController.bilac.value.time == null) {
+    //   return UIUtils.buildNoDataView();
+    // } else {
+    //   return Container();
+    // }
   }
 }

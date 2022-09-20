@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:g1tool/model/bilac.dart';
 import 'package:g1tool/model/player.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -18,7 +17,6 @@ class DBProvider {
   static final DBProvider db = DBProvider._();
   String dbName = "g1tools.db";
   String tableNamePlayer = "Player";
-  String tableNameDayBilac = "Bilac";
 
   Database? _database;
 
@@ -39,11 +37,6 @@ class DBProvider {
           "result INTEGER,"
           "isSelected BIT,"
           "avatar TEXT"
-          ")");
-      await db.execute("CREATE TABLE $tableNameDayBilac ("
-          "id INTEGER PRIMARY KEY,"
-          "time TEXT,"
-          "session TEXT"
           ")");
     });
   }
@@ -109,15 +102,5 @@ class DBProvider {
       return;
     }
     db.rawDelete("Delete * from $tableNamePlayer");
-  }
-
-  Future<Bilac?> getBilacByTime(String time) async {
-    final db = await (database);
-    if (db == null) {
-      return null;
-    }
-    var res =
-        await db.query(tableNameDayBilac, where: "time = ?", whereArgs: [time]);
-    return res.isNotEmpty ? Bilac.fromJson(res.first) : null;
   }
 }
