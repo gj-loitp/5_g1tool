@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Player {
-  static const String RESULT_NONE = "";
+  static const String RESULT_NONE = " ";
   static const String RESULT_WIN = "1";
   static const String RESULT_LOSE = "0";
 
@@ -50,7 +50,7 @@ class Player {
 
   String? getScoreByIndex(int index) {
     var listScore = getListScore();
-    if (index < 0 || index > listScore.length) {
+    if (index < 0 || index > listScore.length - 1) {
       return RESULT_NONE;
     } else {
       return listScore[index];
@@ -72,8 +72,10 @@ class Player {
     }
   }
 
-  static Color getColorByScore(String score) {
-    if (score == RESULT_NONE) {
+  Color getColorByScore(int index, String? score) {
+    if (index == 0) {
+      return Colors.yellow;
+    } else if (score == RESULT_NONE) {
       return Colors.white;
     } else if (score == RESULT_WIN) {
       return Colors.green;

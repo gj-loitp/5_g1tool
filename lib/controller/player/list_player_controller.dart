@@ -37,9 +37,9 @@ class ListPlayerController extends GetxController {
 
     await addPlayer("Lợi",
         "https://github.com/tplloi/g1tool/blob/master/assets/images/player/loi.jpg?raw=true");
-    await addPlayer("Toại *||*",
+    await addPlayer("Toại",
         "https://github.com/tplloi/g1tool/blob/master/assets/images/player/toai.jpeg?raw=true");
-    await addPlayer("Phúc (|)",
+    await addPlayer("Phúc",
         "https://github.com/tplloi/g1tool/blob/master/assets/images/player/phuc.jpg?raw=true");
     await addPlayer("Bảo Chu",
         "https://github.com/tplloi/g1tool/blob/master/assets/images/player/baochu.jpg?raw=true");

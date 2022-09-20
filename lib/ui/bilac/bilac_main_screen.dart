@@ -104,17 +104,17 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
         columns.add("Ván $i");
       }
 
-      var rows = <List<String>>[];
+      var rows = <List<Player>>[];
       var listPlayer = _cBilacMainController.listPlayer;
       for (int i = 0; i < listPlayer.length; i++) {
         var p = listPlayer[i];
-        var r = <String>[];
+        var r = <Player>[];
 
         for (int i = 0; i < maxRound; i++) {
           if (i == 0) {
-            r.add("${p.name} (${p.getNumberOfRound()})");
+            r.add(p);
           } else {
-            r.add("${p.getScoreByIndex(i)}");
+            r.add(p);
           }
         }
 
@@ -131,13 +131,20 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
         rows: rows.map((record) {
           return TableViewRow(
             height: 40,
-            cells: record.mapIndexed((index, value) {
+            cells: record.mapIndexed((index, player) {
+              String text;
+              String? score = player.getScoreByIndex(index);
+              if (index == 0) {
+                text = '${player.name} (${player.getNumberOfRound()})';
+              } else {
+                text = "$score";
+              }
               return TableViewCell(
                 child: InkWell(
                   child: Container(
                     margin: const EdgeInsets.all(1.0),
                     decoration: BoxDecoration(
-                      color: Player.getColorByScore(value),
+                      color: player.getColorByScore(index, score),
                       border: Border.all(
                         color: Colors.red,
                         width: 0.5,
@@ -150,12 +157,12 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
                     width: double.infinity,
                     height: double.infinity,
                     child: UIUtils.getText(
-                      value,
+                      text,
                       fontSize: 12.0,
                     ),
                   ),
                   onTap: () {
-                    _onTap(value, index);
+                    // _onTap(value, index);
                   },
                 ),
               );
