@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Player {
-  static const String RESULT_NONE = " ";
+  static const String RESULT_NONE = "";
   static const String RESULT_WIN = "1";
   static const String RESULT_LOSE = "0";
 
@@ -54,6 +54,39 @@ class Player {
       return RESULT_NONE;
     } else {
       return listScore[index];
+    }
+  }
+
+  void updateScoreByIndex(int index, String score) {
+    var listScore = getListScore();
+    print("updateScoreByIndex index $index");
+    print("updateScoreByIndex score $score");
+    print("updateScoreByIndex scoreString $scoreString");
+    print("updateScoreByIndex listScore $listScore");
+    if (index < 0 || index > listScore.length - 1) {
+      //do nothing
+    } else {
+      listScore[index] = score;
+      print("updateScoreByIndex listScore after $listScore");
+
+      String tmpScoreString = "";
+      for (int i = 0; i < listScore.length; i++) {
+        var item = listScore[i];
+        print(">>> $i -> $item");
+        if (item.isEmpty) {
+          tmpScoreString += "#${Player.RESULT_NONE}";
+        } else {
+          var itemPrev = listScore[i - 1];
+          if (itemPrev.isEmpty) {
+            tmpScoreString += item;
+          } else {
+            tmpScoreString += "#$item";
+          }
+        }
+      }
+
+      scoreString = tmpScoreString;
+      print("updateScoreByIndex ~~scoreString $scoreString");
     }
   }
 

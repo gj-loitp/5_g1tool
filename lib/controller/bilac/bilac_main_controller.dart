@@ -26,7 +26,7 @@ class BilacMainController extends GetxController {
       p.scoreString = tmpScoreString;
     }
 
-    _print(">>>listPlayer ${jsonEncode(listPlayer)}");
+    // _print(">>>listPlayer ${jsonEncode(listPlayer)}");
     listPlayer.refresh();
   }
 
@@ -42,5 +42,9 @@ class BilacMainController extends GetxController {
     return C(2, listPlayer.length);
   }
 
-  void updateScoreOfPlayer(int indexScore, Player player) {}
+  void updateScoreOfPlayer(int indexScore, Player player) {
+    _print(">>>_onTap index $indexScore - ${jsonEncode(player)}");
+    player.updateScoreByIndex(indexScore, Player.RESULT_WIN);
+    listPlayer.refresh();
+  }
 }

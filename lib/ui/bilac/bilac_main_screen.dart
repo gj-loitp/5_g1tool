@@ -176,7 +176,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
   }
 
   void _onTap(int index, Player player) {
-    print(">>>_onTap index $index - ${jsonEncode(player)}");
+    // print(">>>_onTap index $index - ${jsonEncode(player)}");
     if (index == 0) {
       return;
     }
