@@ -75,6 +75,10 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
   }
 
   Widget _buildBody() {
-    return Container();
+    if (_cBilacMainController.bilac.value.time == null) {
+      return UIUtils.buildNoDataView();
+    } else {
+      return Container();
+    }
   }
 }
