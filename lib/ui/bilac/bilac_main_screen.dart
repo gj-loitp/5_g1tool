@@ -86,9 +86,10 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
     if (_cBilacMainController.listPlayer.isEmpty) {
       return UIUtils.buildNoDataView();
     } else {
+      var maxRound = _cBilacMainController.getMaxRound();
       var columns = <String>[];
       columns.add("Name");
-      for (int i = 1; i < _cBilacMainController.getMaxRound(); i++) {
+      for (int i = 1; i < maxRound; i++) {
         columns.add("Set $i");
       }
 
@@ -98,11 +99,11 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
         var p = listPlayer[i];
         var r = <String>[];
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < maxRound; i++) {
           if (i == 0) {
             r.add("${p.name}");
           } else {
-            r.add("${p.isSelected}");
+            r.add("$i");
           }
         }
 
