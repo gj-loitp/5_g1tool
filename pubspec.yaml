@@ -16,6 +16,7 @@ dependencies:
   get: ^4.6.5
   sqflite: ^2.1.0
   awesome_dialog: ^3.0.1
+  scrollable_table_view: ^0.0.3
 
 
 dev_dependencies:

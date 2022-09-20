@@ -2,12 +2,14 @@ import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../common/c/string_constant.dart';
 import '../../common/core/base_stateful_state.dart';
 import '../../common/utils/ui_utils.dart';
 import '../../controller/bilac/bilac_main_controller.dart';
 import '../player/select_player_screen.dart';
+import 'model.dart';
 
 class BiLacMainScreen extends StatefulWidget {
   const BiLacMainScreen({super.key});
@@ -80,11 +82,33 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
   }
 
   Widget _buildBody() {
-    return Container();
     // if (_cBilacMainController.bilac.value.time == null) {
     //   return UIUtils.buildNoDataView();
     // } else {
     //   return Container();
     // }
+    var columns = products.first.keys.toList();
+    return ScrollableTableView(
+      columns: columns.map((column) {
+        return TableViewColumn(
+          label: column,
+        );
+      }).toList(),
+      rows: products.map((product) {
+        return TableViewRow(
+          height: 60,
+          cells: columns.map((column) {
+            return TableViewCell(
+              child: InkWell(
+                child: Text(product[column] ?? ""),
+                onTap: (){
+                  print(">>>>>onTap");
+                },
+              ),
+            );
+          }).toList(),
+        );
+      }).toList(),
+    );
   }
 }
