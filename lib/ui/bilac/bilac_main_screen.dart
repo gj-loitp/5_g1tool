@@ -40,7 +40,8 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
       return Scaffold(
         body: Stack(
           children: [
-            UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
+            if (_cBilacMainController.listPlayer.isNotEmpty == false)
+              UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
             Column(
               children: [
                 CalendarAppBar(
