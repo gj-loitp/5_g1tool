@@ -29,6 +29,8 @@ class ListPlayerController extends GetxController {
       Player player = Player();
       player.name = name;
       player.avatar = avatar;
+      player.isSelected = false;
+      player.result = RESULT_NONE;
       if (!isExist(player, listPlayer)) {
         await DBProvider.db.addClient(player);
       }

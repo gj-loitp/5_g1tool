@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:g1tool/common/core/base_stateful_state.dart';
@@ -135,6 +137,7 @@ class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> {
         var player = Player.fromJson(widget.player.toJson());
         player.name = newName;
         _cUpdatePlayer.updatePlayer(player).then((value) {
+          print("updatePlayer $value");
           Get.back();
           showSnackBarFull(StringConstants.warning, "Cập nhật thành công");
           widget.onUpdateSuccess.call(null);

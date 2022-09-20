@@ -34,6 +34,8 @@ class DBProvider {
       await db.execute("CREATE TABLE $tableNamePlayer ("
           "id INTEGER PRIMARY KEY,"
           "name TEXT,"
+          "result INTEGER,"
+          "isSelected BIT,"
           "avatar TEXT"
           ")");
     });

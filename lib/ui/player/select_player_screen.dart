@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:g1tool/model/player.dart';
-import 'package:g1tool/ui/player/add_player_screen.dart';
-import 'package:g1tool/ui/player/update_player_screen.dart';
 import 'package:get/get.dart';
 
 import '../../common/c/string_constant.dart';
@@ -31,39 +29,31 @@ class _SelectPlayerScreenState extends BaseStatefulState<SelectPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: UIUtils.getAppBar(
-        "Chọn người chơi",
-        () {
-          Get.back();
-        },
-        null,
-      ),
-      body: Obx(() {
-        return Stack(
+    return Obx(() {
+      return Scaffold(
+        appBar: UIUtils.getAppBar(
+          "Chọn người chơi",
+          () {
+            Get.back();
+          },
+          null,
+        ),
+        body: Stack(
           children: [
             UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
             _buildListPlayerView(),
           ],
-        );
-      }),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: ColorConstants.appColor,
-          onPressed: () {
-            Get.to(
-              () => AddPlayerScreen(
-                onAddSuccess: (name) {
-                  showSnackBarFull(
-                    StringConstants.warning,
-                    "Đã thêm người chơi `$name` thành công",
-                  );
-                  _cSelectPlayer.getListPlayer();
-                },
-              ),
-            );
-          },
-          child: const Icon(Icons.add)),
-    );
+        ),
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: _cSelectPlayer.isEmptyData()
+                ? Colors.grey
+                : ColorConstants.appColor,
+            onPressed: () {
+              //TODO confirm selected list
+            },
+            child: const Icon(Icons.done_all)),
+      );
+    });
   }
 
   Widget _buildListPlayerView() {
@@ -109,36 +99,11 @@ class _SelectPlayerScreenState extends BaseStatefulState<SelectPlayerScreen> {
             Player p = list[i];
             return buildItem(
               p,
-              () {
-                Get.to(
-                  () => UpdatePlayerScreen(
-                    onUpdateSuccess: (updatedPlayer) {
-                      _cSelectPlayer.getListPlayer();
-                    },
-                    player: p,
-                  ),
-                );
-              },
+              () {},
             );
           },
         ),
       );
     }
-  }
-
-  void _genDefaultPlayer() {
-    showWarningDialog(
-      StringConstants.warning,
-      "Bạn có muốn thêm danh sách người chơi mặc định?",
-      () {
-        //do nothing
-      },
-      () {
-        _cSelectPlayer.genListPlayerDefault();
-      },
-      (type) {
-        //do nothing
-      },
-    );
   }
 }
