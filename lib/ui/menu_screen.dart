@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../common/c/string_constant.dart';
 import '../common/utils/ui_utils.dart';
+import 'bilac/bilac_main_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -31,7 +32,9 @@ class MenuScreen extends StatelessWidget {
                 const Spacer(),
                 UIUtils.getButton(
                   "Bi lắc",
-                  () {},
+                  () {
+                    Get.to(() => const BiLacMainScreen());
+                  },
                 ),
                 UIUtils.getButton(
                   "Uno",

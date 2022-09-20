@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../common/c/string_constant.dart';
 import '../../common/utils/ui_utils.dart';
-import '../../controller/update_player_controller.dart';
+import '../../controller/player/update_player_controller.dart';
 import '../../model/player.dart';
 
 class UpdatePlayerScreen extends StatefulWidget {

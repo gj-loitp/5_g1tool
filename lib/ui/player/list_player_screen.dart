@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import '../../common/c/string_constant.dart';
 import '../../common/core/base_stateful_state.dart';
 import '../../common/utils/ui_utils.dart';
-import '../../controller/list_player_controller.dart';
+import '../../controller/player/list_player_controller.dart';
 
 class ListPlayerScreen extends StatefulWidget {
   const ListPlayerScreen({super.key});

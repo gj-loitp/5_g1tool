@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 import '../../common/c/string_constant.dart';
 import '../../common/utils/ui_utils.dart';
-import '../../controller/add_player_controller.dart';
+import '../../controller/player/add_player_controller.dart';
 
 class AddPlayerScreen extends StatefulWidget {
   final Function(String name) onAddSuccess;

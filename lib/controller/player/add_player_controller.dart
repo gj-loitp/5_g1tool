@@ -1,7 +1,7 @@
 import 'package:g1tool/model/player.dart';
 import 'package:get/get.dart';
 
-import '../common/db/db_provider.dart';
+import '../../common/db/db_provider.dart';
 
 class AddPlayerController extends GetxController {
   var name = "".obs;
