@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class Player {
-  static const String RESULT_NONE = "x";
+  static const String RESULT_NONE = "";
   static const String RESULT_WIN = "1";
   static const String RESULT_LOSE = "0";
 

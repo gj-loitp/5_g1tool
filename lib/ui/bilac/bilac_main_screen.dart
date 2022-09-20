@@ -131,21 +131,25 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
             height: 40,
             cells: record.map((value) {
               return TableViewCell(
-                child: Container(
-                  margin: const EdgeInsets.all(2.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                      color: Colors.red,
+                child: InkWell(
+                  child: Container(
+                    margin: const EdgeInsets.all(1.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.red,
+                        width: 0.5,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(5),
+                      ),
                     ),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(20),
-                    ),
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: UIUtils.getText(value),
                   ),
-                  alignment: Alignment.center,
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: UIUtils.getText(value),
+                  onTap: () {},
                 ),
               );
             }).toList(),
