@@ -1,3 +1,4 @@
+import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
 import 'package:get/get.dart';
@@ -28,24 +29,37 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIUtils.getAppBar(
-        "Bi lắc",
-        () {
-          Get.back();
-        },
-        null,
+      body: Stack(
+        children: [
+          UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
+          Column(
+            children: [
+              CalendarAppBar(
+                accent: ColorConstants.appColor,
+                onDateChanged: (value) {
+                  _onDateChanged(value);
+                },
+                firstDate:
+                    DateTime.now().subtract(const Duration(days: 30 * 3)),
+                lastDate: DateTime.now().add(const Duration(days: 30)),
+                selectedDate: DateTime.now(),
+                fullCalendar: true,
+                locale: 'vi',
+                padding: 5.0,
+              ),
+            ],
+          ),
+        ],
       ),
-      body: Obx(() {
-        return Stack(
-          children: [
-            UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
-          ],
-        );
-      }),
       floatingActionButton: FloatingActionButton(
           backgroundColor: ColorConstants.appColor,
           onPressed: () {},
           child: const Icon(Icons.add)),
     );
+  }
+
+  void _onDateChanged(DateTime dateTime) {
+    print("_onDateChanged $dateTime");
+    //TODO
   }
 }
