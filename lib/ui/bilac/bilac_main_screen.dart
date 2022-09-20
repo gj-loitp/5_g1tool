@@ -47,6 +47,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
                 locale: 'vi',
                 padding: 5.0,
               ),
+              Expanded(child: _buildBody()),
             ],
           ),
         ],
@@ -61,5 +62,9 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
   void _onDateChanged(DateTime dateTime) {
     print("_onDateChanged $dateTime");
     //TODO
+  }
+
+  Widget _buildBody() {
+    return Container();
   }
 }
