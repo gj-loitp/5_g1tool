@@ -110,20 +110,6 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
         rows.add(r);
       }
 
-      // var rows1 = <String>[];
-      // rows1.add("Loi");
-      // rows1.add("1");
-      // rows1.add("0");
-      //
-      // var rows2 = <String>[];
-      // rows2.add("Toai");
-      // rows2.add("0");
-      // rows2.add("1");
-      //
-      // var rows = <List<String>>[];
-      // rows.add(rows1);
-      // rows.add(rows2);
-
       return ScrollableTableView(
         columns: columns.map((column) {
           return TableViewColumn(
