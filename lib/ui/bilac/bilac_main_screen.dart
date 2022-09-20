@@ -36,43 +36,45 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
-          Column(
-            children: [
-              CalendarAppBar(
-                accent: ColorConstants.appColor,
-                onDateChanged: (value) {
-                  _onDateChanged(value);
-                },
-                firstDate:
-                    DateTime.now().subtract(const Duration(days: 30 * 3)),
-                lastDate: DateTime.now().add(const Duration(days: 30)),
-                selectedDate: DateTime.now(),
-                fullCalendar: true,
-                locale: 'vi',
-                padding: 5.0,
-              ),
-              Expanded(child: _buildBody()),
-            ],
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: ColorConstants.appColor,
-          onPressed: () {
-            Get.to(
-              () => SelectPlayerScreen(
-                onListPlayerSelected: (listPlayerSelected) {
-                  _cBilacMainController.genNewGame(listPlayerSelected);
-                },
-              ),
-            );
-          },
-          child: const Icon(Icons.add)),
-    );
+    return Obx(() {
+      return Scaffold(
+        body: Stack(
+          children: [
+            UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
+            Column(
+              children: [
+                CalendarAppBar(
+                  accent: ColorConstants.appColor,
+                  onDateChanged: (value) {
+                    _onDateChanged(value);
+                  },
+                  firstDate:
+                      DateTime.now().subtract(const Duration(days: 30 * 3)),
+                  lastDate: DateTime.now().add(const Duration(days: 30)),
+                  selectedDate: DateTime.now(),
+                  fullCalendar: true,
+                  locale: 'vi',
+                  padding: 5.0,
+                ),
+                Expanded(child: _buildBody()),
+              ],
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: ColorConstants.appColor,
+            onPressed: () {
+              Get.to(
+                () => SelectPlayerScreen(
+                  onListPlayerSelected: (listPlayerSelected) {
+                    _cBilacMainController.genNewGame(listPlayerSelected);
+                  },
+                ),
+              );
+            },
+            child: const Icon(Icons.add)),
+      );
+    });
   }
 
   void _onDateChanged(DateTime dateTime) {
@@ -81,47 +83,63 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
   }
 
   Widget _buildBody() {
-    // if (_cBilacMainController.bilac.value.time == null) {
-    //   return UIUtils.buildNoDataView();
-    // } else {
-    //   return Container();
-    // }
+    if (_cBilacMainController.listPlayer.isEmpty) {
+      return UIUtils.buildNoDataView();
+    } else {
+      var columns = <String>[];
+      columns.add("Name");
+      for (int i = 1; i < _cBilacMainController.getMaxRound(); i++) {
+        columns.add("Set $i");
+      }
 
-    var columns = <String>[];
-    columns.add("Name");
-    columns.add("Round 1");
-    columns.add("Round 2");
+      var rows = <List<String>>[];
+      var listPlayer = _cBilacMainController.listPlayer;
+      for (int i = 0; i < listPlayer.length; i++) {
+        var p = listPlayer[i];
+        var r = <String>[];
 
-    var rows1 = <String>[];
-    rows1.add("Loi");
-    rows1.add("1");
-    rows1.add("0");
+        for (int i = 0; i < 3; i++) {
+          if (i == 0) {
+            r.add("${p.name}");
+          } else {
+            r.add("${p.isSelected}");
+          }
+        }
 
-    var rows2 = <String>[];
-    rows2.add("Toai");
-    rows2.add("0");
-    rows2.add("1");
+        rows.add(r);
+      }
 
-    var rows = <List<String>>[];
-    rows.add(rows1);
-    rows.add(rows2);
+      // var rows1 = <String>[];
+      // rows1.add("Loi");
+      // rows1.add("1");
+      // rows1.add("0");
+      //
+      // var rows2 = <String>[];
+      // rows2.add("Toai");
+      // rows2.add("0");
+      // rows2.add("1");
+      //
+      // var rows = <List<String>>[];
+      // rows.add(rows1);
+      // rows.add(rows2);
 
-    return ScrollableTableView(
-      columns: columns.map((column) {
-        return TableViewColumn(
-          label: column,
-        );
-      }).toList(),
-      rows: rows.map((record) {
-        return TableViewRow(
-          height: 60,
-          cells: record.map((value) {
-            return TableViewCell(
-              child: Text(value),
-            );
-          }).toList(),
-        );
-      }).toList(),
-    );
+      return ScrollableTableView(
+        columns: columns.map((column) {
+          return TableViewColumn(
+            label: column,
+          );
+        }).toList(),
+        rows: rows.map((record) {
+          return TableViewRow(
+            height: 50,
+            cells: record.map((value) {
+              return TableViewCell(
+                child: Text(value),
+              );
+            }).toList(),
+          );
+        }).toList(),
+      );
+    }
   }
 }
