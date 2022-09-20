@@ -99,7 +99,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
       var columns = <String>[];
       columns.add("Name");
       for (int i = 1; i < maxRound; i++) {
-        columns.add("Set $i");
+        columns.add("Ván $i");
       }
 
       var rows = <List<String>>[];
@@ -112,7 +112,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
           if (i == 0) {
             r.add("${p.name}");
           } else {
-            r.add("$i");
+            r.add("${p.getScoreByIndex(i)}");
           }
         }
 

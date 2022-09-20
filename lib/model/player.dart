@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 
-const int RESULT_NONE = -1;
-const int RESULT_WIN = 1;
-const int RESULT_LOSE = 0;
-
 class Player {
+  static const String RESULT_NONE = "";
+  static const String RESULT_WIN = "1";
+  static const String RESULT_LOSE = "0";
+
   String? name;
   String? avatar;
+  String? scoreString;
   int? id;
-  int? result;
   bool? isSelected;
 
   Player({
@@ -20,8 +20,8 @@ class Player {
   Player.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     avatar = json['avatar'];
+    scoreString = json['scoreString'];
     id = json['id'];
-    result = json['result'];
     isSelected = json['isSelected'];
   }
 
@@ -29,8 +29,8 @@ class Player {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['avatar'] = avatar;
+    data['scoreString'] = scoreString;
     data['id'] = id;
-    data['result'] = result;
     data['isSelected'] = isSelected;
     return data;
   }
@@ -40,6 +40,19 @@ class Player {
       return "$id - $name";
     } else {
       return "$name";
+    }
+  }
+
+  List<String> getListScore() {
+    return scoreString?.split("#") ?? List.empty();
+  }
+
+  String? getScoreByIndex(int index) {
+    var listScore = getListScore();
+    if (index < 0 || index > listScore.length) {
+      return RESULT_NONE;
+    } else {
+      return listScore[index];
     }
   }
 }
