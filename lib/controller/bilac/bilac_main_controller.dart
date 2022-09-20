@@ -42,9 +42,9 @@ class BilacMainController extends GetxController {
     return C(2, listPlayer.length);
   }
 
-  void updateScoreOfPlayer(int indexScore, Player player) {
+  void updateScoreOfPlayer(int indexScore, Player player, String newScore) {
     _print(">>>_onTap index $indexScore - ${jsonEncode(player)}");
-    player.updateScoreByIndex(indexScore, Player.RESULT_WIN);
+    player.updateScoreByIndex(indexScore, newScore);
     listPlayer.refresh();
   }
 }
