@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -162,7 +164,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
                     ),
                   ),
                   onTap: () {
-                    // _onTap(value, index);
+                    _onTap(index, player);
                   },
                 ),
               );
@@ -173,9 +175,9 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
     }
   }
 
-  void _onTap(String score, int indexScore) {
-    print(">>>_onTap score $score, indexScore $indexScore");
-    if (indexScore == 0) {
+  void _onTap(int index, Player player) {
+    print(">>>_onTap index $index - ${jsonEncode(player)}");
+    if (index == 0) {
       return;
     }
   }
