@@ -1,4 +1,5 @@
 import 'package:calendar_appbar/calendar_appbar.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
 import 'package:get/get.dart';
@@ -130,7 +131,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
         rows: rows.map((record) {
           return TableViewRow(
             height: 40,
-            cells: record.map((value) {
+            cells: record.mapIndexed((index, value) {
               return TableViewCell(
                 child: InkWell(
                   child: Container(
@@ -153,13 +154,22 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
                       fontSize: 12.0,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    _onTap(value, index);
+                  },
                 ),
               );
             }).toList(),
           );
         }).toList(),
       );
+    }
+  }
+
+  void _onTap(String score, int indexScore) {
+    print(">>>_onTap score $score, indexScore $indexScore");
+    if (indexScore == 0) {
+      return;
     }
   }
 }
