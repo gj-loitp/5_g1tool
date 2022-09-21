@@ -45,8 +45,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       return Scaffold(
         body: Stack(
           children: [
-            if (_cBilacMainController.listPlayer.isNotEmpty == false)
-              UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
+            UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
             AnimatedBackground(
               behaviour: BubblesBehaviour(),
               vsync: this,
