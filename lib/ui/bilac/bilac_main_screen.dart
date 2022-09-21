@@ -228,7 +228,9 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
           Flexible(
             flex: 1,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                //TODO ket qua
+              },
               child: Container(
                 alignment: Alignment.center,
                 width: double.infinity,
