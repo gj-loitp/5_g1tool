@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
+import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
@@ -193,24 +194,60 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
   Widget _buildScoreSelectorView() {
     return Visibility(
       visible: _cBilacMainController.listPlayer.isNotEmpty,
-      child: InkWell(
-        onTap: () {
-          _showScoreSheet(context);
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            color: _cBilacMainController.getScoreSelectorColor(),
-            border: Border.all(
-              color: Colors.red,
-              width: 0.5,
-            ),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(width: DimenConstants.marginPaddingMedium),
+          Flexible(
+            flex: 1,
+            child: InkWell(
+              onTap: () {
+                _showScoreSheet(context);
+              },
+              child: Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: _cBilacMainController.getScoreSelectorColor(),
+                  border: Border.all(
+                    color: Colors.red,
+                    width: 0.5,
+                  ),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(5),
+                  ),
+                ),
+                padding: const EdgeInsets.fromLTRB(45.0, 5.0, 45.0, 5.0),
+                child: UIUtils.getText(
+                    _cBilacMainController.getScoreSelectorText()),
+              ),
             ),
           ),
-          padding: const EdgeInsets.fromLTRB(45.0, 5.0, 45.0, 5.0),
-          child: UIUtils.getText(_cBilacMainController.getScoreSelectorText()),
-        ),
+          const SizedBox(width: DimenConstants.marginPaddingMedium),
+          Flexible(
+            flex: 1,
+            child: InkWell(
+              onTap: () {},
+              child: Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.cyan,
+                  border: Border.all(
+                    color: Colors.red,
+                    width: 0.5,
+                  ),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(5),
+                  ),
+                ),
+                padding: const EdgeInsets.fromLTRB(45.0, 5.0, 45.0, 5.0),
+                child: UIUtils.getText("Kết quả"),
+              ),
+            ),
+          ),
+          const SizedBox(width: DimenConstants.marginPaddingMedium),
+        ],
       ),
     );
   }
