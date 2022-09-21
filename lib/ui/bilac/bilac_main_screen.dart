@@ -1,3 +1,4 @@
+import 'package:animated_background/animated_background.dart';
 import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,7 +23,8 @@ class BiLacMainScreen extends StatefulWidget {
   }
 }
 
-class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
+class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
+    with TickerProviderStateMixin {
   final _cBilacMainController = Get.put(BilacMainController());
 
   @override
@@ -45,24 +47,28 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
           children: [
             if (_cBilacMainController.listPlayer.isNotEmpty == false)
               UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
-            Column(
-              children: [
-                CalendarAppBar(
-                  accent: ColorConstants.appColor,
-                  onDateChanged: (value) {
-                    _onDateChanged(value);
-                  },
-                  firstDate:
-                      DateTime.now().subtract(const Duration(days: 30 * 3)),
-                  lastDate: DateTime.now().add(const Duration(days: 30)),
-                  selectedDate: DateTime.now(),
-                  fullCalendar: true,
-                  locale: 'vi',
-                  padding: 5.0,
-                ),
-                _buildScoreSelectorView(),
-                Expanded(child: _buildBody()),
-              ],
+            AnimatedBackground(
+              behaviour: BubblesBehaviour(),
+              vsync: this,
+              child: Column(
+                children: [
+                  CalendarAppBar(
+                    accent: ColorConstants.appColor,
+                    onDateChanged: (value) {
+                      _onDateChanged(value);
+                    },
+                    firstDate:
+                        DateTime.now().subtract(const Duration(days: 30 * 3)),
+                    lastDate: DateTime.now().add(const Duration(days: 30)),
+                    selectedDate: DateTime.now(),
+                    fullCalendar: true,
+                    locale: 'vi',
+                    padding: 5.0,
+                  ),
+                  _buildScoreSelectorView(),
+                  Expanded(child: _buildBody()),
+                ],
+              ),
             ),
           ],
         ),
