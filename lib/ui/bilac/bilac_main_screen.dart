@@ -180,28 +180,32 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
     if (index == 0) {
       return;
     }
-    _cBilacMainController.updateScoreOfPlayer(
-        index, player, Player.RESULT_LOSE);
+
+    var currentScore = _cBilacMainController.scoreSelector.value;
+    _cBilacMainController.updateScoreOfPlayer(index, player, currentScore);
   }
 
   Widget _buildScoreSelectorView() {
-    return InkWell(
-      onTap: () {
-        _showScoreSheet(context);
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: _cBilacMainController.getScoreSelectorColor(),
-          border: Border.all(
-            color: Colors.red,
-            width: 0.5,
+    return Visibility(
+      visible: _cBilacMainController.listPlayer.isNotEmpty,
+      child: InkWell(
+        onTap: () {
+          _showScoreSheet(context);
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: _cBilacMainController.getScoreSelectorColor(),
+            border: Border.all(
+              color: Colors.red,
+              width: 0.5,
+            ),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(5),
+            ),
           ),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(5),
-          ),
+          padding: const EdgeInsets.fromLTRB(45.0, 5.0, 45.0, 5.0),
+          child: UIUtils.getText(_cBilacMainController.getScoreSelectorText()),
         ),
-        padding: const EdgeInsets.fromLTRB(45.0, 5.0, 45.0, 5.0),
-        child: UIUtils.getText(_cBilacMainController.getScoreSelectorText()),
       ),
     );
   }
