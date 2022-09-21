@@ -66,7 +66,12 @@ class Player {
     if (index < 0 || index > listScore.length - 1) {
       //do nothing
     } else {
-      listScore[index] = score;
+      if (listScore[index] == score) {
+        listScore[index] = Player.RESULT_NONE;
+      } else {
+        listScore[index] = score;
+      }
+
       // print("updateScoreByIndex listScore after $listScore");
 
       String tmpScoreString = "";
