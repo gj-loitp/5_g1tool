@@ -1,3 +1,5 @@
+import 'package:animated_background/animated_background.dart';
+import 'package:animated_background/bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
@@ -23,7 +25,8 @@ class SelectPlayerScreen extends StatefulWidget {
   }
 }
 
-class _SelectPlayerScreenState extends BaseStatefulState<SelectPlayerScreen> {
+class _SelectPlayerScreenState extends BaseStatefulState<SelectPlayerScreen>
+    with TickerProviderStateMixin {
   final _cSelectPlayer = Get.put(SelectPlayerController());
 
   @override
@@ -46,7 +49,11 @@ class _SelectPlayerScreenState extends BaseStatefulState<SelectPlayerScreen> {
         body: Stack(
           children: [
             UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
-            _buildListPlayerView(),
+            AnimatedBackground(
+              behaviour: BubblesBehaviour(),
+              vsync: this,
+              child: _buildListPlayerView(),
+            ),
           ],
         ),
         floatingActionButton: FloatingActionButton(
