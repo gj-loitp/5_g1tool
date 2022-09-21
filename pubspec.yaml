@@ -9,6 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  animated_background: ^2.0.0
   avatar_glow: ^2.0.2
   cached_network_image: ^3.2.2
   calendar_appbar: ^0.0.6
