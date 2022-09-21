@@ -217,7 +217,8 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
                     Radius.circular(5),
                   ),
                 ),
-                padding: const EdgeInsets.fromLTRB(45.0, 5.0, 45.0, 5.0),
+                padding:
+                    const EdgeInsets.all(DimenConstants.marginPaddingSmall),
                 child: UIUtils.getText(
                     _cBilacMainController.getScoreSelectorText()),
               ),
@@ -241,7 +242,8 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
                     Radius.circular(5),
                   ),
                 ),
-                padding: const EdgeInsets.fromLTRB(45.0, 5.0, 45.0, 5.0),
+                padding:
+                    const EdgeInsets.all(DimenConstants.marginPaddingSmall),
                 child: UIUtils.getText("Kết quả"),
               ),
             ),
