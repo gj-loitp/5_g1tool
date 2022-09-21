@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
 import 'package:get/get.dart';
@@ -181,5 +182,44 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
       return;
     }
     _cBilacMainController.updateScoreOfPlayer(index, player, Player.RESULT_LOSE);
+  }
+
+  Future<void> _showScoreSheet(BuildContext context) async {
+    return showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoActionSheet(
+          title: UIUtils.getText("Mời chọn"),
+          message: UIUtils.getText("Chọn trạng thái trận đấu"),
+          actions: [
+            CupertinoActionSheetAction(
+              child: UIUtils.getText("Mặc định"),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+            CupertinoActionSheetAction(
+              child: UIUtils.getText("Thắng"),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+            CupertinoActionSheetAction(
+              child: UIUtils.getText("Thua"),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ],
+          cancelButton: CupertinoActionSheetAction(
+            isDefaultAction: true,
+            child: UIUtils.getText("Đóng"),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+        );
+      },
+    );
   }
 }
