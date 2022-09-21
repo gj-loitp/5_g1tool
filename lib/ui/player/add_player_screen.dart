@@ -1,3 +1,4 @@
+import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:g1tool/common/c/color_constant.dart';
@@ -23,7 +24,8 @@ class AddPlayerScreen extends StatefulWidget {
   }
 }
 
-class _AddPlayerScreenState extends BaseStatefulState<AddPlayerScreen> {
+class _AddPlayerScreenState extends BaseStatefulState<AddPlayerScreen>
+    with TickerProviderStateMixin {
   final _cAddPlayer = Get.put(AddPlayerController());
 
   @override
@@ -45,31 +47,35 @@ class _AddPlayerScreenState extends BaseStatefulState<AddPlayerScreen> {
         body: Stack(
           children: [
             UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
-            ListView(
-              padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-              physics: const BouncingScrollPhysics(),
-              children: [
-                Container(
-                  color: Colors.white,
-                  padding:
-                      const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-                  child: TextFormField(
-                    maxLength: 30,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      filled: true,
-                      fillColor: Colors.white,
-                      icon: Icon(Icons.person),
-                      hintText: 'Nhập tên người chơi',
-                      labelText: 'Tên *',
+            AnimatedBackground(
+              behaviour: BubblesBehaviour(),
+              vsync: this,
+              child: ListView(
+                padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  Container(
+                    color: Colors.white,
+                    padding:
+                    const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+                    child: TextFormField(
+                      maxLength: 30,
+                      keyboardType: TextInputType.text,
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        filled: true,
+                        fillColor: Colors.white,
+                        icon: Icon(Icons.person),
+                        hintText: 'Nhập tên người chơi',
+                        labelText: 'Tên *',
+                      ),
+                      onChanged: (text) {
+                        _cAddPlayer.setName(text);
+                      },
                     ),
-                    onChanged: (text) {
-                      _cAddPlayer.setName(text);
-                    },
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
