@@ -60,7 +60,7 @@ class _MenuScreen extends State<MenuScreen> with TickerProviderStateMixin {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

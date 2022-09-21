@@ -1,3 +1,5 @@
+import 'package:animated_background/animated_background.dart';
+import 'package:animated_background/bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
@@ -20,7 +22,7 @@ class ListPlayerScreen extends StatefulWidget {
   }
 }
 
-class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> {
+class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> with TickerProviderStateMixin{
   final _cListPlayer = Get.put(ListPlayerController());
 
   @override
@@ -53,7 +55,11 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> {
         return Stack(
           children: [
             UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
-            _buildListPlayerView(),
+            AnimatedBackground(
+              behaviour: BubblesBehaviour(),
+              vsync: this,
+              child: _buildListPlayerView(),
+            ),
           ],
         );
       }),
