@@ -1,3 +1,4 @@
+import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:g1tool/common/core/base_stateful_state.dart';
@@ -24,7 +25,7 @@ class UpdatePlayerScreen extends StatefulWidget {
   }
 }
 
-class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> {
+class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> with TickerProviderStateMixin{
   final _cUpdatePlayer = Get.put(UpdatePlayerController());
   final _tecName = TextEditingController();
 
@@ -47,56 +48,60 @@ class _UpdatePlayerScreenState extends BaseStatefulState<UpdatePlayerScreen> {
       body: Stack(
         children: [
           UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
-          Padding(
-            padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView(
-                    physics: const BouncingScrollPhysics(),
-                    children: [
-                      SizedBox(
-                        height: 250,
-                        child: UIUtils.buildCachedNetworkImage(
-                            widget.player.avatar ?? ""),
-                      ),
-                      Container(
-                        color: Colors.white,
-                        padding: const EdgeInsets.all(
-                            DimenConstants.marginPaddingMedium),
-                        child: TextFormField(
-                          controller: _tecName,
-                          maxLength: 30,
-                          keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            filled: true,
-                            fillColor: Colors.white,
-                            icon: Icon(Icons.person),
-                            hintText: 'Nhập tên người chơi',
-                            labelText: 'Tên *',
-                          ),
-                          onChanged: (text) {
-                            _cUpdatePlayer.setName(text);
-                          },
+          AnimatedBackground(
+            behaviour: BubblesBehaviour(),
+            vsync: this,
+            child: Padding(
+              padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView(
+                      physics: const BouncingScrollPhysics(),
+                      children: [
+                        SizedBox(
+                          height: 250,
+                          child: UIUtils.buildCachedNetworkImage(
+                              widget.player.avatar ?? ""),
                         ),
-                      ),
-                    ],
+                        Container(
+                          color: Colors.white,
+                          padding: const EdgeInsets.all(
+                              DimenConstants.marginPaddingMedium),
+                          child: TextFormField(
+                            controller: _tecName,
+                            maxLength: 30,
+                            keyboardType: TextInputType.text,
+                            decoration: const InputDecoration(
+                              border: UnderlineInputBorder(),
+                              filled: true,
+                              fillColor: Colors.white,
+                              icon: Icon(Icons.person),
+                              hintText: 'Nhập tên người chơi',
+                              labelText: 'Tên *',
+                            ),
+                            onChanged: (text) {
+                              _cUpdatePlayer.setName(text);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                UIUtils.getButton(
-                  "Xoá",
-                  () {
-                    _deletePlayer();
-                  },
-                ),
-                UIUtils.getButton(
-                  "Cập nhật",
-                  () {
-                    _updatePlayer();
-                  },
-                ),
-              ],
+                  UIUtils.getButton(
+                    "Xoá",
+                        () {
+                      _deletePlayer();
+                    },
+                  ),
+                  UIUtils.getButton(
+                    "Cập nhật",
+                        () {
+                      _updatePlayer();
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ],
