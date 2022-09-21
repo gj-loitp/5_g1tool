@@ -105,13 +105,13 @@ class Player {
     }
   }
 
-  Color getColorByScore(int index, String? score) {
+  static Color getColorByScore(int index, String? score) {
     if (index == 0) {
       return Colors.yellow;
     } else if (score == RESULT_NONE) {
       return Colors.white;
     } else if (score == RESULT_WIN) {
-      return Colors.green;
+      return Colors.greenAccent;
     } else if (score == RESULT_LOSE) {
       return Colors.redAccent;
     } else {

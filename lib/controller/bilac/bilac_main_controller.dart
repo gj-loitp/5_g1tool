@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:g1tool/model/player.dart';
@@ -6,6 +7,7 @@ import 'package:get/get.dart';
 
 class BilacMainController extends GetxController {
   var listPlayer = <Player>[].obs;
+  var scoreSelector = Player.RESULT_NONE.obs;
 
   void _print(String s) {
     if (kDebugMode) {
@@ -46,5 +48,23 @@ class BilacMainController extends GetxController {
     _print(">>>_onTap index $indexScore - ${jsonEncode(player)}");
     player.updateScoreByIndex(indexScore, newScore);
     listPlayer.refresh();
+  }
+
+  void setScoreSelector(String s) {
+    scoreSelector.value = s;
+  }
+
+  String getScoreSelectorText() {
+    String s = "Mặc định";
+    if (scoreSelector.value == Player.RESULT_WIN) {
+      s = "Thắng";
+    } else if (scoreSelector.value == Player.RESULT_LOSE) {
+      s = "Thua";
+    }
+    return s;
+  }
+
+  Color getScoreSelectorColor() {
+    return Player.getColorByScore(1, scoreSelector.value);
   }
 }

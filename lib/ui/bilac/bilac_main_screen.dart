@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
@@ -62,6 +60,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
                   locale: 'vi',
                   padding: 5.0,
                 ),
+                _buildScoreSelectorView(),
                 Expanded(child: _buildBody()),
               ],
             ),
@@ -147,7 +146,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
                   child: Container(
                     margin: const EdgeInsets.all(1.0),
                     decoration: BoxDecoration(
-                      color: player.getColorByScore(index, score),
+                      color: Player.getColorByScore(index, score),
                       border: Border.all(
                         color: Colors.red,
                         width: 0.5,
@@ -181,7 +180,30 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
     if (index == 0) {
       return;
     }
-    _cBilacMainController.updateScoreOfPlayer(index, player, Player.RESULT_LOSE);
+    _cBilacMainController.updateScoreOfPlayer(
+        index, player, Player.RESULT_LOSE);
+  }
+
+  Widget _buildScoreSelectorView() {
+    return InkWell(
+      onTap: () {
+        _showScoreSheet(context);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: _cBilacMainController.getScoreSelectorColor(),
+          border: Border.all(
+            color: Colors.red,
+            width: 0.5,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(5),
+          ),
+        ),
+        padding: const EdgeInsets.fromLTRB(45.0, 5.0, 45.0, 5.0),
+        child: UIUtils.getText(_cBilacMainController.getScoreSelectorText()),
+      ),
+    );
   }
 
   Future<void> _showScoreSheet(BuildContext context) async {
@@ -195,18 +217,21 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen> {
             CupertinoActionSheetAction(
               child: UIUtils.getText("Mặc định"),
               onPressed: () {
+                _cBilacMainController.setScoreSelector(Player.RESULT_NONE);
                 Get.back();
               },
             ),
             CupertinoActionSheetAction(
               child: UIUtils.getText("Thắng"),
               onPressed: () {
+                _cBilacMainController.setScoreSelector(Player.RESULT_WIN);
                 Get.back();
               },
             ),
             CupertinoActionSheetAction(
               child: UIUtils.getText("Thua"),
               onPressed: () {
+                _cBilacMainController.setScoreSelector(Player.RESULT_LOSE);
                 Get.back();
               },
             ),
