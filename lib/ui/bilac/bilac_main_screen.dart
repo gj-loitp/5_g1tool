@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
-
 import '../../common/c/string_constant.dart';
 import '../../common/core/base_stateful_state.dart';
 import '../../common/utils/ui_utils.dart';
@@ -129,7 +127,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
         rows.add(r);
       }
 
-      return ScrollableTableView(
+      /*return ScrollableTableView(
         rowDividerHeight: 0.0,
         columns: columns.map((column) {
           return TableViewColumn(
@@ -177,6 +175,80 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             }).toList(),
           );
         }).toList(),
+      );*/
+
+      DataColumn genDataColumn(String label) {
+        return DataColumn(
+          label: Text(
+            label,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        );
+      }
+
+      DataRow genDataRow(
+          String id,
+          String name,
+          String profession,
+          String c1,
+          String c2,
+          String c3,
+          String c4,
+          String c5,
+          ) {
+        return DataRow(cells: [
+          DataCell(Text(id)),
+          DataCell(Text(name)),
+          DataCell(Text(profession)),
+          DataCell(Text(c1)),
+          DataCell(Text(c2)),
+          DataCell(Text(c3)),
+          DataCell(Text(c4)),
+          DataCell(Text(c5)),
+        ]);
+      }
+
+      return ListView(
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+        children: [
+          SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            child: DataTable(
+              columns: [
+                genDataColumn('Id'),
+                genDataColumn('Name'),
+                genDataColumn('Profession'),
+                genDataColumn('Column1'),
+                genDataColumn('Column2'),
+                genDataColumn('Column3'),
+                genDataColumn('Column4'),
+                genDataColumn('Column5'),
+              ],
+              rows: [
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
+              ],
+            ),
+          ),
+        ],
       );
     }
   }
