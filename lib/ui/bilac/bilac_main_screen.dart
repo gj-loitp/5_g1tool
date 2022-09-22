@@ -328,7 +328,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       var scoreWin = p.getScoreWin();
       data.add({
         'domain': '($rate) ${p.name}',
-        'measure': (scoreWin * 100 / scoreWinAll).toInt()
+        'measure': scoreWin * 100 ~/ scoreWinAll
       });
     }
 
