@@ -48,10 +48,11 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             AnimatedBackground(
               behaviour: BubblesBehaviour(),
               vsync: this,
-              child: Column(
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
                 children: [
                   CalendarAppBar(
-                    accent: ColorConstants.appColor,
+                    accent: ColorConstants.appColor.withOpacity(0.7),
                     onDateChanged: (value) {
                       _onDateChanged(value);
                     },
@@ -64,7 +65,8 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
                     padding: 5.0,
                   ),
                   _buildScoreSelectorView(),
-                  Expanded(child: _buildBody()),
+                  // Expanded(child: _buildBody()),
+                  _buildBody(),
                 ],
               ),
             ),
@@ -209,6 +211,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       }
 
       return ListView(
+        shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
         children: [
