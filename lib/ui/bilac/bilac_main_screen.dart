@@ -325,7 +325,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
     for (var p in _cBilacMainController.listPlayer) {
       var rate = p.getScoreAndTotalRound();
       var scoreWin = p.getScoreWin();
-      data.add({'domain': '${p.name}', 'measure': scoreWin});
+      data.add({'domain': '${p.name} $rate', 'measure': scoreWin});
     }
     // data.add({'domain': '1', 'measure': 28});
     // data.add({'domain': '2', 'measure': 27});
@@ -391,6 +391,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             return "${pieData['domain']}:\n${pieData['measure']}%";
           },
           labelPosition: PieLabelPosition.outside,
+          labelFontSize: 8,
         ),
       ),
     );
