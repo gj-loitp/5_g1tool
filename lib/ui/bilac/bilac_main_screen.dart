@@ -190,10 +190,10 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             DataCell(
               Container(
                 width: width,
-                alignment: Alignment.center,
+                alignment: Alignment.centerLeft,
                 child: UIUtils.getText(
                   player.getName(),
-                  fontSize: DimenConstants.txtMedium,
+                  fontSize: DimenConstants.txtSmall,
                 ),
               ),
             ),
@@ -252,7 +252,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
               headingRowColor: MaterialStateColor.resolveWith(
                   (states) => Colors.blue.withOpacity(0.9)),
               headingRowHeight: 45.0,
-              horizontalMargin: 10.0,
+              horizontalMargin: 5.0,
               columnSpacing: 0.0,
               columns: getListDataColumn(),
               rows: getListDataRow(),
