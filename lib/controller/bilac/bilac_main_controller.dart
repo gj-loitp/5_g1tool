@@ -64,6 +64,6 @@ class BilacMainController extends GetxController {
   }
 
   Color getScoreSelectorColor() {
-    return Player.getColorByScore(1, scoreSelector.value);
+    return Player.getColorByScore(scoreSelector.value);
   }
 }

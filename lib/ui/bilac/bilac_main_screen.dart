@@ -163,7 +163,8 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       List<DataColumn> getListDataColumn() {
         DataColumn genDataColumn(String label) {
           return DataColumn(
-            label: SizedBox(
+            label: Container(
+              padding: const EdgeInsets.all(DimenConstants.marginPaddingTiny),
               width: width,
               child: Text(
                 label,
@@ -195,6 +196,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
           cells.add(
             DataCell(
               Container(
+                padding: const EdgeInsets.all(DimenConstants.marginPaddingTiny),
                 width: width,
                 alignment: Alignment.centerLeft,
                 child: UIUtils.getText(
@@ -207,13 +209,17 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
           var listScore = player.getListScore();
           log(">>>${player.name} index $index, listScore ${jsonEncode(listScore)}");
           for (int i = 0; i < listScore.length; i++) {
+            var score = listScore[i];
             cells.add(
               DataCell(
                 Container(
+                  padding:
+                      const EdgeInsets.all(DimenConstants.marginPaddingTiny),
+                  color: Player.getColorByScore(score),
                   alignment: Alignment.center,
                   width: width,
                   child: UIUtils.getText(
-                    listScore[i],
+                    score,
                     fontSize: DimenConstants.txtMedium,
                   ),
                 ),
@@ -259,7 +265,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
               headingRowColor: MaterialStateColor.resolveWith(
                   (states) => Colors.blue.withOpacity(0.9)),
               headingRowHeight: 45.0,
-              horizontalMargin: 5.0,
+              horizontalMargin: 0.0,
               columnSpacing: 0.0,
               columns: getListDataColumn(),
               rows: getListDataRow(),
