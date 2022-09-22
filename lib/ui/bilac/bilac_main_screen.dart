@@ -317,7 +317,14 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
   Widget _buildChartView() {
     var data = <Map<String, dynamic>>[];
     int scoreWinAll = 0;
-    var list = _cBilacMainController.listPlayer;
+
+    var list = <Player>[];
+    for (var p in _cBilacMainController.listPlayer) {
+      var deepCopyPlayer = Player.fromJson(p.toJson());
+      list.add(deepCopyPlayer);
+    }
+    list.sort((a, b) => a.getScoreWin().compareTo(b.getScoreWin()));
+
     for (var p in list) {
       scoreWinAll += p.getScoreWin();
     }
@@ -326,9 +333,15 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
     for (var p in list) {
       var rate = p.getScoreAndTotalRound();
       var scoreWin = p.getScoreWin();
+      var measure = 0;
+      try {
+        measure = scoreWin * 100 ~/ scoreWinAll;
+      } catch (e) {
+        log("Error measure $e");
+      }
       data.add({
         'domain': '($rate) ${p.name}',
-        'measure': scoreWin * 100 ~/ scoreWinAll
+        'measure': measure,
       });
     }
 
