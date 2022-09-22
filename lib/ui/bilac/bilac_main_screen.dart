@@ -1,11 +1,11 @@
 import 'package:animated_background/animated_background.dart';
 import 'package:calendar_appbar/calendar_appbar.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:get/get.dart';
+
 import '../../common/c/string_constant.dart';
 import '../../common/core/base_stateful_state.dart';
 import '../../common/utils/ui_utils.dart';
@@ -179,16 +179,30 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
         }).toList(),
       );*/
 
-      DataColumn genDataColumn(String label) {
-        return DataColumn(
-          label: Text(
-            label,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-        );
+      List<DataColumn> getListDataColumn() {
+        DataColumn genDataColumn(String label) {
+          return DataColumn(
+            label: Text(
+              label,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          );
+        }
+
+        var list = <DataColumn>[];
+        list.add(genDataColumn('Id'));
+        list.add(genDataColumn('Name'));
+        list.add(genDataColumn('Profession'));
+        list.add(genDataColumn('Column1'));
+        list.add(genDataColumn('Column2'));
+        list.add(genDataColumn('Column3'));
+        list.add(genDataColumn('Column4'));
+        list.add(genDataColumn('Column5'));
+        return list;
       }
 
-      DataRow genDataRow(
+      List<DataRow> getListDataRow() {
+        DataRow genDataRow(
           String id,
           String name,
           String profession,
@@ -197,17 +211,33 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
           String c3,
           String c4,
           String c5,
-          ) {
-        return DataRow(cells: [
-          DataCell(Text(id)),
-          DataCell(Text(name)),
-          DataCell(Text(profession)),
-          DataCell(Text(c1)),
-          DataCell(Text(c2)),
-          DataCell(Text(c3)),
-          DataCell(Text(c4)),
-          DataCell(Text(c5)),
-        ]);
+        ) {
+          return DataRow(cells: [
+            DataCell(Text(id)),
+            DataCell(Text(name)),
+            DataCell(Text(profession)),
+            DataCell(Text(c1)),
+            DataCell(Text(c2)),
+            DataCell(Text(c3)),
+            DataCell(Text(c4)),
+            DataCell(Text(c5)),
+          ]);
+        }
+
+        var list = <DataRow>[];
+        list.add(
+            genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
+        list.add(
+            genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
+        list.add(
+            genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
+        list.add(
+            genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
+        list.add(
+            genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
+        list.add(
+            genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
+        return list;
       }
 
       return ListView(
@@ -219,36 +249,8 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             child: DataTable(
-              columns: [
-                genDataColumn('Id'),
-                genDataColumn('Name'),
-                genDataColumn('Profession'),
-                genDataColumn('Column1'),
-                genDataColumn('Column2'),
-                genDataColumn('Column3'),
-                genDataColumn('Column4'),
-                genDataColumn('Column5'),
-              ],
-              rows: [
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-                genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"),
-              ],
+              columns: getListDataColumn(),
+              rows: getListDataRow(),
             ),
           ),
         ],
