@@ -1,4 +1,3 @@
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -431,8 +430,10 @@ class UIUtils {
           ),
         ),
       ),
-      placeholder: (context, url) => const Center(
-        child: CupertinoActivityIndicator(),
+      placeholder: (context, url) => Center(
+        child: CupertinoActivityIndicator(
+          color: ColorConstants.appColor,
+        ),
       ),
       errorWidget: (context, url, error) => const Center(
         child: Icon(Icons.error),

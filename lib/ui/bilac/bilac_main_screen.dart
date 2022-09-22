@@ -106,6 +106,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       return UIUtils.buildNoDataView();
     } else {
       var maxRound = _cBilacMainController.getMaxRound();
+      var width = 70.0;
       log("maxRound $maxRound");
       /*return ScrollableTableView(
         rowDividerHeight: 0.0,
@@ -160,7 +161,17 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       List<DataColumn> getListDataColumn() {
         DataColumn genDataColumn(String label) {
           return DataColumn(
-            label: UIUtils.getText(label, color: Colors.white),
+            label: SizedBox(
+              width: width,
+              child: Text(
+                label,
+                style: const TextStyle(
+                  fontSize: DimenConstants.txtMedium,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
           );
         }
 
@@ -173,13 +184,38 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       }
 
       List<DataRow> getListDataRow() {
-        DataRow genDataRow(int index, Player player) {
+        DataRow genDataRow(int index, Player player, GestureTapCallback onTap) {
           var cells = <DataCell>[];
-          cells.add(DataCell(Text(player.getName())));
+          cells.add(
+            DataCell(
+              Container(
+                width: width,
+                alignment: Alignment.center,
+                child: UIUtils.getText(
+                  player.getName(),
+                  fontSize: DimenConstants.txtMedium,
+                ),
+              ),
+            ),
+          );
           var listScore = player.getListScore();
           // log(">>>${player.name} index $index, listScore ${jsonEncode(listScore)}");
           for (var score in listScore) {
-            cells.add(DataCell(Text(score)));
+            cells.add(
+              DataCell(
+                Container(
+                  alignment: Alignment.center,
+                  width: width,
+                  child: UIUtils.getText(
+                    score,
+                    fontSize: DimenConstants.txtMedium,
+                  ),
+                ),
+                onTap: () {
+                  onTap.call();
+                },
+              ),
+            );
           }
           return DataRow(cells: cells);
         }
@@ -188,7 +224,15 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
         var listPlayer = _cBilacMainController.listPlayer;
         for (int i = 0; i < listPlayer.length; i++) {
           Player p = listPlayer[i];
-          list.add(genDataRow(i, p));
+          list.add(
+            genDataRow(
+              i,
+              p,
+              () {
+                log("onTap $i");
+              },
+            ),
+          );
         }
         return list;
       }
@@ -209,7 +253,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
                   (states) => Colors.blue.withOpacity(0.9)),
               headingRowHeight: 45.0,
               horizontalMargin: 10.0,
-              columnSpacing: 15.0,
+              columnSpacing: 0.0,
               columns: getListDataColumn(),
               rows: getListDataRow(),
             ),
