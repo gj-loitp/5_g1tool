@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:animated_background/animated_background.dart';
 import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -162,10 +160,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       List<DataColumn> getListDataColumn() {
         DataColumn genDataColumn(String label) {
           return DataColumn(
-            label: Text(
-              label,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+            label: Text(label),
           );
         }
 
@@ -201,12 +196,28 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       return ListView(
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+        padding: const EdgeInsets.only(top: DimenConstants.marginPaddingMedium),
         children: [
           SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             child: DataTable(
+              dataRowColor: MaterialStateColor.resolveWith(
+                  (states) => Colors.greenAccent),
+              dataRowHeight: 45.0,
+              dataTextStyle: const TextStyle(
+                color: Colors.redAccent,
+                fontSize: 15.0,
+              ),
+              headingRowColor:
+                  MaterialStateColor.resolveWith((states) => Colors.teal),
+              headingRowHeight: 75.0,
+              headingTextStyle: const TextStyle(
+                color: Colors.white,
+                fontSize: 15.0,
+              ),
+              horizontalMargin: 15.0,
+              columnSpacing: 10.0,
               columns: getListDataColumn(),
               rows: getListDataRow(),
             ),
