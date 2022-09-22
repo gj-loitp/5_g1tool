@@ -317,26 +317,20 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
   Widget _buildChartView() {
     var data = <Map<String, dynamic>>[];
     int scoreWinAll = 0;
-    for (var p in _cBilacMainController.listPlayer) {
+    var list = _cBilacMainController.listPlayer;
+    for (var p in list) {
       scoreWinAll += p.getScoreWin();
     }
     log(">>>scoreWinAll $scoreWinAll");
 
-    for (var p in _cBilacMainController.listPlayer) {
+    for (var p in list) {
       var rate = p.getScoreAndTotalRound();
       var scoreWin = p.getScoreWin();
       data.add({
         'domain': '($rate) ${p.name}',
-        'measure': scoreWin * 100 / scoreWinAll
+        'measure': (scoreWin * 100 / scoreWinAll).toInt()
       });
     }
-    // data.add({'domain': '1', 'measure': 28});
-    // data.add({'domain': '2', 'measure': 27});
-    // data.add({'domain': '3', 'measure': 20});
-    // data.add({'domain': '4', 'measure': 25});
-    // data.add({'domain': '5', 'measure': 25});
-    // data.add({'domain': '6', 'measure': 25});
-    // data.add({'domain': '7', 'measure': 25});
 
     Color getColor(int? i) {
       if (i == 0) {
