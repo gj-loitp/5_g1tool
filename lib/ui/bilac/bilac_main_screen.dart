@@ -317,6 +317,8 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       child: AspectRatio(
         aspectRatio: 16 / 9,
         child: DChartPie(
+          labelColor: Colors.white,
+          labelLineColor: Colors.white,
           data: const [
             {'domain': 'Flutter', 'measure': 28},
             {'domain': 'React Native', 'measure': 27},
