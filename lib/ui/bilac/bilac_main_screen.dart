@@ -318,6 +318,47 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
     data.add({'domain': 'Ionic', 'measure': 20});
     data.add({'domain': 'Cordova', 'measure': 15});
 
+    Color getColor(int? i) {
+      if (i == 0) {
+        return Colors.red;
+      } else if (i == 1) {
+        return Colors.pink;
+      } else if (i == 2) {
+        return Colors.purple;
+      } else if (i == 3) {
+        return Colors.deepPurple;
+      } else if (i == 4) {
+        return Colors.indigo;
+      } else if (i == 5) {
+        return Colors.blue;
+      } else if (i == 6) {
+        return Colors.lightBlue;
+      } else if (i == 7) {
+        return Colors.cyan;
+      } else if (i == 8) {
+        return Colors.teal;
+      } else if (i == 9) {
+        return Colors.green;
+      } else if (i == 10) {
+        return Colors.lightGreen;
+      } else if (i == 11) {
+        return Colors.lime;
+      } else if (i == 12) {
+        return Colors.yellow;
+      } else if (i == 13) {
+        return Colors.amber;
+      } else if (i == 14) {
+        return Colors.orange;
+      } else if (i == 15) {
+        return Colors.deepOrange;
+      } else if (i == 16) {
+        return Colors.brown;
+      } else if (i == 17) {
+        return Colors.blueGrey;
+      }
+      return Colors.red;
+    }
+
     return Padding(
       padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
       child: AspectRatio(
@@ -327,16 +368,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
           labelLineColor: Colors.white,
           data: data,
           fillColor: (pieData, index) {
-            switch (pieData['domain']) {
-              case 'Flutter':
-                return Colors.blue;
-              case 'React Native':
-                return Colors.blueAccent;
-              case 'Ionic':
-                return Colors.lightBlue;
-              default:
-                return Colors.orange;
-            }
+            return getColor(index);
           },
           pieLabel: (pieData, index) {
             return "${pieData['domain']}:\n${pieData['measure']}%";
