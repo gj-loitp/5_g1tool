@@ -105,24 +105,9 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
     if (_cBilacMainController.listPlayer.isEmpty) {
       return UIUtils.buildNoDataView();
     } else {
-      var maxRound = _cBilacMainController.getMaxRound();
-
-      var rows = <List<Player>>[];
-      var listPlayer = _cBilacMainController.listPlayer;
-      for (int i = 0; i < listPlayer.length; i++) {
-        var p = listPlayer[i];
-        var r = <Player>[];
-
-        for (int i = 0; i < maxRound; i++) {
-          if (i == 0) {
-            r.add(p);
-          } else {
-            r.add(p);
-          }
-        }
-
-        rows.add(r);
-      }
+      // var maxRound = _cBilacMainController.getMaxRound();
+      //TODO revert
+      var maxRound = 4;
 
       /*return ScrollableTableView(
         rowDividerHeight: 0.0,
@@ -193,41 +178,21 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       }
 
       List<DataRow> getListDataRow() {
-        DataRow genDataRow(
-          String id,
-          String name,
-          String profession,
-          String c1,
-          String c2,
-          String c3,
-          String c4,
-          String c5,
-        ) {
-          return DataRow(cells: [
-            DataCell(Text(id)),
-            DataCell(Text(name)),
-            DataCell(Text(profession)),
-            DataCell(Text(c1)),
-            DataCell(Text(c2)),
-            DataCell(Text(c3)),
-            DataCell(Text(c4)),
-            DataCell(Text(c5)),
-          ]);
+        DataRow genDataRow(Player player) {
+          var cells = <DataCell>[];
+          cells.add(DataCell(Text(player.getName())));
+          player.getListScore().forEach((score) {
+            cells.add(DataCell(Text(score)));
+          });
+          return DataRow(cells: cells);
         }
 
         var list = <DataRow>[];
-        // list.add(
-        //     genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
-        // list.add(
-        //     genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
-        // list.add(
-        //     genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
-        // list.add(
-        //     genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
-        // list.add(
-        //     genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
-        // list.add(
-        //     genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
+        var listPlayer = _cBilacMainController.listPlayer;
+        for (int i = 0; i < listPlayer.length; i++) {
+          Player p = listPlayer[i];
+          list.add(genDataRow(p));
+        }
         return list;
       }
 
