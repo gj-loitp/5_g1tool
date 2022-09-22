@@ -184,7 +184,8 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       }
 
       List<DataRow> getListDataRow() {
-        DataRow genDataRow(int index, Player player, GestureTapCallback onTap) {
+        DataRow genDataRow(int index, Player player,
+            Function(int indexPlayer, Player player, int indexScore) onTap) {
           var cells = <DataCell>[];
           cells.add(
             DataCell(
@@ -200,19 +201,19 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
           );
           var listScore = player.getListScore();
           // log(">>>${player.name} index $index, listScore ${jsonEncode(listScore)}");
-          for (var score in listScore) {
+          for (int i = 0; i < listScore.length; i++) {
             cells.add(
               DataCell(
                 Container(
                   alignment: Alignment.center,
                   width: width,
                   child: UIUtils.getText(
-                    score,
+                    listScore[i],
                     fontSize: DimenConstants.txtMedium,
                   ),
                 ),
                 onTap: () {
-                  onTap.call();
+                  onTap.call(index, player, i);
                 },
               ),
             );
@@ -228,8 +229,9 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             genDataRow(
               i,
               p,
-              () {
-                log("onTap $i");
+              (index, player, indexScore) {
+                log("onTap $index $player $indexScore");
+                _onTap(indexScore, player);
               },
             ),
           );
