@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:animated_background/animated_background.dart';
 import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -184,8 +186,11 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       }
 
       List<DataRow> getListDataRow() {
-        DataRow genDataRow(int index, Player player,
-            Function(int indexPlayer, Player player, int indexScore) onTap) {
+        DataRow genDataRow(
+          int index,
+          Player player,
+          Function(int indexPlayer, Player player, int indexScore) onTap,
+        ) {
           var cells = <DataCell>[];
           cells.add(
             DataCell(
@@ -200,7 +205,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             ),
           );
           var listScore = player.getListScore();
-          // log(">>>${player.name} index $index, listScore ${jsonEncode(listScore)}");
+          log(">>>${player.name} index $index, listScore ${jsonEncode(listScore)}");
           for (int i = 0; i < listScore.length; i++) {
             cells.add(
               DataCell(
@@ -230,7 +235,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
               i,
               p,
               (index, player, indexScore) {
-                log("onTap $index $player $indexScore");
+                log("onTap $index ${jsonEncode(player)} $indexScore");
                 _onTap(indexScore, player);
               },
             ),
@@ -267,10 +272,6 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
 
   void _onTap(int index, Player player) {
     // print(">>>_onTap index $index - ${jsonEncode(player)}");
-    if (index == 0) {
-      return;
-    }
-
     var currentScore = _cBilacMainController.scoreSelector.value;
     _cBilacMainController.updateScoreOfPlayer(index, player, currentScore);
   }

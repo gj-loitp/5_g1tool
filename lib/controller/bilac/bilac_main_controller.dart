@@ -19,7 +19,7 @@ class BilacMainController extends GetxController {
     listPlayer.addAll(listPlayerSelected);
 
     var maxRound = getMaxRound();
-    String tmpScoreString = "";
+    String tmpScoreString = Player.RESULT_NONE;
     for (int i = 0; i < maxRound - 1; i++) {
       tmpScoreString += "#${Player.RESULT_NONE}";
     }
