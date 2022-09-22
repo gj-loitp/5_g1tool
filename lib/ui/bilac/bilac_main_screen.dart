@@ -205,7 +205,10 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       return ListView(
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.only(top: DimenConstants.marginPaddingMedium),
+        padding: const EdgeInsets.only(
+          top: DimenConstants.marginPaddingMedium,
+          bottom: DimenConstants.marginPadding98,
+        ),
         children: [
           SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
@@ -313,10 +316,24 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
 
   Widget _buildChartView() {
     var data = <Map<String, dynamic>>[];
-    data.add({'domain': 'Flutter', 'measure': 28});
-    data.add({'domain': 'React Native', 'measure': 27});
-    data.add({'domain': 'Ionic', 'measure': 20});
-    data.add({'domain': 'Cordova', 'measure': 15});
+    // int scoreWinAll = 0;
+    // for (var p in _cBilacMainController.listPlayer) {
+    //   scoreWinAll += p.getScoreWin();
+    // }
+    // log(">>>scoreWinAll $scoreWinAll");
+
+    for (var p in _cBilacMainController.listPlayer) {
+      var rate = p.getScoreAndTotalRound();
+      var scoreWin = p.getScoreWin();
+      data.add({'domain': '${p.name}', 'measure': scoreWin});
+    }
+    // data.add({'domain': '1', 'measure': 28});
+    // data.add({'domain': '2', 'measure': 27});
+    // data.add({'domain': '3', 'measure': 20});
+    // data.add({'domain': '4', 'measure': 25});
+    // data.add({'domain': '5', 'measure': 25});
+    // data.add({'domain': '6', 'measure': 25});
+    // data.add({'domain': '7', 'measure': 25});
 
     Color getColor(int? i) {
       if (i == 0) {

@@ -57,6 +57,32 @@ class Player {
     }
   }
 
+  int getScoreWin() {
+    int scoreWin = 0;
+    getListScore().forEach((score) {
+      if (score == Player.RESULT_WIN) {
+        scoreWin++;
+      }
+    });
+    return scoreWin;
+  }
+
+  int getScoreLose() {
+    int scoreWin = 0;
+    getListScore().forEach((score) {
+      if (score == Player.RESULT_LOSE) {
+        scoreWin++;
+      }
+    });
+    return scoreWin;
+  }
+
+  String? getScoreAndTotalRound() {
+    int scoreWin = getScoreWin();
+    int scoreLose = getScoreLose();
+    return "$scoreWin/${scoreWin + scoreLose}";
+  }
+
   void updateScoreByIndex(int index, String score) {
     var listScore = getListScore();
     // print("updateScoreByIndex index $index");
