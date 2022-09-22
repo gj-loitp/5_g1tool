@@ -312,6 +312,12 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
   }
 
   Widget _buildChartView() {
+    var data = <Map<String, dynamic>>[];
+    data.add({'domain': 'Flutter', 'measure': 28});
+    data.add({'domain': 'React Native', 'measure': 27});
+    data.add({'domain': 'Ionic', 'measure': 20});
+    data.add({'domain': 'Cordova', 'measure': 15});
+
     return Padding(
       padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
       child: AspectRatio(
@@ -319,12 +325,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
         child: DChartPie(
           labelColor: Colors.white,
           labelLineColor: Colors.white,
-          data: const [
-            {'domain': 'Flutter', 'measure': 28},
-            {'domain': 'React Native', 'measure': 27},
-            {'domain': 'Ionic', 'measure': 20},
-            {'domain': 'Cordova', 'measure': 15},
-          ],
+          data: data,
           fillColor: (pieData, index) {
             switch (pieData['domain']) {
               case 'Flutter':
