@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:animated_background/animated_background.dart';
 import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -105,10 +107,8 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
     if (_cBilacMainController.listPlayer.isEmpty) {
       return UIUtils.buildNoDataView();
     } else {
-      // var maxRound = _cBilacMainController.getMaxRound();
-      //TODO revert
-      var maxRound = 4;
-
+      var maxRound = _cBilacMainController.getMaxRound();
+      log("maxRound $maxRound");
       /*return ScrollableTableView(
         rowDividerHeight: 0.0,
         columns: columns.map((column) {
@@ -171,19 +171,21 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
 
         var list = <DataColumn>[];
         list.add(genDataColumn('Tên'));
-        for (int i = 1; i < maxRound; i++) {
+        for (int i = 0; i < maxRound; i++) {
           list.add(genDataColumn('Ván $i'));
         }
         return list;
       }
 
       List<DataRow> getListDataRow() {
-        DataRow genDataRow(Player player) {
+        DataRow genDataRow(int index, Player player) {
           var cells = <DataCell>[];
           cells.add(DataCell(Text(player.getName())));
-          player.getListScore().forEach((score) {
+          var listScore = player.getListScore();
+          // log(">>>${player.name} index $index, listScore ${jsonEncode(listScore)}");
+          for (var score in listScore) {
             cells.add(DataCell(Text(score)));
-          });
+          }
           return DataRow(cells: cells);
         }
 
@@ -191,7 +193,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
         var listPlayer = _cBilacMainController.listPlayer;
         for (int i = 0; i < listPlayer.length; i++) {
           Player p = listPlayer[i];
-          list.add(genDataRow(p));
+          list.add(genDataRow(i, p));
         }
         return list;
       }
