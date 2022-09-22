@@ -180,7 +180,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
         var list = <DataColumn>[];
         list.add(genDataColumn('Tên'));
         for (int i = 0; i < maxRound; i++) {
-          list.add(genDataColumn('${i + 1}'));
+          list.add(genDataColumn('$i'));
         }
         return list;
       }

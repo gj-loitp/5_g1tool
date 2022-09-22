@@ -59,35 +59,31 @@ class Player {
 
   void updateScoreByIndex(int index, String score) {
     var listScore = getListScore();
-    print("updateScoreByIndex index $index");
-    print("updateScoreByIndex score $score");
-    print("updateScoreByIndex scoreString $scoreString");
-    print("updateScoreByIndex listScore $listScore");
+    // print("updateScoreByIndex index $index");
+    // print("updateScoreByIndex score $score");
+    // print("updateScoreByIndex scoreString $scoreString");
+    // print("updateScoreByIndex listScore $listScore");
     if (index < 0 || index > listScore.length - 1) {
       //do nothing
     } else {
       listScore[index] = score;
 
-      print("updateScoreByIndex listScore after $listScore");
+      // print("updateScoreByIndex listScore after $listScore");
 
       String tmpScoreString = "";
-      for (int i = 0; i < listScore.length - 1; i++) {
+      for (int i = 0; i < listScore.length; i++) {
         var item = listScore[i];
-        print(">>> $i -> $item");
-        if (item.isEmpty) {
-          tmpScoreString += "#${Player.RESULT_NONE}";
-        } else {
-          var itemPrev = listScore[i - 1];
-          if (itemPrev.isEmpty) {
-            tmpScoreString += item;
-          } else {
-            tmpScoreString += "#$item";
-          }
-        }
+        // print(">>> $i -> $item");
+        tmpScoreString += "$item#";
+      }
+      //remove last character
+      if (tmpScoreString.isNotEmpty) {
+        tmpScoreString = tmpScoreString.substring(0, tmpScoreString.length - 1);
       }
 
+      // print("updateScoreByIndex tmpScoreString $tmpScoreString");
       scoreString = tmpScoreString;
-      print("updateScoreByIndex ~~scoreString $scoreString");
+      // print("updateScoreByIndex ~~scoreString $scoreString");
     }
   }
 
