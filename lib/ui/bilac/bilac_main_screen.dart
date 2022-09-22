@@ -110,55 +110,6 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       var maxRound = _cBilacMainController.getMaxRound();
       var width = 70.0;
       log("maxRound $maxRound");
-      /*return ScrollableTableView(
-        rowDividerHeight: 0.0,
-        columns: columns.map((column) {
-          return TableViewColumn(
-            label: column,
-          );
-        }).toList(),
-        rows: rows.map((record) {
-          return TableViewRow(
-            height: 40,
-            cells: record.mapIndexed((index, player) {
-              String text;
-              String? score = player.getScoreByIndex(index);
-              if (index == 0) {
-                text = '${player.name} (${player.getNumberOfRound()})';
-              } else {
-                text = "$score";
-              }
-              return TableViewCell(
-                child: InkWell(
-                  child: Container(
-                    margin: const EdgeInsets.all(1.0),
-                    decoration: BoxDecoration(
-                      color: Player.getColorByScore(index, score),
-                      border: Border.all(
-                        color: Colors.red,
-                        width: 0.5,
-                      ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(5),
-                      ),
-                    ),
-                    alignment: Alignment.center,
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: UIUtils.getText(
-                      text,
-                      fontSize: 12.0,
-                    ),
-                  ),
-                  onTap: () {
-                    _onTap(index, player);
-                  },
-                ),
-              );
-            }).toList(),
-          );
-        }).toList(),
-      );*/
 
       List<DataColumn> getListDataColumn() {
         DataColumn genDataColumn(String label) {
@@ -181,7 +132,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
         var list = <DataColumn>[];
         list.add(genDataColumn('Tên'));
         for (int i = 0; i < maxRound; i++) {
-          list.add(genDataColumn('$i'));
+          list.add(genDataColumn('${i + 1}'));
         }
         return list;
       }

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class Player {
   static const String RESULT_NONE = "-";
-  static const String RESULT_WIN = "1";
-  static const String RESULT_LOSE = "0";
+  static const String RESULT_WIN = "✓";
+  static const String RESULT_LOSE = "✗";
 
   String? name;
   String? avatar;
