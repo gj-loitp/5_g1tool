@@ -106,11 +106,6 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       return UIUtils.buildNoDataView();
     } else {
       var maxRound = _cBilacMainController.getMaxRound();
-      var columns = <String>[];
-      columns.add("Tên");
-      for (int i = 1; i < maxRound; i++) {
-        columns.add("Ván $i");
-      }
 
       var rows = <List<Player>>[];
       var listPlayer = _cBilacMainController.listPlayer;
@@ -184,20 +179,16 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
           return DataColumn(
             label: Text(
               label,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           );
         }
 
         var list = <DataColumn>[];
-        list.add(genDataColumn('Id'));
-        list.add(genDataColumn('Name'));
-        list.add(genDataColumn('Profession'));
-        list.add(genDataColumn('Column1'));
-        list.add(genDataColumn('Column2'));
-        list.add(genDataColumn('Column3'));
-        list.add(genDataColumn('Column4'));
-        list.add(genDataColumn('Column5'));
+        list.add(genDataColumn('Tên'));
+        for (int i = 1; i < maxRound; i++) {
+          list.add(genDataColumn('Ván $i'));
+        }
         return list;
       }
 
@@ -225,18 +216,18 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
         }
 
         var list = <DataRow>[];
-        list.add(
-            genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
-        list.add(
-            genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
-        list.add(
-            genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
-        list.add(
-            genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
-        list.add(
-            genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
-        list.add(
-            genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
+        // list.add(
+        //     genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
+        // list.add(
+        //     genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
+        // list.add(
+        //     genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
+        // list.add(
+        //     genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
+        // list.add(
+        //     genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
+        // list.add(
+        //     genDataRow('1', 'Loi1', "Profession", "1", "2", "3", "4", "5"));
         return list;
       }
 
