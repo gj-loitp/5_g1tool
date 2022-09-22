@@ -160,14 +160,14 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       List<DataColumn> getListDataColumn() {
         DataColumn genDataColumn(String label) {
           return DataColumn(
-            label: Text(label),
+            label: UIUtils.getText(label, color: Colors.white),
           );
         }
 
         var list = <DataColumn>[];
         list.add(genDataColumn('Tên'));
         for (int i = 0; i < maxRound; i++) {
-          list.add(genDataColumn('Ván $i'));
+          list.add(genDataColumn('${i + 1}'));
         }
         return list;
       }
@@ -203,21 +203,13 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             scrollDirection: Axis.horizontal,
             child: DataTable(
               dataRowColor: MaterialStateColor.resolveWith(
-                  (states) => Colors.greenAccent),
+                  (states) => Colors.white.withOpacity(0.9)),
               dataRowHeight: 45.0,
-              dataTextStyle: const TextStyle(
-                color: Colors.redAccent,
-                fontSize: 15.0,
-              ),
-              headingRowColor:
-                  MaterialStateColor.resolveWith((states) => Colors.teal),
-              headingRowHeight: 75.0,
-              headingTextStyle: const TextStyle(
-                color: Colors.white,
-                fontSize: 15.0,
-              ),
-              horizontalMargin: 15.0,
-              columnSpacing: 10.0,
+              headingRowColor: MaterialStateColor.resolveWith(
+                  (states) => Colors.blue.withOpacity(0.9)),
+              headingRowHeight: 45.0,
+              horizontalMargin: 10.0,
+              columnSpacing: 15.0,
               columns: getListDataColumn(),
               rows: getListDataRow(),
             ),
