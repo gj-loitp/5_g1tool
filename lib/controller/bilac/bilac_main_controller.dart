@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -44,7 +45,7 @@ class BilacMainController extends GetxController {
     // _print(">>>listPlayer ${jsonEncode(listPlayer)}");
     bilac.setListPlayer(listPlayer);
 
-    // _print(">>>this.bilac ${jsonEncode(bilac)}");
+    _print(">>>this.bilac ${jsonEncode(bilac)}");
     listBilac.add(bilac);
 
     for (var bilac in listBilac) {

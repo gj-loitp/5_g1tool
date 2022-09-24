@@ -52,9 +52,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             AnimatedBackground(
               behaviour: BubblesBehaviour(),
               vsync: this,
-              child: ListView(
-                padding: EdgeInsets.zero,
-                physics: const BouncingScrollPhysics(),
+              child: Column(
                 children: [
                   CalendarAppBar(
                     accent: ColorConstants.appColor.withOpacity(0.7),
@@ -70,7 +68,10 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
                     padding: 5.0,
                   ),
                   _buildScoreSelectorView(),
-                  _buildBody(),
+                  const SizedBox(height: DimenConstants.marginPaddingSmall),
+                  Expanded(
+                    child: _buildBody(),
+                  ),
                 ],
               ),
             ),
@@ -311,8 +312,8 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             if (indexBilac != 0)
               const SizedBox(height: DimenConstants.marginPadding98 * 2),
             Padding(
-              padding:
-                  const EdgeInsets.only(left: DimenConstants.marginPaddingMedium),
+              padding: const EdgeInsets.only(
+                  left: DimenConstants.marginPaddingMedium),
               child: UIUtils.getText(
                 "SESSION ${indexBilac + 1}",
                 fontSize: DimenConstants.txtLarge,
@@ -343,42 +344,13 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       }
 
       return ListView.builder(
-        shrinkWrap: true,
+        // shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         itemCount: listBilac.length,
         itemBuilder: (context, i) {
           return buildItem(i, listBilac[i]);
         },
       );
-
-      // return ListView(
-      //   shrinkWrap: true,
-      //   physics: const BouncingScrollPhysics(),
-      //   padding: const EdgeInsets.only(
-      //     top: DimenConstants.marginPaddingMedium,
-      //     bottom: DimenConstants.marginPadding98,
-      //   ),
-      //   children: [
-      //     SingleChildScrollView(
-      //       physics: const BouncingScrollPhysics(),
-      //       scrollDirection: Axis.horizontal,
-      //       child: DataTable(
-      //         dataRowColor: MaterialStateColor.resolveWith(
-      //             (states) => Colors.white.withOpacity(0.9)),
-      //         dataRowHeight: 45.0,
-      //         headingRowColor: MaterialStateColor.resolveWith(
-      //             (states) => Colors.blue.withOpacity(0.9)),
-      //         headingRowHeight: 45.0,
-      //         horizontalMargin: 0.0,
-      //         columnSpacing: 0.0,
-      //         columns: getListDataColumn(),
-      //         rows: getListDataRow(),
-      //       ),
-      //     ),
-      //     const SizedBox(height: DimenConstants.marginPaddingMedium),
-      //     _buildChartView(),
-      //   ],
-      // );
     }
   }
 
