@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import '../../common/db/db_provider.dart';
 
 class BilacMainController extends GetxController {
+  var selectedDatetime = DateTime.now().obs;
   var bilac = Bilac().obs;
 
   // var listPlayer = <Player>[].obs;
@@ -21,9 +22,13 @@ class BilacMainController extends GetxController {
     }
   }
 
+  void setSelectedDatetime(DateTime dateTime) {
+    selectedDatetime.value = dateTime;
+  }
+
   Future<void> genNewGame(List<Player> listPlayerSelected) async {
     var bilac = Bilac();
-    bilac.time = TimeConstants.getTime(DateTime.now());
+    bilac.time = TimeConstants.getTime(selectedDatetime.value);
 
     var listPlayer = <Player>[];
     listPlayer.addAll(listPlayerSelected);
@@ -44,7 +49,7 @@ class BilacMainController extends GetxController {
     this.bilac.value = bilac;
 
     await DBProvider.db.addBilac(this.bilac.value);
-    getBilacByTime(TimeConstants.getTime(DateTime.now()));
+    getBilacByTime();
   }
 
   //tinh to hop n chap k
@@ -88,7 +93,8 @@ class BilacMainController extends GetxController {
     return Player.getColorByScore(scoreSelector.value);
   }
 
-  Future<void> getBilacByTime(String time) async {
+  Future<void> getBilacByTime() async {
+    String time = TimeConstants.getTime(selectedDatetime.value);
     var b = await DBProvider.db.getBilacByTime(time);
     // _print("time $time -> b: ${jsonEncode(b)}");
     if (b == null) {

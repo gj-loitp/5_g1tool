@@ -10,7 +10,6 @@ import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:get/get.dart';
 
 import '../../common/c/string_constant.dart';
-import '../../common/c/time_constant.dart';
 import '../../common/core/base_stateful_state.dart';
 import '../../common/utils/ui_utils.dart';
 import '../../controller/bilac/bilac_main_controller.dart';
@@ -101,7 +100,8 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
   }
 
   void _onDateChanged(DateTime dateTime) {
-    _cBilacMainController.getBilacByTime(TimeConstants.getTime(dateTime));
+    _cBilacMainController.setSelectedDatetime(dateTime);
+    _cBilacMainController.getBilacByTime();
   }
 
   Widget _buildBody() {
@@ -228,8 +228,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             ),
           ),
           const SizedBox(height: DimenConstants.marginPaddingMedium),
-          //TODO fix
-          // _buildChartView(),
+          _buildChartView(),
         ],
       );
     }
@@ -337,81 +336,85 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
     }
     log(">>>scoreWinAll $scoreWinAll");
 
-    for (var p in list) {
-      var rate = p.getScoreAndTotalRound();
-      var scoreWin = p.getScoreWin();
-      var measure = 0;
-      try {
-        measure = scoreWin * 100 ~/ scoreWinAll;
-      } catch (e) {
-        log("Error measure $e");
+    if (scoreWinAll == 0) {
+      return UIUtils.buildNoDataView();
+    } else {
+      for (var p in list) {
+        var rate = p.getScoreAndTotalRound();
+        var scoreWin = p.getScoreWin();
+        var measure = 0;
+        try {
+          measure = scoreWin * 100 ~/ scoreWinAll;
+        } catch (e) {
+          // log("Error measure $e");
+        }
+        data.add({
+          'domain': '($rate) ${p.name}',
+          'measure': measure,
+        });
       }
-      data.add({
-        'domain': '($rate) ${p.name}',
-        'measure': measure,
-      });
-    }
 
-    Color getColor(int? i) {
-      if (i == 0) {
+      Color getColor(int? i) {
+        if (i == 0) {
+          return Colors.red;
+        } else if (i == 1) {
+          return Colors.pink;
+        } else if (i == 2) {
+          return Colors.purple;
+        } else if (i == 3) {
+          return Colors.deepPurple;
+        } else if (i == 4) {
+          return Colors.indigo;
+        } else if (i == 5) {
+          return Colors.blue;
+        } else if (i == 6) {
+          return Colors.lightBlue;
+        } else if (i == 7) {
+          return Colors.cyan;
+        } else if (i == 8) {
+          return Colors.teal;
+        } else if (i == 9) {
+          return Colors.green;
+        } else if (i == 10) {
+          return Colors.lightGreen;
+        } else if (i == 11) {
+          return Colors.lime;
+        } else if (i == 12) {
+          return Colors.yellow;
+        } else if (i == 13) {
+          return Colors.amber;
+        } else if (i == 14) {
+          return Colors.orange;
+        } else if (i == 15) {
+          return Colors.deepOrange;
+        } else if (i == 16) {
+          return Colors.brown;
+        } else if (i == 17) {
+          return Colors.blueGrey;
+        }
         return Colors.red;
-      } else if (i == 1) {
-        return Colors.pink;
-      } else if (i == 2) {
-        return Colors.purple;
-      } else if (i == 3) {
-        return Colors.deepPurple;
-      } else if (i == 4) {
-        return Colors.indigo;
-      } else if (i == 5) {
-        return Colors.blue;
-      } else if (i == 6) {
-        return Colors.lightBlue;
-      } else if (i == 7) {
-        return Colors.cyan;
-      } else if (i == 8) {
-        return Colors.teal;
-      } else if (i == 9) {
-        return Colors.green;
-      } else if (i == 10) {
-        return Colors.lightGreen;
-      } else if (i == 11) {
-        return Colors.lime;
-      } else if (i == 12) {
-        return Colors.yellow;
-      } else if (i == 13) {
-        return Colors.amber;
-      } else if (i == 14) {
-        return Colors.orange;
-      } else if (i == 15) {
-        return Colors.deepOrange;
-      } else if (i == 16) {
-        return Colors.brown;
-      } else if (i == 17) {
-        return Colors.blueGrey;
       }
-      return Colors.red;
-    }
 
-    return Padding(
-      padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: DChartPie(
-          labelColor: Colors.white,
-          labelLineColor: Colors.white,
-          data: data,
-          fillColor: (pieData, index) {
-            return getColor(index);
-          },
-          pieLabel: (pieData, index) {
-            return "${pieData['domain']}:\n${pieData['measure']}%";
-          },
-          labelPosition: PieLabelPosition.outside,
-          labelFontSize: 8,
-          labelPadding: 0,
+      return Padding(
+        padding: const EdgeInsets.all(DimenConstants.marginPaddingMedium),
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: DChartPie(
+            labelColor: Colors.white,
+            labelLineColor: Colors.white,
+            data: data,
+            fillColor: (pieData, index) {
+              return getColor(index);
+            },
+            pieLabel: (pieData, index) {
+              return "${pieData['domain']}:\n${pieData['measure']}%";
+            },
+            labelPosition: PieLabelPosition.outside,
+            labelFontSize: 8,
+            labelPadding: 0,
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 }
