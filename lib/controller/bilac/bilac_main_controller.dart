@@ -63,16 +63,17 @@ class BilacMainController extends GetxController {
     return C(2, listLength);
   }
 
-  void updateScoreOfPlayer(
+  Future<void> updateScoreOfPlayer(
     List<Player> listPlayer,
     int indexScore,
     Player player,
     String newScore,
-  ) {
+  ) async {
     // _print(">>>_onTap index $indexScore - ${jsonEncode(player)}");
     player.updateScoreByIndex(indexScore, newScore);
     bilac.value.setListPlayer(listPlayer);
     bilac.refresh();
+    await DBProvider.db.updateBilac(bilac.value);
   }
 
   void setScoreSelector(String s) {

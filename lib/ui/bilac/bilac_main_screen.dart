@@ -111,7 +111,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       var listLength = _cBilacMainController.getListPlayer().length;
       var maxRound = _cBilacMainController.getMaxRound(listLength);
       var width = 40.0;
-      log("maxRound $maxRound");
+      // log("maxRound $maxRound");
 
       List<DataColumn> getListDataColumn() {
         DataColumn genDataColumn(String label, double width) {

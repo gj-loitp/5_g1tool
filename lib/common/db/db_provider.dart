@@ -138,4 +138,14 @@ class DBProvider {
         [id, bilac.time, bilac.stringJson]);
     return raw;
   }
+
+  updateBilac(Bilac bilac) async {
+    final db = await (database);
+    if (db == null) {
+      return;
+    }
+    var res = await db.update(tableNameBilac, bilac.toJson(),
+        where: "id = ?", whereArgs: [bilac.id]);
+    return res;
+  }
 }
