@@ -57,14 +57,15 @@ class _SelectPlayerScreenState extends BaseStatefulState<SelectPlayerScreen>
           ],
         ),
         floatingActionButton: FloatingActionButton(
-            backgroundColor: _cSelectPlayer.isEmptyData() ||
-                    _cSelectPlayer.isEmptyListPlayerSelected()
-                ? Colors.grey
-                : ColorConstants.appColor,
+            backgroundColor: _cSelectPlayer.isValidListPlayerSelected()
+                ? ColorConstants.appColor
+                : Colors.grey,
             onPressed: () {
-              widget.onListPlayerSelected
-                  .call(_cSelectPlayer.getListPlayerSelected());
-              Get.back();
+              if (_cSelectPlayer.isValidListPlayerSelected()) {
+                widget.onListPlayerSelected
+                    .call(_cSelectPlayer.getListPlayerSelected());
+                Get.back();
+              }
             },
             child: const Icon(Icons.done_all)),
       );

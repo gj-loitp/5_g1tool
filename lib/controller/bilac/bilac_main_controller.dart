@@ -28,7 +28,7 @@ class BilacMainController extends GetxController {
     var listPlayer = <Player>[];
     listPlayer.addAll(listPlayerSelected);
 
-    var maxRound = getMaxRound();
+    var maxRound = getMaxRound(listPlayerSelected.length);
     String tmpScoreString = Player.RESULT_NONE;
     for (int i = 0; i < maxRound - 1; i++) {
       tmpScoreString += "#${Player.RESULT_NONE}";
@@ -37,13 +37,15 @@ class BilacMainController extends GetxController {
       p.scoreString = tmpScoreString;
     }
 
-    // _print(">>>listPlayer ${jsonEncode(listPlayer)}");
-    bilac.setListPlayer(listPlayer);
+    _print(">>>listPlayer ${jsonEncode(listPlayer)}");
+    // bilac.setListPlayer(listPlayer);
 
-    this.bilac.value = bilac;
-    await DBProvider.db.addBilac(this.bilac.value);
+    _print(">>>this.bilac ${jsonEncode(bilac)}");
+    // this.bilac.value = bilac;
 
-    getBilacByTime(TimeConstants.getTime(DateTime.now()));
+    // await DBProvider.db.addBilac(this.bilac.value);
+    //
+    // getBilacByTime(TimeConstants.getTime(DateTime.now()));
   }
 
   //tinh to hop n chap k
@@ -53,9 +55,8 @@ class BilacMainController extends GetxController {
     return C(k - 1, n - 1) + C(k, n - 1);
   }
 
-  int getMaxRound() {
-    // _print("getMaxRound ${C(2, listPlayer.length)}");
-    return C(2, getListPlayer().length);
+  int getMaxRound(int listLength) {
+    return C(2, listLength);
   }
 
   void updateScoreOfPlayer(int indexScore, Player player, String newScore) {

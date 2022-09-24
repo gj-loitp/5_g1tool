@@ -13,12 +13,14 @@ class SelectPlayerController extends GetxController {
     listPlayer.refresh();
   }
 
-  bool isEmptyData() {
-    return listPlayer.isEmpty;
-  }
-
-  bool isEmptyListPlayerSelected() {
-    return getListPlayerSelected().isEmpty;
+  bool isValidListPlayerSelected() {
+    if (listPlayer.isEmpty) {
+      return false;
+    }
+    if (getListPlayerSelected().length < 2) {
+      return false;
+    }
+    return true;
   }
 
   List<Player> getListPlayerSelected() {

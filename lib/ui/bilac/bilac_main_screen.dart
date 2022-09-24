@@ -108,7 +108,8 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
     if (_cBilacMainController.isEmptyData()) {
       return UIUtils.buildNoDataView();
     } else {
-      var maxRound = _cBilacMainController.getMaxRound();
+      var listLength = _cBilacMainController.getListPlayer().length;
+      var maxRound = _cBilacMainController.getMaxRound(listLength);
       var width = 40.0;
       log("maxRound $maxRound");
 
