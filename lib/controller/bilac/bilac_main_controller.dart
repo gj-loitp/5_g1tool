@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import '../../common/db/db_provider.dart';
 
 class BilacMainController extends GetxController {
+  var isShowCalendar = true.obs;
   var selectedDatetime = DateTime.now().obs;
   var listBilac = <Bilac>[].obs;
 
@@ -20,6 +21,10 @@ class BilacMainController extends GetxController {
     if (kDebugMode) {
       print(s);
     }
+  }
+
+  void toggleShowCalendar() {
+    isShowCalendar.value = !isShowCalendar.value;
   }
 
   void setSelectedDatetime(DateTime dateTime) {

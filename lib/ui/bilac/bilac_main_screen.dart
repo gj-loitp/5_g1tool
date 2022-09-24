@@ -54,19 +54,24 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
               vsync: this,
               child: Column(
                 children: [
-                  CalendarAppBar(
-                    accent: ColorConstants.appColor.withOpacity(0.7),
-                    onDateChanged: (value) {
-                      _onDateChanged(value);
-                    },
-                    firstDate:
-                        DateTime.now().subtract(const Duration(days: 30 * 3)),
-                    lastDate: DateTime.now(),
-                    selectedDate: DateTime.now(),
-                    fullCalendar: true,
-                    locale: 'vi',
-                    padding: 5.0,
-                  ),
+                  if (_cBilacMainController.isShowCalendar.value)
+                    CalendarAppBar(
+                      accent: ColorConstants.appColor.withOpacity(0.7),
+                      onDateChanged: (value) {
+                        _onDateChanged(value);
+                      },
+                      firstDate:
+                          DateTime.now().subtract(const Duration(days: 30 * 3)),
+                      lastDate: DateTime.now(),
+                      selectedDate: DateTime.now(),
+                      fullCalendar: true,
+                      locale: 'vi',
+                      padding: 5.0,
+                    ),
+                  if (!_cBilacMainController.isShowCalendar.value)
+                    const SizedBox(
+                        height: DimenConstants.marginPaddingLarge +
+                            DimenConstants.marginPaddingMedium),
                   _buildScoreSelectorView(),
                   const SizedBox(height: DimenConstants.marginPaddingSmall),
                   Expanded(
@@ -372,35 +377,59 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
   }
 
   Widget _buildScoreSelectorView() {
-    return Visibility(
-      visible: _cBilacMainController.listBilac.isNotEmpty,
-      child: InkWell(
-        onTap: () {
-          _showScoreSheet(context);
-        },
-        child: Container(
-          alignment: Alignment.center,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: _cBilacMainController.getScoreSelectorColor(),
-            border: Border.all(
-              color: Colors.red,
-              width: 0.5,
-            ),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(5),
+    return Row(
+      children: [
+        const SizedBox(width: DimenConstants.marginPaddingMedium),
+        Expanded(
+          child: InkWell(
+            onTap: () {
+              _showScoreSheet(context);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: _cBilacMainController.getScoreSelectorColor(),
+                border: Border.all(
+                  color: _cBilacMainController.getScoreSelectorColor(),
+                  width: 0.5,
+                ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(5),
+                ),
+              ),
+              padding: const EdgeInsets.all(DimenConstants.marginPaddingSmall),
+              child:
+                  UIUtils.getText(_cBilacMainController.getScoreSelectorText()),
             ),
           ),
-          margin: const EdgeInsets.fromLTRB(
-            DimenConstants.marginPaddingMedium,
-            0,
-            DimenConstants.marginPaddingMedium,
-            0,
-          ),
-          padding: const EdgeInsets.all(DimenConstants.marginPaddingSmall),
-          child: UIUtils.getText(_cBilacMainController.getScoreSelectorText()),
         ),
-      ),
+        const SizedBox(width: DimenConstants.marginPaddingMedium),
+        Expanded(
+          child: InkWell(
+            onTap: () {
+              _cBilacMainController.toggleShowCalendar();
+            },
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                  color: Colors.white,
+                  width: 0.5,
+                ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(5),
+                ),
+              ),
+              padding: const EdgeInsets.all(DimenConstants.marginPaddingSmall),
+              child: _cBilacMainController.isShowCalendar.value
+                  ? UIUtils.getText("Ẩn lịch")
+                  : UIUtils.getText("Hiện lịch"),
+            ),
+          ),
+        ),
+        const SizedBox(width: DimenConstants.marginPaddingMedium),
+      ],
     );
   }
 
