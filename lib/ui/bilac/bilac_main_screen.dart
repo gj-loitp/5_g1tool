@@ -313,13 +313,11 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (indexBilac != 0)
-              const SizedBox(height: DimenConstants.marginPadding98 * 2),
             Padding(
               padding: const EdgeInsets.only(
                   left: DimenConstants.marginPaddingMedium),
               child: UIUtils.getText(
-                "SESSION ${indexBilac + 1}",
+                "GAME ${indexBilac + 1}",
                 fontSize: DimenConstants.txtLarge,
                 color: Colors.white,
               ),
@@ -343,6 +341,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             ),
             const SizedBox(height: DimenConstants.marginPaddingMedium),
             buildChartView(indexBilac),
+            const SizedBox(height: DimenConstants.marginPadding98),
           ],
         );
       }
