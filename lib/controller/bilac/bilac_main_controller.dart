@@ -13,8 +13,6 @@ class BilacMainController extends GetxController {
   var isShowCalendar = true.obs;
   var selectedDatetime = DateTime.now().obs;
   var listBilac = <Bilac>[].obs;
-
-  // var listPlayer = <Player>[].obs;
   var scoreSelector = Player.RESULT_NONE.obs;
 
   void _print(String s) {
@@ -32,7 +30,6 @@ class BilacMainController extends GetxController {
   }
 
   Future<void> genNewGame(List<Player> listPlayerSelected) async {
-    //TODO fix loi khi add new game se bi duplicate bilac
     var bilac = Bilac();
     bilac.time = TimeConstants.getTime(selectedDatetime.value);
 
@@ -51,12 +48,10 @@ class BilacMainController extends GetxController {
     // _print(">>>listPlayer ${jsonEncode(listPlayer)}");
     bilac.setListPlayer(listPlayer);
 
-    _print(">>>this.bilac ${jsonEncode(bilac)}");
+    // _print(">>>this.bilac ${jsonEncode(bilac)}");
     listBilac.add(bilac);
 
-    for (var bilac in listBilac) {
-      await DBProvider.db.addBilac(bilac);
-    }
+    await DBProvider.db.addBilac(bilac);
     getBilacByTime();
   }
 

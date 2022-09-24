@@ -39,7 +39,6 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
   @override
   void dispose() {
     super.dispose();
-    //TODO save db
   }
 
   @override
