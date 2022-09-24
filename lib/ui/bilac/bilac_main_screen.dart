@@ -52,6 +52,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
               behaviour: BubblesBehaviour(),
               vsync: this,
               child: ListView(
+                padding: EdgeInsets.zero,
                 physics: const BouncingScrollPhysics(),
                 children: [
                   CalendarAppBar(
