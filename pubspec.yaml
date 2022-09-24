@@ -18,7 +18,7 @@ dependencies:
 #  modal_bottom_sheet: ^2.1.2
   get: ^4.6.5
   sqflite: ^2.1.0
-  awesome_dialog: ^3.0.1
+  awesome_dialog: ^3.0.2
 #  scrollable_table_view: ^0.0.4
 
 
@@ -27,14 +27,23 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.1
 
+  #https://pub.dev/packages/flutter_launcher_icons
+  flutter_launcher_icons: ^0.10.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/ic_launcher.png"
+  min_sdk_android: 21
+
 flutter:
   uses-material-design: true
 
-#  fonts:
-#    - family: Pacifico
-#      fonts:
-#        - asset: data_repo/fonts/Pacifico-Regular.ttf
-#          weight: 400
+  #  fonts:
+  #    - family: Pacifico
+  #      fonts:
+  #        - asset: data_repo/fonts/Pacifico-Regular.ttf
+  #          weight: 400
 
   assets:
     - assets/images/

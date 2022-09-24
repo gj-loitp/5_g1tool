@@ -10,16 +10,19 @@ import 'package:get/get.dart';
 import '../../common/db/db_provider.dart';
 
 class BilacMainController extends GetxController {
+  var isShowCalendar = true.obs;
   var selectedDatetime = DateTime.now().obs;
-  var bilac = Bilac().obs;
-
-  // var listPlayer = <Player>[].obs;
+  var listBilac = <Bilac>[].obs;
   var scoreSelector = Player.RESULT_NONE.obs;
 
   void _print(String s) {
     if (kDebugMode) {
       print(s);
     }
+  }
+
+  void toggleShowCalendar() {
+    isShowCalendar.value = !isShowCalendar.value;
   }
 
   void setSelectedDatetime(DateTime dateTime) {
@@ -42,13 +45,13 @@ class BilacMainController extends GetxController {
       p.scoreString = tmpScoreString;
     }
 
-    _print(">>>listPlayer ${jsonEncode(listPlayer)}");
+    // _print(">>>listPlayer ${jsonEncode(listPlayer)}");
     bilac.setListPlayer(listPlayer);
 
-    _print(">>>this.bilac ${jsonEncode(bilac)}");
-    this.bilac.value = bilac;
+    // _print(">>>this.bilac ${jsonEncode(bilac)}");
+    listBilac.add(bilac);
 
-    await DBProvider.db.addBilac(this.bilac.value);
+    await DBProvider.db.addBilac(bilac);
     getBilacByTime();
   }
 
@@ -64,6 +67,7 @@ class BilacMainController extends GetxController {
   }
 
   Future<void> updateScoreOfPlayer(
+    int indexBilac,
     List<Player> listPlayer,
     int indexScore,
     Player player,
@@ -71,9 +75,9 @@ class BilacMainController extends GetxController {
   ) async {
     // _print(">>>_onTap index $indexScore - ${jsonEncode(player)}");
     player.updateScoreByIndex(indexScore, newScore);
-    bilac.value.setListPlayer(listPlayer);
-    bilac.refresh();
-    await DBProvider.db.updateBilac(bilac.value);
+    listBilac[indexBilac].setListPlayer(listPlayer);
+    listBilac.refresh();
+    await DBProvider.db.updateBilac(listBilac[indexBilac]);
   }
 
   void setScoreSelector(String s) {
@@ -96,26 +100,17 @@ class BilacMainController extends GetxController {
 
   Future<void> getBilacByTime() async {
     String time = TimeConstants.getTime(selectedDatetime.value);
-    var b = await DBProvider.db.getBilacByTime(time);
+    var list = await DBProvider.db.getBilacByTime(time);
     // _print("time $time -> b: ${jsonEncode(b)}");
-    if (b == null) {
-      bilac.value = Bilac();
-    } else {
-      bilac.value = b;
+
+    listBilac.clear();
+    for (var bl in list) {
+      listBilac.add(bl);
     }
-    // _print(">>>getBilacByTime time $time -> ${jsonEncode(bilac.value)}");
-    // _print(">>>getListPlayer ${jsonEncode(bilac.value.getListPlayer())}");
+    listBilac.refresh();
   }
 
-  bool isEmptyData() {
-    if (bilac.value.time == null || bilac.value.time?.isEmpty == true) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  List<Player> getListPlayer() {
-    return bilac.value.getListPlayer();
+  List<Player> getListPlayer(int index) {
+    return listBilac[index].getListPlayer();
   }
 }

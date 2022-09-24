@@ -113,14 +113,21 @@ class DBProvider {
     db.rawDelete("Delete * from $tableNameBilac");
   }
 
-  Future<Bilac?> getBilacByTime(String time) async {
+  Future<List<Bilac>> getBilacByTime(String time) async {
     final db = await (database);
     if (db == null) {
-      return null;
+      return List.empty();
     }
     var res =
         await db.query(tableNameBilac, where: "time = ?", whereArgs: [time]);
-    return res.isNotEmpty ? Bilac.fromJson(res.first) : null;
+    var list = <Bilac>[];
+    for (var element in res) {
+      var bilac = element.isNotEmpty ? Bilac.fromJson(element) : null;
+      if (bilac != null) {
+        list.add(bilac);
+      }
+    }
+    return list;
   }
 
   addBilac(Bilac bilac) async {
