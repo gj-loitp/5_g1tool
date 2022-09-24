@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 
 import 'common/c/dimen_constant.dart';
 
-//TODO add chart
 //TODO gen keystore android
 //TODO ic_launcher android
 void main() {
