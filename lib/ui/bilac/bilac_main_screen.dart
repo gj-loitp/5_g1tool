@@ -195,7 +195,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
               p,
               (index, player, indexScore) {
                 log("onTap $index ${jsonEncode(player)} $indexScore");
-                _onTap(indexScore, player);
+                _onTap(listPlayer, indexScore, player);
               },
             ),
           );
@@ -228,16 +228,22 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             ),
           ),
           const SizedBox(height: DimenConstants.marginPaddingMedium),
-          _buildChartView(),
+          //TODO fix
+          // _buildChartView(),
         ],
       );
     }
   }
 
-  void _onTap(int index, Player player) {
+  void _onTap(List<Player> listPlayer, int index, Player player) {
     // print(">>>_onTap index $index - ${jsonEncode(player)}");
     var currentScore = _cBilacMainController.scoreSelector.value;
-    _cBilacMainController.updateScoreOfPlayer(index, player, currentScore);
+    _cBilacMainController.updateScoreOfPlayer(
+      listPlayer,
+      index,
+      player,
+      currentScore,
+    );
   }
 
   Widget _buildScoreSelectorView() {

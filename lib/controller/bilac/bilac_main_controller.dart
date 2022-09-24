@@ -58,12 +58,16 @@ class BilacMainController extends GetxController {
     return C(2, listLength);
   }
 
-  void updateScoreOfPlayer(int indexScore, Player player, String newScore) {
+  void updateScoreOfPlayer(
+    List<Player> listPlayer,
+    int indexScore,
+    Player player,
+    String newScore,
+  ) {
     // _print(">>>_onTap index $indexScore - ${jsonEncode(player)}");
-    // player.updateScoreByIndex(indexScore, newScore);
-    // listPlayer.refresh();
-
-    //TODO
+    player.updateScoreByIndex(indexScore, newScore);
+    bilac.value.setListPlayer(listPlayer);
+    bilac.refresh();
   }
 
   void setScoreSelector(String s) {
@@ -89,7 +93,7 @@ class BilacMainController extends GetxController {
     // _print("time $time -> b: ${jsonEncode(b)}");
     if (b == null) {
       bilac.value = Bilac();
-    }else{
+    } else {
       bilac.value = b;
     }
     // _print(">>>getBilacByTime time $time -> ${jsonEncode(bilac.value)}");
