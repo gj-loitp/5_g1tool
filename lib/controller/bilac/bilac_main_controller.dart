@@ -38,14 +38,13 @@ class BilacMainController extends GetxController {
     }
 
     _print(">>>listPlayer ${jsonEncode(listPlayer)}");
-    // bilac.setListPlayer(listPlayer);
+    bilac.setListPlayer(listPlayer);
 
     _print(">>>this.bilac ${jsonEncode(bilac)}");
-    // this.bilac.value = bilac;
+    this.bilac.value = bilac;
 
-    // await DBProvider.db.addBilac(this.bilac.value);
-    //
-    // getBilacByTime(TimeConstants.getTime(DateTime.now()));
+    await DBProvider.db.addBilac(this.bilac.value);
+    getBilacByTime(TimeConstants.getTime(DateTime.now()));
   }
 
   //tinh to hop n chap k
@@ -87,11 +86,14 @@ class BilacMainController extends GetxController {
 
   Future<void> getBilacByTime(String time) async {
     var b = await DBProvider.db.getBilacByTime(time);
-    if (b != null) {
+    // _print("time $time -> b: ${jsonEncode(b)}");
+    if (b == null) {
+      bilac.value = Bilac();
+    }else{
       bilac.value = b;
     }
-    _print(">>>getBilacByTime ${jsonEncode(bilac.value)}");
-    _print(">>>getListPlayer ${jsonEncode(bilac.value.getListPlayer())}");
+    // _print(">>>getBilacByTime time $time -> ${jsonEncode(bilac.value)}");
+    // _print(">>>getListPlayer ${jsonEncode(bilac.value.getListPlayer())}");
   }
 
   bool isEmptyData() {

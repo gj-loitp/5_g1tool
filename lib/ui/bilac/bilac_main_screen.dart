@@ -62,7 +62,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
                     },
                     firstDate:
                         DateTime.now().subtract(const Duration(days: 30 * 3)),
-                    lastDate: DateTime.now().add(const Duration(days: 30)),
+                    lastDate: DateTime.now(),
                     selectedDate: DateTime.now(),
                     fullCalendar: true,
                     locale: 'vi',
