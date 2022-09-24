@@ -6,6 +6,8 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../model/bilac.dart';
+
 /// Created by Loitp on 05,August,2022
 /// Galaxy One company,
 /// Vietnam
@@ -17,6 +19,7 @@ class DBProvider {
   static final DBProvider db = DBProvider._();
   String dbName = "g1tools.db";
   String tableNamePlayer = "Player";
+  String tableNameBilac = "Bilac";
 
   Database? _database;
 
@@ -34,12 +37,19 @@ class DBProvider {
       await db.execute("CREATE TABLE $tableNamePlayer ("
           "id INTEGER PRIMARY KEY,"
           "name TEXT,"
+          "scoreString TEXT,"
+          "isSelected BIT,"
           "avatar TEXT"
+          ")");
+      await db.execute("CREATE TABLE $tableNameBilac ("
+          "id INTEGER PRIMARY KEY,"
+          "time TEXT,"
+          "stringJson TEXT"
           ")");
     });
   }
 
-  addClient(Player p) async {
+  addPlayer(Player p) async {
     final db = await (database);
     if (db == null) {
       return;
@@ -100,5 +110,42 @@ class DBProvider {
       return;
     }
     db.rawDelete("Delete * from $tableNamePlayer");
+    db.rawDelete("Delete * from $tableNameBilac");
+  }
+
+  Future<Bilac?> getBilacByTime(String time) async {
+    final db = await (database);
+    if (db == null) {
+      return null;
+    }
+    var res =
+        await db.query(tableNameBilac, where: "time = ?", whereArgs: [time]);
+    return res.isNotEmpty ? Bilac.fromJson(res.first) : null;
+  }
+
+  addBilac(Bilac bilac) async {
+    final db = await (database);
+    if (db == null) {
+      return;
+    }
+    var table =
+        await db.rawQuery("SELECT MAX(id)+1 as id FROM $tableNameBilac");
+    int? id = table.first["id"] as int?;
+    //insert to the table using the new id
+    var raw = await db.rawInsert(
+        "INSERT Into $tableNameBilac (id,time,stringJson)"
+        " VALUES (?,?,?)",
+        [id, bilac.time, bilac.stringJson]);
+    return raw;
+  }
+
+  updateBilac(Bilac bilac) async {
+    final db = await (database);
+    if (db == null) {
+      return;
+    }
+    var res = await db.update(tableNameBilac, bilac.toJson(),
+        where: "id = ?", whereArgs: [bilac.id]);
+    return res;
   }
 }

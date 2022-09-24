@@ -1,10 +1,17 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/ui_utils.dart';
 
 abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
   BaseStatefulState();
+
+  void log(String s) {
+    if (kDebugMode) {
+      print("loitpp $s");
+    }
+  }
 
   void showSnackBarFull(
     String title,

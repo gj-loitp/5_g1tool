@@ -1,7 +1,7 @@
 import 'package:g1tool/model/player.dart';
 import 'package:get/get.dart';
 
-import '../common/db/db_provider.dart';
+import '../../common/db/db_provider.dart';
 
 class ListPlayerController extends GetxController {
   var listPlayer = <Player>[].obs;
@@ -29,16 +29,17 @@ class ListPlayerController extends GetxController {
       Player player = Player();
       player.name = name;
       player.avatar = avatar;
+      player.isSelected = false;
       if (!isExist(player, listPlayer)) {
-        await DBProvider.db.addClient(player);
+        await DBProvider.db.addPlayer(player);
       }
     }
 
     await addPlayer("Lợi",
         "https://github.com/tplloi/g1tool/blob/master/assets/images/player/loi.jpg?raw=true");
-    await addPlayer("Toại *||*",
+    await addPlayer("Toại",
         "https://github.com/tplloi/g1tool/blob/master/assets/images/player/toai.jpeg?raw=true");
-    await addPlayer("Phúc (|)",
+    await addPlayer("Phúc",
         "https://github.com/tplloi/g1tool/blob/master/assets/images/player/phuc.jpg?raw=true");
     await addPlayer("Bảo Chu",
         "https://github.com/tplloi/g1tool/blob/master/assets/images/player/baochu.jpg?raw=true");

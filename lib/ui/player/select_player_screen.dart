@@ -4,55 +4,49 @@ import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:g1tool/model/player.dart';
-import 'package:g1tool/ui/player/add_player_screen.dart';
-import 'package:g1tool/ui/player/update_player_screen.dart';
 import 'package:get/get.dart';
 
 import '../../common/c/string_constant.dart';
 import '../../common/core/base_stateful_state.dart';
 import '../../common/utils/ui_utils.dart';
-import '../../controller/player/list_player_controller.dart';
+import '../../controller/player/select_player_controller.dart';
 
-class ListPlayerScreen extends StatefulWidget {
-  const ListPlayerScreen({super.key});
+class SelectPlayerScreen extends StatefulWidget {
+  final Function(List<Player> listPlayerSelected) onListPlayerSelected;
+
+  const SelectPlayerScreen({
+    Key? key,
+    required this.onListPlayerSelected,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _ListPlayerScreenState();
+    return _SelectPlayerScreenState();
   }
 }
 
-class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> with TickerProviderStateMixin{
-  final _cListPlayer = Get.put(ListPlayerController());
+class _SelectPlayerScreenState extends BaseStatefulState<SelectPlayerScreen>
+    with TickerProviderStateMixin {
+  final _cSelectPlayer = Get.put(SelectPlayerController());
 
   @override
   void initState() {
     super.initState();
-    _cListPlayer.getListPlayer();
+    _cSelectPlayer.getListPlayer();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: UIUtils.getAppBar(
-        "Danh sách người chơi",
-        () {
-          Get.back();
-        },
-        [
-          IconButton(
-            icon: const Icon(
-              Icons.supervisor_account,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              _genDefaultPlayer();
-            },
-          ),
-        ],
-      ),
-      body: Obx(() {
-        return Stack(
+    return Obx(() {
+      return Scaffold(
+        appBar: UIUtils.getAppBar(
+          "Chọn người chơi",
+          () {
+            Get.back();
+          },
+          null,
+        ),
+        body: Stack(
           children: [
             UIUtils.buildCachedNetworkImage(StringConstants.bkgLink),
             AnimatedBackground(
@@ -61,29 +55,25 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> with Ti
               child: _buildListPlayerView(),
             ),
           ],
-        );
-      }),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: ColorConstants.appColor,
-          onPressed: () {
-            Get.to(
-              () => AddPlayerScreen(
-                onAddSuccess: (name) {
-                  showSnackBarFull(
-                    StringConstants.warning,
-                    "Đã thêm người chơi `$name` thành công",
-                  );
-                  _cListPlayer.getListPlayer();
-                },
-              ),
-            );
-          },
-          child: const Icon(Icons.add)),
-    );
+        ),
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: _cSelectPlayer.isValidListPlayerSelected()
+                ? ColorConstants.appColor
+                : Colors.grey,
+            onPressed: () {
+              if (_cSelectPlayer.isValidListPlayerSelected()) {
+                widget.onListPlayerSelected
+                    .call(_cSelectPlayer.getListPlayerSelected());
+                Get.back();
+              }
+            },
+            child: const Icon(Icons.done_all)),
+      );
+    });
   }
 
   Widget _buildListPlayerView() {
-    var list = _cListPlayer.listPlayer;
+    var list = _cSelectPlayer.listPlayer;
     if (list.isEmpty) {
       return UIUtils.buildNoDataView();
     } else {
@@ -106,10 +96,18 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> with Ti
                   ),
                 ),
                 const SizedBox(width: DimenConstants.marginPaddingMedium),
-                UIUtils.getText(
-                  p.getName(),
-                  fontSize: DimenConstants.txtLarge,
+                Expanded(
+                  child: UIUtils.getText(
+                    p.getName(),
+                    fontSize: DimenConstants.txtLarge,
+                  ),
                 ),
+                if (p.isSelected == true)
+                  Image.asset(
+                    "assets/images/ic_success.png",
+                    width: 35,
+                    height: 35,
+                  ),
               ],
             ),
           ),
@@ -126,35 +124,12 @@ class _ListPlayerScreenState extends BaseStatefulState<ListPlayerScreen> with Ti
             return buildItem(
               p,
               () {
-                Get.to(
-                  () => UpdatePlayerScreen(
-                    onUpdateSuccess: (updatedPlayer) {
-                      _cListPlayer.getListPlayer();
-                    },
-                    player: p,
-                  ),
-                );
+                _cSelectPlayer.toggleSelectPlayer(i);
               },
             );
           },
         ),
       );
     }
-  }
-
-  void _genDefaultPlayer() {
-    showWarningDialog(
-      StringConstants.warning,
-      "Bạn có muốn thêm danh sách người chơi mặc định?",
-      () {
-        //do nothing
-      },
-      () {
-        _cListPlayer.genListPlayerDefault();
-      },
-      (type) {
-        //do nothing
-      },
-    );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:g1tool/model/player.dart';
 import 'package:get/get.dart';
 
-import '../common/db/db_provider.dart';
+import '../../common/db/db_provider.dart';
 
 class AddPlayerController extends GetxController {
   var name = "".obs;
@@ -19,6 +19,6 @@ class AddPlayerController extends GetxController {
     p.name = name;
     p.avatar =
         "https://live.staticflickr.com/575/33169799475_17f36bcb58_q.jpg";
-    return await DBProvider.db.addClient(p);
+    return await DBProvider.db.addPlayer(p);
   }
 }
