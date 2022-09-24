@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.roy93group.g1tool">
    <application
-        android:label="g1tool"
+        android:label="G1 tools"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
