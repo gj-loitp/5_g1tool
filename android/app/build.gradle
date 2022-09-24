@@ -50,9 +50,31 @@ android {
         versionName flutterVersionName
     }
 
+//    buildTypes {
+//        release {
+//            signingConfig signingConfigs.debug
+//        }
+//    }
+
+    signingConfigs {
+        release {
+            storeFile file("keystore.jks")
+            storePassword KS_PW
+            keyAlias KS_ALIAS
+            keyPassword KS_PW
+        }
+    }
+
     buildTypes {
         release {
-            signingConfig signingConfigs.debug
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
