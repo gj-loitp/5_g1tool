@@ -1,10 +1,15 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:g1tool/model/bilac.dart';
 import 'package:g1tool/model/player.dart';
 import 'package:get/get.dart';
 
+import '../../common/db/db_provider.dart';
+
 class BilacMainController extends GetxController {
+  var bilac = Bilac().obs;
   var listPlayer = <Player>[].obs;
   var scoreSelector = Player.RESULT_NONE.obs;
 
@@ -65,5 +70,13 @@ class BilacMainController extends GetxController {
 
   Color getScoreSelectorColor() {
     return Player.getColorByScore(scoreSelector.value);
+  }
+
+  Future<void> getBilacByTime(String time) async {
+    var b = await DBProvider.db.getBilacByTime(time);
+    if (b != null) {
+      bilac.value = b;
+    }
+    _print(">>>getBilacByTime ${jsonEncode(bilac.value)}");
   }
 }
