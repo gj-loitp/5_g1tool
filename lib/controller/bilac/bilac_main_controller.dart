@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:g1tool/common/c/time_constant.dart';
 import 'package:g1tool/model/bilac.dart';
 import 'package:g1tool/model/player.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,8 @@ import '../../common/db/db_provider.dart';
 
 class BilacMainController extends GetxController {
   var bilac = Bilac().obs;
-  var listPlayer = <Player>[].obs;
+
+  // var listPlayer = <Player>[].obs;
   var scoreSelector = Player.RESULT_NONE.obs;
 
   void _print(String s) {
@@ -19,8 +21,11 @@ class BilacMainController extends GetxController {
     }
   }
 
-  void genNewGame(List<Player> listPlayerSelected) {
-    listPlayer.clear();
+  Future<void> genNewGame(List<Player> listPlayerSelected) async {
+    var bilac = Bilac();
+    bilac.time = TimeConstants.getTime(DateTime.now());
+
+    var listPlayer = <Player>[];
     listPlayer.addAll(listPlayerSelected);
 
     var maxRound = getMaxRound();
@@ -33,7 +38,12 @@ class BilacMainController extends GetxController {
     }
 
     // _print(">>>listPlayer ${jsonEncode(listPlayer)}");
-    listPlayer.refresh();
+    bilac.setListPlayer(listPlayer);
+
+    this.bilac.value = bilac;
+    await DBProvider.db.addBilac(this.bilac.value);
+
+    getBilacByTime(TimeConstants.getTime(DateTime.now()));
   }
 
   //tinh to hop n chap k
@@ -45,13 +55,15 @@ class BilacMainController extends GetxController {
 
   int getMaxRound() {
     // _print("getMaxRound ${C(2, listPlayer.length)}");
-    return C(2, listPlayer.length);
+    return C(2, getListPlayer().length);
   }
 
   void updateScoreOfPlayer(int indexScore, Player player, String newScore) {
     // _print(">>>_onTap index $indexScore - ${jsonEncode(player)}");
-    player.updateScoreByIndex(indexScore, newScore);
-    listPlayer.refresh();
+    // player.updateScoreByIndex(indexScore, newScore);
+    // listPlayer.refresh();
+
+    //TODO
   }
 
   void setScoreSelector(String s) {
@@ -78,5 +90,18 @@ class BilacMainController extends GetxController {
       bilac.value = b;
     }
     _print(">>>getBilacByTime ${jsonEncode(bilac.value)}");
+    _print(">>>getListPlayer ${jsonEncode(bilac.value.getListPlayer())}");
+  }
+
+  bool isEmptyData() {
+    if (bilac.value.time == null || bilac.value.time?.isEmpty == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  List<Player> getListPlayer() {
+    return bilac.value.getListPlayer();
   }
 }

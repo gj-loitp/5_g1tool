@@ -44,7 +44,7 @@ class DBProvider {
       await db.execute("CREATE TABLE $tableNameBilac ("
           "id INTEGER PRIMARY KEY,"
           "time TEXT,"
-          "json TEXT"
+          "stringJson TEXT"
           ")");
     });
   }
@@ -121,5 +121,21 @@ class DBProvider {
     var res =
         await db.query(tableNameBilac, where: "time = ?", whereArgs: [time]);
     return res.isNotEmpty ? Bilac.fromJson(res.first) : null;
+  }
+
+  addBilac(Bilac bilac) async {
+    final db = await (database);
+    if (db == null) {
+      return;
+    }
+    var table =
+        await db.rawQuery("SELECT MAX(id)+1 as id FROM $tableNameBilac");
+    int? id = table.first["id"] as int?;
+    //insert to the table using the new id
+    var raw = await db.rawInsert(
+        "INSERT Into $tableNameBilac (id,time,stringJson)"
+        " VALUES (?,?,?)",
+        [id, bilac.time, bilac.stringJson]);
+    return raw;
   }
 }

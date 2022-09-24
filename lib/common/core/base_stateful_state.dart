@@ -9,7 +9,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
 
   void log(String s) {
     if (kDebugMode) {
-      print(s);
+      print("loitpp $s");
     }
   }
 

@@ -105,7 +105,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
   }
 
   Widget _buildBody() {
-    if (_cBilacMainController.listPlayer.isEmpty) {
+    if (_cBilacMainController.isEmptyData()) {
       return UIUtils.buildNoDataView();
     } else {
       var maxRound = _cBilacMainController.getMaxRound();
@@ -185,7 +185,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
         }
 
         var list = <DataRow>[];
-        var listPlayer = _cBilacMainController.listPlayer;
+        var listPlayer = _cBilacMainController.getListPlayer();
         for (int i = 0; i < listPlayer.length; i++) {
           Player p = listPlayer[i];
           list.add(
@@ -241,7 +241,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
 
   Widget _buildScoreSelectorView() {
     return Visibility(
-      visible: _cBilacMainController.listPlayer.isNotEmpty,
+      visible: _cBilacMainController.getListPlayer().isNotEmpty,
       child: InkWell(
         onTap: () {
           _showScoreSheet(context);
@@ -319,7 +319,7 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
     int scoreWinAll = 0;
 
     var list = <Player>[];
-    for (var p in _cBilacMainController.listPlayer) {
+    for (var p in _cBilacMainController.getListPlayer()) {
       var deepCopyPlayer = Player.fromJson(p.toJson());
       list.add(deepCopyPlayer);
     }
