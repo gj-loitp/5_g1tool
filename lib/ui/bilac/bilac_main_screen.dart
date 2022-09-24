@@ -109,11 +109,11 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
       return UIUtils.buildNoDataView();
     } else {
       var maxRound = _cBilacMainController.getMaxRound();
-      var width = 70.0;
+      var width = 40.0;
       log("maxRound $maxRound");
 
       List<DataColumn> getListDataColumn() {
-        DataColumn genDataColumn(String label) {
+        DataColumn genDataColumn(String label, double width) {
           return DataColumn(
             label: Container(
               padding: const EdgeInsets.all(DimenConstants.marginPaddingTiny),
@@ -131,9 +131,9 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
         }
 
         var list = <DataColumn>[];
-        list.add(genDataColumn('Tên'));
+        list.add(genDataColumn('Tên', width * 2));
         for (int i = 0; i < maxRound; i++) {
-          list.add(genDataColumn('${i + 1}'));
+          list.add(genDataColumn('${i + 1}', width));
         }
         return list;
       }
@@ -149,10 +149,10 @@ class _BiLacMainScreenState extends BaseStatefulState<BiLacMainScreen>
             DataCell(
               Container(
                 padding: const EdgeInsets.all(DimenConstants.marginPaddingTiny),
-                width: width,
+                width: width * 2,
                 alignment: Alignment.centerLeft,
                 child: UIUtils.getText(
-                  player.getName(),
+                  "${player.getName()} (${player.getScoreAndTotalRound()})",
                   fontSize: DimenConstants.txtSmall,
                 ),
               ),

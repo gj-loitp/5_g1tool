@@ -47,10 +47,12 @@ class _MenuScreen extends State<MenuScreen> with TickerProviderStateMixin {
                       Get.to(() => const BiLacMainScreen());
                     },
                   ),
-                  UIUtils.getButton(
-                    "Uno",
-                    () {},
-                  ),
+                  //TODO iplm button uno
+                  // UIUtils.getButton(
+                  //   "Uno",
+                  //   () {
+                  //   },
+                  // ),
                   UIUtils.getButton(
                     "Quản lý người chơi",
                     () {
