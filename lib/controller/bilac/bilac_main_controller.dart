@@ -27,6 +27,7 @@ class BilacMainController extends GetxController {
   }
 
   Future<void> genNewGame(List<Player> listPlayerSelected) async {
+    //TODO fix loi khi add new game se bi duplicate bilac
     var bilac = Bilac();
     bilac.time = TimeConstants.getTime(selectedDatetime.value);
 
