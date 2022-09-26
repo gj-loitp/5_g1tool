@@ -10,6 +10,8 @@ import 'package:get/get.dart';
 
 import 'common/c/dimen_constant.dart';
 
+//TODO rate app
+//TODO more app
 void main() {
   runApp(
     GetMaterialApp(
