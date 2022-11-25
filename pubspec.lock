@@ -147,7 +147,7 @@ packages:
       name: d_chart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.4"
+    version: "0.1.0"
   fake_async:
     dependency: transitive
     description:

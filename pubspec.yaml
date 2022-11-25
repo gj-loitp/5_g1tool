@@ -14,7 +14,7 @@ dependencies:
   cached_network_image: ^3.2.2
   calendar_appbar: ^0.0.6
   cupertino_icons: ^1.0.5
-  d_chart: ^0.0.4
+  d_chart: ^0.1.0
 #  modal_bottom_sheet: ^2.1.2
   get: ^4.6.5
   sqflite: ^2.1.0
