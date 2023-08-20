@@ -1,7 +1,7 @@
 name: g1tool
 description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.0.0+1
+version: 2023.08.20+20230820
 
 environment:
   sdk: '>=2.18.0 <3.0.0'
