@@ -35,36 +35,21 @@ class ListPlayerController extends GetxController {
       }
     }
 
-    await addPlayer("Lợi",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/loi.jpg?raw=true");
-    await addPlayer("Toại",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/toai.jpeg?raw=true");
-    await addPlayer("Phúc",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/phuc.jpg?raw=true");
-    await addPlayer("Bảo Chu",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/baochu.jpg?raw=true");
-    await addPlayer("Duy",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/duy.jpg?raw=true");
-    await addPlayer("Linh",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/linh.jpg?raw=true");
-    await addPlayer("Ngân",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/ngan.jpg?raw=true");
-    await addPlayer("Chi",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/chi.jpg?raw=true");
-    await addPlayer("Viên",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/vien.jpg?raw=true");
-    await addPlayer("Tú",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/tu.jpg?raw=true");
-    await addPlayer("Huyền",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/huyen.jpg?raw=true");
-    await addPlayer("Bảo Huỳnh",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/baohuynh.jpg?raw=true");
-    await addPlayer("Huy",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/huy.jpg?raw=true");
-    await addPlayer("Tịnh",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/tinh.jpg?raw=true");
-    await addPlayer("Triển",
-        "https://github.com/tplloi/g1tool/blob/master/assets/images/player/trien.jpg?raw=true");
+    await addPlayer("Lợi", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Toại", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Phúc", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Bảo Chu", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Duy", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Linh", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Ngân", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Chi", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Viên", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Tú", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Huyền", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Bảo Huỳnh", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Huy", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Tịnh", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
+    await addPlayer("Triển", "https://live.staticflickr.com/5591/29952508971_636bae2edd_w.jpg");
 
     getListPlayer();
   }

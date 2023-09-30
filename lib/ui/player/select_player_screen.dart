@@ -1,5 +1,4 @@
 import 'package:animated_background/animated_background.dart';
-import 'package:animated_background/bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:g1tool/common/c/color_constant.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';

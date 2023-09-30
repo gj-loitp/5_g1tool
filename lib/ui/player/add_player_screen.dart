@@ -1,6 +1,5 @@
 import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:g1tool/common/c/color_constant.dart';
 import 'package:g1tool/common/c/dimen_constant.dart';
 import 'package:g1tool/common/core/base_stateful_state.dart';
