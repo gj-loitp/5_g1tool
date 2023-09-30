@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 import 'common/c/dimen_constant.dart';
 
+//TODO quen mat keystore roi k update app dc
 //TODO rate app
 //TODO more app
 //TODO applovin
