@@ -12,6 +12,8 @@ import 'common/c/dimen_constant.dart';
 
 //TODO rate app
 //TODO more app
+//TODO applovin
+
 void main() {
   runApp(
     GetMaterialApp(
@@ -20,8 +22,7 @@ void main() {
       defaultTransition: Transition.cupertino,
       theme: ThemeData(
         backgroundColor: Colors.white,
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-            .copyWith(secondary: Colors.purple),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple).copyWith(secondary: Colors.purple),
       ),
       home: const SplashScreen(),
     ),
